@@ -1,8 +1,6 @@
 import React from "react";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PageNotFound from "./Pages/PageNotFound.jsx";
-// import Info from "./Pages/Info.jsx";
 const Info = React.lazy(() => import("./Pages/Info.jsx"));
 const ProjectRoutes = () => {
   return (

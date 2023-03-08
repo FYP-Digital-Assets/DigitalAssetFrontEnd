@@ -2,7 +2,7 @@
 export const Info = () => {
   return (
     <div>
-        <h1>hello world</h1>
+        <h1>hello world and b</h1>
     </div>
   )
 }

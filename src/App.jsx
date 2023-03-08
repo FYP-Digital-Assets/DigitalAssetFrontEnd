@@ -1,10 +1,10 @@
 import './App.css'
-import {Info} from "./Pages/Info" ;
-function App() {
 
+import  ProjectRoutes  from "./Routes" ;
+function App() {
   return (
     <div className="App">
-      <Info/ >
+      <ProjectRoutes / >
     </div>
   )
 }

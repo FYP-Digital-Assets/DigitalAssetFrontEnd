@@ -6,7 +6,7 @@ function App() {
     <div className="App"> 
       <ProjectRoutes / >
     </div>
-  )
+  ) ;
 }
 
 export default App

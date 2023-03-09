@@ -1,18 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PageNotFound from "./Pages/PageNotFound.jsx";
+
+import AppLayout from "./AppLayout.jsx";
 const Info = React.lazy(() => import("./Pages/Info.jsx"));
+const PageNotFound = React.lazy(() =>import("./Pages/PageNotFound.jsx")) ;
+
 const ProjectRoutes = () => {
   return (
-    <React.Suspense fallback={<>Loading...</>}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Info />} />
-          <Route path="*" element={<PageNotFound />} />
-          <Route path="/info" element={<Info />} />
+          <Route path="/" element={<AppLayout/>} >
+            <Route index element={<Info />} />  
+            <Route path="/info" element={<Info />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-    </React.Suspense>
   );
 };
 export default ProjectRoutes;

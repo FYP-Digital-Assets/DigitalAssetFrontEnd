@@ -1,6 +1,6 @@
 export const E404 = () => {
     return (
-        <svg width="750" height="500" viewBox="0 0 750 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="750" height="500" viewBox="0 0 750 500" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="404 error with people holding the numbers-pana 1">
         <g id="freepik--background-complete--inject-13">
         <g id="tile">

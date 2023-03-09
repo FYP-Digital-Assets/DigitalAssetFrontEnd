@@ -3,7 +3,7 @@ export const Info = () => {
   return (
     <div>
       <Navbar/>
-     
+      
         
     </div>
   )

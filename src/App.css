@@ -82,3 +82,52 @@
   height: 30px;
   cursor: pointer;
 }
+.e404{
+  width: 50%;
+}
+
+svg #tile{
+  animation: tiles 2s linear infinite alternate;
+  
+}
+svg #personmiddle{
+  animation: personmiddle 2s linear infinite alternate;
+}
+svg #personleft{
+  animation: personleft 2s linear infinite alternate;
+}
+svg #personright{
+  animation: personright 2s linear infinite alternate;
+}
+@keyframes tiles{
+  from{
+    transform: translateX(-3%);
+  }
+  to{
+    transform: translateX(3%);
+  }
+}
+@keyframes personleft {
+  from{
+    transform: translateY(0%) ;
+  }
+  to{
+    transform: translateY(-2%)
+  }
+}
+@keyframes personmiddle {
+  from{
+    transform: translateY(-2%) ;
+  }
+  to{
+    transform: translateY(0%)
+  }
+}
+@keyframes personright {
+  from{
+    transform: translateY(0%) ;
+  }
+  to{
+    transform: translateY(-2%)
+  }
+}

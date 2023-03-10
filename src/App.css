@@ -1,3 +1,4 @@
+/* color css-variable according to design System */
 :root{
   --primary-color :#6AC8F7 ;
   --secondry-color : #6AF79A ;
@@ -8,7 +9,55 @@
   --accent-color: #ECF1F4;
   --light-color: #FAFCFE;
 }
-
+/* Typography according to design system */
+.heading_1{
+  font-weight: bold;
+  font-size: 64px;
+  letter-spacing: -0.02rem;
+}
+.heading_2{
+  font-weight: bold;
+  font-size: 40px;
+  letter-spacing: -0.02rem;
+}
+.heading_3{
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: -0.02rem;
+}
+.subtitle-text{
+  font-size: 25px;
+}
+.body-text{
+  font-size: 16px;
+}
+.body-text-bold{
+  font-size: 16px;
+  font-weight: bold;
+}
+.small-text{
+  font-size: 14px;
+}
+.pre-title-text{
+  font-size: 12px;
+  letter-spacing: 0.04rem;
+}
+.button-text-small{
+  font-size: 14px;
+  letter-spacing: 0.04rem;
+  font-weight: bold;
+}
+.button-text-medium{
+  font-size: 16px;
+  letter-spacing: 0.04rem;
+  font-weight: bold;
+}
+.button-text-large{
+  font-size: 24px;
+  letter-spacing: 0.04rem;
+  font-weight: bold;
+}
+/* navbar component  */
 .navbar1 {
   background-color: var(--light-color);  
   width: 100%;
@@ -17,6 +66,7 @@
   align-items: center ;
   justify-items: center;
   padding: 5px;
+  box-shadow: 0px 2px 9px 1px var(--accent-color);
 }
 .navEle1{
   display: flex;
@@ -33,7 +83,9 @@
 }
 .searchButton:hover{
   background: var(--secondry-color);
-  
+}
+.searchButton:active{
+  background-color:#07e454 ;
 }
 .searchInput{
   width: 100%;
@@ -46,12 +98,15 @@
   color: #4A4A68;
   font-size: 16px;
   background-color: var(--light-color);
+  color: var(--muted-color);
   
 }
+
 .searchInput:focus{
   border-color: var(--primary-color); 
    
   box-shadow: 0px 0px 3px 1px var(--primary-color);
+  color: var(--text-color);
 
 }
 .searchInput:focus + .searchButton{
@@ -59,6 +114,7 @@
   box-shadow: 0px 0px 3px 1px var(--primary-color);
 
 }
+
 .searchbar{
   width: 100%;
   position: relative;
@@ -66,7 +122,7 @@
 }
 .wrap{
   width: 30rem;
-  margin-left: 5rem;
+  margin-left: 1rem;
 }
 .profileIcon{
   border: 1px solid var(--dark-color);

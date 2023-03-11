@@ -59,6 +59,9 @@
 }
 /* navbar component  */
 .navbar1 {
+  position: sticky;
+  top: 0%;
+  
   background-color: var(--light-color);  
   width: 100%;
   display: flex;
@@ -170,7 +173,7 @@ svg #personright{
     transform: translateY(0%) ;
   }
   to{
-    transform: translateY(-2%)
+    transform: translateY(-2%) ;
   }
 }
 @keyframes personmiddle {
@@ -178,7 +181,7 @@ svg #personright{
     transform: translateY(-2%) ;
   }
   to{
-    transform: translateY(0%)
+    transform: translateY(0%) ;
   }
 }
 @keyframes personright {
@@ -186,6 +189,45 @@ svg #personright{
     transform: translateY(0%) ;
   }
   to{
-    transform: translateY(-2%)
+    transform: translateY(-2%) ;
   }
 }
+/* info backleft svg */
+.backLeftsvg{
+  position: absolute;
+  top: 10%;
+  left: -2%;
+  z-index: -1;
+}
+
+#Vector_star{
+  animation: colors_stars 20s infinite linear alternate ;
+}
+@keyframes colors_stars {
+  0%   { fill:var(--primary-color); }
+  20%  { fill:#98c5c5 }
+  40%  { fill:#e4ccd0 ; }
+  60%  { fill:#a09899 }
+  80%  { fill:#463135; }
+  100% { fill:#0E0E2C; }
+}
+
+#vector_bg_luquid1, #vector_bg_luquid2{
+  animation: larve 4s ease-in-out infinite alternate;
+  transform-origin: bottom;
+  transform-box: fill-box;
+}
+#vector_bg_luquid3{
+  animation: larve 5s linear infinite alternate;
+}
+
+@keyframes larve{
+  from{
+    transform: rotateX(0deg) rotateY(25deg)  ;
+  }
+  to{
+    transform: rotateX(20deg) rotateY(0deg) ;
+  }
+}
+
+

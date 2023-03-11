@@ -1,6 +1,6 @@
 import "../App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
-import logo from "../assets/logo2.png"
+import logo from "../assets/logo2.svg"
 import searchIcon from "../assets/Searchicon.svg"
 import profileIcon from "../assets/profile.svg"
 import walletIcon from "../assets/wallet.svg"
@@ -10,7 +10,7 @@ export const Navbar = () => {
     return (
       <nav className="navbar1">
         <div className="navEle1">
-            <a className="mx-1" href="/">
+            <a className="mx-4" href="/">
                 <img src={logo} alt="Digital asset" width="220" />
             </a>
             <div className="wrap">

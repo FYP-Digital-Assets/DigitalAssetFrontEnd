@@ -1,233 +1,60 @@
-/* color css-variable according to design System */
-:root{
-  --primary-color :#6AC8F7 ;
-  --secondry-color : #6AF79A ;
-  --tertiary-color : #F76A81;
-  --text-color: #4A4A68;
-  --dark-color: #0E0E2C; 
-  --muted-color: #8C8CA1 ;
-  --accent-color: #ECF1F4;
-  --light-color: #FAFCFE;
+.App {
+  font-family: sans-serif;
+  text-align: center;
 }
-/* Typography according to design system */
-.heading_1{
+.App button {
+  padding: 13px 29px;
+  font-size: 1rem;
   font-weight: bold;
-  font-size: 64px;
-  letter-spacing: -0.02rem;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background: blue;
+  color: white;
+  cursor: pointer;
 }
-.heading_2{
-  font-weight: bold;
-  font-size: 40px;
-  letter-spacing: -0.02rem;
-}
-.heading_3{
-  font-weight: bold;
-  font-size: 24px;
-  letter-spacing: -0.02rem;
-}
-.subtitle-text{
-  font-size: 25px;
-}
-.body-text{
-  font-size: 16px;
-}
-.body-text-bold{
-  font-size: 16px;
-  font-weight: bold;
-}
-.small-text{
-  font-size: 14px;
-}
-.pre-title-text{
-  font-size: 12px;
-  letter-spacing: 0.04rem;
-}
-.button-text-small{
-  font-size: 14px;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-.button-text-medium{
-  font-size: 16px;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-.button-text-large{
-  font-size: 24px;
-  letter-spacing: 0.04rem;
-  font-weight: bold;
-}
-/* navbar component  */
-.navbar1 {
-  position: sticky;
-  top: 0%;
-  
-  background-color: var(--light-color);  
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center ;
-  justify-items: center;
-  padding: 5px;
-  box-shadow: 0px 2px 9px 1px var(--accent-color);
-}
-.navEle1{
+#portal .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
 }
-.searchButton{
-  width: 50px;
-  height: 35px;
-  border: 1px solid var(--muted-color);
-  background: var(--accent-color);
-  text-align: center;
-  border-radius: 0 10px 10px 0;
-  cursor: pointer;
-}
-.searchButton:hover{
-  background: var(--secondry-color);
-}
-.searchButton:active{
-  background-color:#07e454 ;
-}
-.searchInput{
-  width: 100%;
-  border: 1px solid var(--muted-color);
-  border-right: none;
-  padding: 5px;
-  height: 35px;
-  border-radius: 10px 0 0 10px;
-  outline: none;
-  color: #4A4A68;
-  font-size: 16px;
-  background-color: var(--light-color);
-  color: var(--muted-color);
-  
-}
-
-.searchInput:focus{
-  border-color: var(--primary-color); 
-   
-  box-shadow: 0px 0px 3px 1px var(--primary-color);
-  color: var(--text-color);
-
-}
-.searchInput:focus + .searchButton{
-  border-color: var(--primary-color); 
-  box-shadow: 0px 0px 3px 1px var(--primary-color);
-
-}
-
-.searchbar{
-  width: 100%;
-  position: relative;
+.container .modal {
+  z-index: 1;
+  width: 350px;
+  height: 220px;
+  background: white;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  position: relative;
+  animation: animate 0.3s;
 }
-.wrap{
-  width: 30rem;
-  margin-left: 1rem;
-}
-.profileIcon{
-  border: 1px solid var(--dark-color);
-  border-radius: 50%;
-  
+.modal button {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  padding: 8px 11px;
+  background: blue;
   color: white;
-}
-.navlinks{
-  display: flex ;
-}
-.imageNav{
-  width: 30px;
-  height: 30px;
+  font-weight: bold;
+  border: none;
+  outline: none;
+  border-radius: 2px;
   cursor: pointer;
 }
-
-/* PageNotFound and E404 Svg */
-.e404{
-  width: 50%;
-}
-
-svg #tile{
-  animation: tiles 2s linear infinite alternate;
-  
-}
-svg #personmiddle{
-  animation: personmiddle 2s linear infinite alternate;
-}
-svg #personleft{
-  animation: personleft 2s linear infinite alternate;
-}
-svg #personright{
-  animation: personright 2s linear infinite alternate;
-}
-@keyframes tiles{
-  from{
-    transform: translateX(-3%);
+@keyframes animate {
+  from {
+    transform: scale(0.5);
   }
-  to{
-    transform: translateX(3%);
+  to {
+    transform: scale(1);
   }
 }
-@keyframes personleft {
-  from{
-    transform: translateY(0%) ;
-  }
-  to{
-    transform: translateY(-2%) ;
-  }
-}
-@keyframes personmiddle {
-  from{
-    transform: translateY(-2%) ;
-  }
-  to{
-    transform: translateY(0%) ;
-  }
-}
-@keyframes personright {
-  from{
-    transform: translateY(0%) ;
-  }
-  to{
-    transform: translateY(-2%) ;
-  }
-}
-/* info backleft svg */
-.backLeftsvg{
-  position: absolute;
-  top: 10%;
-  left: -2%;
-  z-index: -1;
-}
-
-#Vector_star{
-  animation: colors_stars 20s infinite linear alternate ;
-}
-@keyframes colors_stars {
-  0%   { fill:var(--primary-color); }
-  20%  { fill:#98c5c5 }
-  40%  { fill:#e4ccd0 ; }
-  60%  { fill:#a09899 }
-  80%  { fill:#463135; }
-  100% { fill:#0E0E2C; }
-}
-
-#vector_bg_luquid1, #vector_bg_luquid2{
-  animation: larve 4s ease-in-out infinite alternate;
-  transform-origin: bottom;
-  transform-box: fill-box;
-}
-#vector_bg_luquid3{
-  animation: larve 5s linear infinite alternate;
-}
-
-@keyframes larve{
-  from{
-    transform: rotateX(0deg) rotateY(25deg)  ;
-  }
-  to{
-    transform: rotateX(20deg) rotateY(0deg) ;
-  }
-}
-
-

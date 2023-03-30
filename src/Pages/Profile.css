@@ -1,0 +1,83 @@
+.bioRapter{
+    position: relative;
+    width: 70%;
+    /* border: 1px solid black; */
+}
+
+.bioRapter h1{
+   
+    /* background-color: #fefffe; */
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    
+}
+.bioRapter p{
+    position: relative;
+    border-top: 1px solid rgb(99, 97, 97);
+    padding: 20px;
+    border-radius: 10px;
+    
+}
+.imgProfile{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-left: 20px;
+    object-fit: cover;
+  }
+  .profileText{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin-left: 30px;
+  }
+  .profile_details{
+    background-image: linear-gradient(to right, #6AF79A , #6AC8F7);
+    padding: 30px;
+  }
+  .ethIcon1{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    
+  }
+  .editButton{
+    cursor: pointer;
+    position:fixed;
+    right: 30px;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.692);
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .editButton img{
+    width: 30px;
+  }
+  .editButton .editSpan{
+    margin-left: 10px;
+    display: none;
+    
+  }
+  .editButton:hover .editSpan{
+    color: rgba(67, 5, 238, 0.815);
+    display: inline;
+  }
+  .EditingSection{
+    background-color: #282c343a;
+    /* height: 300px; */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  
+  }
+  .imageChose{
+    padding: 10px;
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

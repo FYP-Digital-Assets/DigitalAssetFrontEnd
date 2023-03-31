@@ -1,15 +1,19 @@
-import React from "react";
-import {Outlet} from "react-router-dom" ;
+import React, { useState } from "react";
+import {Outlet, useNavigate} from "react-router-dom" ;
 import Navbar from "./Components/Navbar";
 import Modal from "./Components/Modal";
 import { useRef } from "react";
-const AppLayout = ()=> {
+const AppLayout = (props)=> {
+    const navigation = useNavigate();
     const close_reference_modal = useRef() ;
     const close_modal =()=>{
         close_reference_modal.current.style.display = "none" ;
     }
     const show_modal = () =>{
-        close_reference_modal.current.style.display = "block" ;
+        if(props.auth){
+            navigation("/Profile") ;
+        }else{close_reference_modal.current.style.display = "block" }
+        
     }
     return (<>
         <Navbar show_modal={show_modal}/>

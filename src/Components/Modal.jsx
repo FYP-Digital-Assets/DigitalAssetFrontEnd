@@ -37,8 +37,8 @@ const Modal = (props)=>{
                                 return (
                                     // each row of modal body
                                     <div className="modal_table_row" key={i}>
-                                        <td className="modal_wallet_img">{<img src={wallet.icon}/>}</td>
-                                        <td>{wallet.name}</td>
+                                        <div className="modal_wallet_img">{<img src={wallet.icon}/>}</div>
+                                        <div>{wallet.name}</div>
                                     </div>
                                 );
                             })}

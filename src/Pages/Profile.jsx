@@ -1,9 +1,10 @@
 import "./Profile.css";
 import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { useEffect } from "react";
 // profile in editing mode
-function Editing(props){
+function EditingProtected(props){
   return (
     <div className='EditingSection'>
       <div className='imageChose'>
@@ -12,19 +13,20 @@ function Editing(props){
         <input type="file" accept="image/*" className='form-control' onChange={props.handleFileChange}/>
       </div>
       <div className='imageChose'>
-        <div class="mb-3 row">
-          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputName"  value={props.name} onChange={props.handleNameChange}/>
+        <div className="mb-3 row">
+          <label htmlFor="inputName" className="col-sm-2 col-form-label">Name</label>
+          <div className="col-sm-10">
+            <input type="text" className="form-control" id="inputName"  value={props.name} onChange={props.handleNameChange}/>
           </div>
          </div>
       </div>
-      <Link to=".." relative="path" lassName="editButton">Done</Link>
+      <Link to=".." relative="path" className="editButton">Done</Link>
     </div>
   )
 }
 // profile withOutEditing mode
-function Profile(props){
+function ProfileProtected(props){
+  
   return(
     <div className="container-fluid">
         {/* user Information */}
@@ -32,7 +34,7 @@ function Profile(props){
             
             <div className='d-flex juctify-content-left '>
                 <Link to="./Editing" relative="path" className="editButton">
-                    <img src={editIcon}  alt="nodd" srcset="" />
+                    <img src={editIcon}  alt="nodd" />
                     <span className="editSpan">edit</span>
                 </Link>
                 <img src="https://placehold.co/600x400" alt='Profile pic' className='imgProfile' />
@@ -65,4 +67,21 @@ function Profile(props){
     </div>
   );
 }
+function Editing(props){
+  const navi = useNavigate();
+  useEffect(() => {
+    if(props.auth == false) navi("/")
+  },[auth])
+  return props.auth ? (<EditingProtected/>):(null) ;
+}
+
+function Profile(props){
+  const navi = useNavigate();
+  useEffect(() => {
+    if(props.auth == false) navi("/")
+  })
+  return props.auth == true ? (<ProfileProtected/>):(null) ;
+}
+
+
 export {Profile, Editing}

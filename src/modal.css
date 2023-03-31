@@ -1,60 +1,57 @@
-.App {
-    font-family: sans-serif;
-    text-align: center;
-  }
-  .App button {
-    padding: 13px 29px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    background: blue;
-    color: white;
-    cursor: pointer;
-  }
-  #portal .container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0.7);
-  }
-  .container .modal {
+  .modal-container_1{
+    top: 9rem;
+    left: 30%;
+    position:fixed;
     z-index: 1;
-    width: 350px;
-    height: 220px;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-    position: relative;
-    animation: animate 0.3s;
+    background-color: #ECF1F4;
+    width: 40%;
+    border-radius: 20px;
+    display: none;
+    border: 1px solid rgb(126, 126, 126);
   }
-  .modal button {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    padding: 8px 11px;
-    background: blue;
-    color: white;
-    font-weight: bold;
-    border: none;
-    outline: none;
-    border-radius: 2px;
+  .btn-modal-close{
+    border: 1px solid #F76A81;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    background-color: #F76A81;
+    
+  }
+  .btn-modal-close:hover{
+    background-color: #f092a2;
+  }
+  .modal_header div{
+
+   display: flex;
+   justify-content: end;
+   margin: 7px 10px;
+  }
+  .modal_header{
+    border-bottom: 1px solid rgb(109, 107, 107);
+  }
+  .modal-body-wallets{
+    background-color: #FAFCFE;
+  }
+  .modal-body-wallets img{
+    width: 2rem;
+  }
+  .modal_table_row{
+    padding: 10px 30px;
+    border-bottom: 1px solid rgb(99, 93, 93);
+    display: flex;
+    justify-content: start;
+    align-items: center;
     cursor: pointer;
   }
-  @keyframes animate {
-    from {
-      transform: scale(0.5);
-    }
-    to {
-      transform: scale(1);
-    }
+  .modal_wallet_img{
+    margin-right: 3rem;
   }
+  
+  .modal_table_row:hover{
+    background-color:#6AC8F7;
+  }
+  .modal_table_row:active{
+    background-color:#e8edf0;
+  }
+  
+

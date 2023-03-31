@@ -1,4 +1,3 @@
-import "bootstrap/dist/css/bootstrap.min.css"
 import "./Profile.css";
 import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"

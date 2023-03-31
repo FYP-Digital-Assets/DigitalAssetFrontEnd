@@ -9,6 +9,7 @@ const PageNotFound = React.lazy(() =>import("./Pages/PageNotFound.jsx")) ;
 
 const ProjectRoutes = () => {
   return (
+    <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<AppLayout/>} >
@@ -18,8 +19,13 @@ const ProjectRoutes = () => {
             <Route path="/Profile" element={<Profile/>} />
             <Route path="/Profile/Editing" element={<Editing/>} />
           </Route>
+          
         </Routes>
+        
       </BrowserRouter>
+     
+      </>
+      
   );
 };
 export default ProjectRoutes;

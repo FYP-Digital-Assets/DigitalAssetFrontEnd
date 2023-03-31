@@ -1,5 +1,4 @@
 import BackLeft from "../assets/BackLeftInfo";
-import "bootstrap/dist/css/bootstrap.min.css"
 import "../App.css";
 import Vector1 from "../assets/Vector1.jsx" ;
 import Vector2 from "../assets/vector2.svg" ;

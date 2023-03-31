@@ -1,11 +1,13 @@
 import "../App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
+
 import logo from "../assets/logo2.svg"
 import searchIcon from "../assets/Searchicon.svg"
 import profileIcon from "../assets/profile.svg"
 import walletIcon from "../assets/wallet.svg"
 
-export const Navbar = () => {
+
+export const Navbar = (props) => {
     
     return (
       <nav className="navbar1">
@@ -26,11 +28,15 @@ export const Navbar = () => {
         
         <div className="navlinks">
             <img src={walletIcon} className="mx-2 imageNav" alt="hle"   />   
-            <img src={profileIcon} className="profileIcon imageNav mx-3" alt="hle"/>   
-           
+            <img src={profileIcon} className="profileIcon imageNav mx-3" alt="hle" onClick={props.show_modal}/> 
+            
+            
+
         
         </div>
+       
       </nav>
+
     )
   }
   

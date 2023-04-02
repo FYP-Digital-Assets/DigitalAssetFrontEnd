@@ -2,7 +2,9 @@ import "./Profile.css";
 import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
 import { Link, useNavigate} from "react-router-dom";
-import { useEffect } from "react";
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
+import { useEffect, useState, useRef } from "react";
 // profile in editing mode
 function EditingProtected(props){
   return (
@@ -20,12 +22,19 @@ function EditingProtected(props){
           </div>
          </div>
       </div>
-      <Link to=".." relative="path" className="editButton">Done</Link>
+      <Link to="/profile"  className="editButton">Done</Link>
     </div>
   )
 }
 // profile withOutEditing mode
 function ProfileProtected(props){
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+  const copy = async () => {
+    await navigator.clipboard.writeText(props.addr);
+    setShow(true)
+    setTimeout(()=> setShow(false), 1000);
+  }
   
   return(
     <div className="container-fluid">
@@ -33,7 +42,7 @@ function ProfileProtected(props){
         <div className="row profile_details">
             
             <div className='d-flex juctify-content-left '>
-                <Link to="./Editing" relative="path" className="editButton">
+                <Link to="/profile/Editing" relative="path" className="editButton">
                     <img src={editIcon}  alt="nodd" />
                     <span className="editSpan">edit</span>
                 </Link>
@@ -42,8 +51,19 @@ function ProfileProtected(props){
                 <div className='profileText'>
                     <h1 className="heading_2 ">Iqbal Baloch</h1>
                     <div className='d-flex justify-content-left'>
-                    <img src={EthIcon} alt='eth icon' className='ethIcon1'/>
-                    <p className='text-muted'>232331231313123123133123123</p>
+                      <img src={EthIcon} alt='eth icon' className='ethIcon1'/>
+                      <p className='text-muted address-text' onClick={copy} ref={target}>
+                        {props.addr.substr(0,6)}...{props.addr.substr(-4, 4)}
+                      </p>
+                      <Overlay target={target.current} show={show} placement="top">
+                        {(props) => (
+                          <Tooltip id="overlay-example" {...props}>
+                            copied!
+                          </Tooltip>
+                        )}
+                      </Overlay>
+                      
+                        
                     </div>
                 </div>
                 
@@ -71,7 +91,7 @@ function Editing(props){
   const navi = useNavigate();
   useEffect(() => {
     if(props.auth == false) navi("/")
-  },[auth])
+  })
   return props.auth ? (<EditingProtected/>):(null) ;
 }
 
@@ -80,7 +100,9 @@ function Profile(props){
   useEffect(() => {
     if(props.auth == false) navi("/")
   })
-  return props.auth == true ? (<ProfileProtected/>):(null) ;
+  return props.auth == true ? (
+      <ProfileProtected addr={props.addr}/>
+  ):(null) ;
 }
 
 

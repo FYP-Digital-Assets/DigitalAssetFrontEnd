@@ -27,7 +27,7 @@ export const Navbar = (props) => {
         
         
         <div className="navlinks">
-            <img src={walletIcon} className="mx-2 imageNav" alt="hle"   />   
+            <img src={walletIcon} className="mx-2 imageNav" alt="hle"  onClick={props.handleShowOffcanvase} />   
             <img src={profileIcon} className="profileIcon imageNav mx-3" alt="hle" onClick={props.show_modal}/> 
             
             

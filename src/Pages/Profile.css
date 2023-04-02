@@ -1,3 +1,15 @@
+.address-text{
+  cursor: pointer;
+}
+
+*[name="btn"]{
+  background-color: #6AC8F7;
+}
+
+.copy-text{
+  position:static;
+  /* display: none;  */
+}
 .bioRapter{
     position: relative;
     width: 70%;
@@ -81,3 +93,4 @@
     flex-direction: column;
     align-items: center;
   }
+

@@ -16,7 +16,7 @@ const ProjectRoutes = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppLayout auth = {isAuth} setAuth={setAuth} setAddr={setAddr}/>} >
+          <Route path="/" element={<AppLayout auth = {isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} />} >
             <Route index element={!isAuth?(<Info />):(<Profile addr={addr} auth = {isAuth}/>) } />  
             <Route path="/info" element={<Info />} />
             <Route path="*" element={<PageNotFound />} />

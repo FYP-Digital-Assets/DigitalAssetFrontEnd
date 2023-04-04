@@ -4,10 +4,40 @@ import Navbar from "./Components/Navbar";
 import Modal from "./Components/Modal";
 import WalletOffcanvase from "./Components/WalletOffcanvase"
 import { useRef } from "react";
+import Web3 from 'web3';
 const AppLayout = (props)=> {
+    // wallet connecting
+    const [bal, setBal] = useState(0);
+    const ConnectToWallet = async() => {
+        try{
+          const web3 = new Web3(window.ethereum);
+          const isMetaMask = web3.currentProvider.isMetaMask;
+          if(isMetaMask){
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            const accounts = await web3.eth.getAccounts();
+            const address = accounts[0];
+            const balance = await web3.eth.getBalance(address);
+            setBal(web3.utils.fromWei(balance, 'ether'));
+            props.setAddr(address) ;
+            props.setAuth(true) ;
+            close_modal();
+          }
+          else{
+            window.open('https://metamask.io/download/', '_blank', 'noreferrer');
+          }
+          
+        }catch(err){
+          console.log(err);
+          console.log("hello")
+        }
+    }
+
     // offcanvase variables
     const [showOffcanvase, setShowOffcanvase] = useState(false);
-    const handleShowOffcanvase = () => setShowOffcanvase(true);
+    const handleShowOffcanvase = () => {
+      setShowOffcanvase(true)
+      close_modal()
+    };
 
     const navigation = useNavigate();
     const close_reference_modal = useRef() ;
@@ -23,8 +53,8 @@ const AppLayout = (props)=> {
     return (<>
         <Navbar show_modal={show_modal} handleShowOffcanvase={handleShowOffcanvase} />
         <React.Suspense fallback={<>Loading...</>}>
-            <WalletOffcanvase setShowOffcanvase={setShowOffcanvase} showOffcanvase={showOffcanvase} auth={props.auth} />
-            <Modal close_modal={close_modal} close_reference_modal={close_reference_modal} setAddr={props.setAddr} auth={props.auth} setAuth={props.setAuth}/>
+            <WalletOffcanvase setShowOffcanvase={setShowOffcanvase} showOffcanvase={showOffcanvase} auth={props.auth} ConnectToWallet={ConnectToWallet} balance={bal} addr={props.addr}/>
+            <Modal close_modal={close_modal} close_reference_modal={close_reference_modal} ConnectToWallet={ConnectToWallet}/>
             <Outlet/>
         </React.Suspense>
     </>

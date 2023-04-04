@@ -1,3 +1,36 @@
+  /* offcanvas */
+  .modal_table_row2{
+    border-radius: 10px;
+    margin-bottom: 5px;
+    padding: 5px;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+  }
+  .modal_wallet_img2{
+    width: 3rem;
+  }
+  .modal_wallet_img3{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+  }
+  .modal_table_row2:hover{
+    background-color: #6AC8F7;
+  }
+  .add-fund-btn{
+    cursor: pointer;
+    background-color: #6AC8F7;
+  }
+  .add-fund-btn:hover{
+    background-color:#38afeb;
+  }
+
+
+
+  /* modal */
   .modal-container_1{
     top: 9rem;
     left: 30%;

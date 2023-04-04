@@ -2,7 +2,7 @@
 import ledger from "../assets/ledger-icon.png"
 import metamask_icon from "../assets/metamask-icon.svg"
 import Phantom from "../assets/Phantom.svg"
-import Web3 from 'web3';
+
 import "../modal.css"
 
 const Modal = (props)=>{
@@ -11,33 +11,12 @@ const Modal = (props)=>{
     walletList.push({name:"Metamask", icon:metamask_icon});
     walletList.push({name:"Ledger", icon:ledger});
     walletList.push({name:"Phantom", icon:Phantom});
-    walletList.push({name:"Core", icon:Phantom});
-    const ConnectToWallet = async() => {
-        try{
-          const web3 = new Web3(window.ethereum);
-          const isMetaMask = web3.currentProvider.isMetaMask;
-          if(isMetaMask){
-            await window.ethereum.request({ method: 'eth_requestAccounts' });
-            const accounts = await web3.eth.getAccounts();
-            const address = accounts[0];
-            props.setAddr(address) ;
-            props.setAuth(true) ;
-            props.close_modal();
-          }
-          else{
-            window.open('https://metamask.io/download/', '_blank', 'noreferrer');
-          }
-          
-        }catch(err){
-          console.log(err);
-          console.log("hello")
-        }
-      }
+    walletList.push({name:"Core", icon:Phantom});   
     return (
         // modal
         // porps.close_reference_modal: = is reference use to update modal in code
         // props.close_modal is the method that close the modal using reference 
-        <div className="modal-container_1" ref={props.close_reference_modal}>
+        <div className="modal-container_1"  ref={props.close_reference_modal} >
             <div>
                 <div>
                     {/* header of modal */}
@@ -56,7 +35,7 @@ const Modal = (props)=>{
                             {walletList.map((wallet, i)=>{
                                 return (
                                     // each row of modal body
-                                    <div className="modal_table_row" key={i} onClick={ConnectToWallet}>
+                                    <div className="modal_table_row" key={i} onClick={props.ConnectToWallet} >
                                         <div className="modal_wallet_img">{<img src={wallet.icon}/>}</div>
                                         <div>{wallet.name}</div>
                                     </div>

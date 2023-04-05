@@ -11,24 +11,22 @@
   /* display: none;  */
 }
 .bioRapter{
-    position: relative;
     width: 70%;
     /* border: 1px solid black; */
 }
 
 .bioRapter h1{
    
-    /* background-color: #fefffe; */
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 5px;
     
 }
 .bioRapter p{
-    position: relative;
-    border-top: 1px solid rgb(99, 97, 97);
-    padding: 20px;
-    border-radius: 10px;
+    border-top: 2px solid rgb(83, 83, 83);
+    padding-top: 10px ;
+    padding-left: 20px;
+    
     
 }
 .imgProfile{
@@ -39,6 +37,7 @@
     margin-top: 20px;
     margin-left: 20px;
     object-fit: cover;
+    background-color: #ECF1F4;
   }
   .profileText{
     display: flex;
@@ -48,7 +47,8 @@
     margin-left: 30px;
   }
   .profile_details{
-    background-image: linear-gradient(to right, #6AF79A , #6AC8F7);
+    background-image: linear-gradient(to right , #6AC8F7,#6AF79A  );
+    /* background-image: linear-gradient(to right, #6AF79A , #6AC8F7); */
     padding: 30px;
   }
   .ethIcon1{
@@ -78,19 +78,63 @@
     color: rgba(67, 5, 238, 0.815);
     display: inline;
   }
+
+  /* edditing profile  */
+  .bio-text-edit{
+    width: 30rem;
+    color: #4A4A68;
+
+  }
+  .bio-text-edit:focus{
+    color: #4A4A68;
+
+  }
   .EditingSection{
-    background-color: #282c343a;
-    /* height: 300px; */
     display: flex;
-    justify-content: center;
-    padding: 10px;
+    background-image: linear-gradient(to right , #6AC8F7,#6AF79A  );
+    padding: 30px;
   
   }
   .imageChose{
     padding: 10px;
-   
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 1px solid #8C8CA1;
+    margin-right: 10px;
+    border-radius: 15px;
+    background-color: #edf0f360 ;
+  }
+  .body-image-title{
+    color: #4A4A68;
+    padding: 10px;
+    width: 100%;
+    background-color: #ECF1F4;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+  }
+  .imgProfile-editing{
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border: 1px solid #8C8CA1;
+    border-radius: 50%;
+    margin-bottom: 6px;
+    background-color: #ECF1F4;
+  }
+  .select-image-form{
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius:15px ;
+  }
+  .lable-for-name{
+    width: 100%;
+    /* padding-left: 10px; */
+  }
+  .input-for-name{
+    width: 30rem;
+  }
+  .bio-lable{
+    width: 100%;
+    margin-top: 10px;
   }
 

@@ -9,6 +9,9 @@
   --accent-color: #ECF1F4;
   --light-color: #FAFCFE;
 }
+.loading{
+  height: 100vh;
+}
 /* Typography according to design system */
 .heading_1{
   font-weight: bold;

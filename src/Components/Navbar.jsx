@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 import logo from "../assets/logo2.svg"
 import searchIcon from "../assets/Searchicon.svg"
-import profileIcon from "../assets/profile.svg"
 import walletIcon from "../assets/wallet.svg"
 
 
@@ -28,7 +27,7 @@ export const Navbar = (props) => {
         
         <div className="navlinks">
             <img src={walletIcon} className="mx-2 imageNav" alt="hle"  onClick={props.handleShowOffcanvase} />   
-            <img src={profileIcon} className="profileIcon imageNav mx-3" alt="hle" onClick={props.show_modal}/> 
+            <img src={props.imageUrl} className="profileIcon imageNav mx-3" alt="hle" onClick={props.show_modal}/> 
             
             
 

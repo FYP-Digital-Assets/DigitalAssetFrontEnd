@@ -6,6 +6,8 @@ import WalletOffcanvase from "./Components/WalletOffcanvase"
 import { useRef } from "react";
 import Web3 from 'web3';
 const AppLayout = (props)=> {
+    
+
     // wallet connecting
     const [bal, setBal] = useState(0);
     const ConnectToWallet = async() => {
@@ -51,8 +53,14 @@ const AppLayout = (props)=> {
         
     }
     return (<>
-        <Navbar show_modal={show_modal} handleShowOffcanvase={handleShowOffcanvase} />
-        <React.Suspense fallback={<>Loading...</>}>
+        <Navbar show_modal={show_modal} handleShowOffcanvase={handleShowOffcanvase} imageUrl={props.imageUrl} />
+        <React.Suspense fallback={
+          <div className="d-flex justify-content-center align-items-center loading">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+        }>
             <WalletOffcanvase setShowOffcanvase={setShowOffcanvase} showOffcanvase={showOffcanvase} auth={props.auth} ConnectToWallet={ConnectToWallet} balance={bal} addr={props.addr}/>
             <Modal close_modal={close_modal} close_reference_modal={close_reference_modal} ConnectToWallet={ConnectToWallet}/>
             <Outlet/>

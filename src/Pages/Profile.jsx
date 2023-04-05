@@ -1,6 +1,7 @@
 import "./Profile.css";
 import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
+import doneIcon from "../assets/verify.png"
 import { Link, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -10,19 +11,32 @@ function EditingProtected(props){
   return (
     <div className='EditingSection'>
       <div className='imageChose'>
-        <h3>profile image</h3>
-        <img src="https://placehold.co/600x400" alt="profile image" className="imgProfile"/>
-        <input type="file" accept="image/*" className='form-control' onChange={props.handleFileChange}/>
+        <h3 className="body-image-title" align="center">Image</h3>
+        <img src={props.imageUrl} alt="profile image" className="imgProfile-editing"/>
+        <input type="file" accept="image/*" className='form-control select-image-form' onChange={props.handleFileChange}/>
       </div>
-      <div className='imageChose'>
-        <div className="mb-3 row">
-          <label htmlFor="inputName" className="col-sm-2 col-form-label">Name</label>
-          <div className="col-sm-10">
-            <input type="text" className="form-control" id="inputName"  value={props.name} onChange={props.handleNameChange}/>
-          </div>
-         </div>
+      <div className='imageChose '>
+        <div className="lable-for-name  ">
+          <label htmlFor="inputName" className="col-form-label">Name</label>   
+        </div>
+        
+        <div >
+          <input type="text" className="form-control input-for-name" id="inputName"  value={props.name} onChange={props.handleNameChange}/>
+        </div>
+        <div className="bio-lable">
+          <label htmlFor="boi-lable" className="col-form-label">Bio</label>  
+        </div>
+        
+         <div >
+          <textarea className="form-control bio-text-edit body-text"  id="boi-lable" style={{height: "10rem"}} value={props.des} onChange={props.handleBioChange} ></textarea>
+          
+        </div>
       </div>
-      <Link to="/profile"  className="editButton">Done</Link>
+      
+      <Link to="/profile" className="editButton">
+          <img src={doneIcon}  alt="nodd" />
+          <span className="editSpan">Done</span>
+      </Link>
     </div>
   )
 }
@@ -44,12 +58,12 @@ function ProfileProtected(props){
             <div className='d-flex juctify-content-left '>
                 <Link to="/profile/Editing" relative="path" className="editButton">
                     <img src={editIcon}  alt="nodd" />
-                    <span className="editSpan">edit</span>
+                    <span className="editSpan">Edit</span>
                 </Link>
-                <img src="https://placehold.co/600x400" alt='Profile pic' className='imgProfile' />
+                <img src={props.imageUrl} alt='Profile pic' className='imgProfile' />
                 {/* Name and crytpo address info */}
                 <div className='profileText'>
-                    <h1 className="heading_2 ">Iqbal Baloch</h1>
+                    <h1 className="heading_2 "> {props.name} </h1>
                     <div className='d-flex justify-content-left'>
                       <img src={EthIcon} alt='eth icon' className='ethIcon1'/>
                       <p className='text-muted address-text' onClick={copy} ref={target}>
@@ -70,14 +84,11 @@ function ProfileProtected(props){
             
             </div>
             {/* descrition of user / bio */}
-            <div className="profileText ms-4 ">
-                <div className="bioRapter mt-5">
+            <div className="ms-4 ">
+                <div className="bioRapter mt-4">
                     <h1 className="subtitle-text">Bio</h1>
                     <p className="body-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                        Impedit ratione delectus quo a maiores soluta aspernatur 
-                        pariatur quia accusamus odio, nihil asperiores sunt consequuntur 
-                        laborum itaque veniam. Atque, nemo quos.
+                        {props.des}
                     </p>
                 </div>
                 
@@ -92,7 +103,7 @@ function Editing(props){
   useEffect(() => {
     if(props.auth == false) navi("/")
   })
-  return props.auth ? (<EditingProtected/>):(null) ;
+  return props.auth ? (<EditingProtected handleFileChange={props.handleFileChange} imageUrl={props.imageUrl} name={props.userName} handleNameChange={props.handleNameChange} des={props.des} handleBioChange = {props.handleBioChange}/>):(null) ;
 }
 
 function Profile(props){
@@ -101,7 +112,7 @@ function Profile(props){
     if(props.auth == false) navi("/")
   })
   return props.auth == true ? (
-      <ProfileProtected addr={props.addr}/>
+      <ProfileProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
   ):(null) ;
 }
 

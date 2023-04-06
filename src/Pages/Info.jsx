@@ -4,6 +4,10 @@ import Vector1 from "../assets/Vector1.jsx" ;
 import Vector2 from "../assets/vector2.svg" ;
 import Vector3 from "../assets/vector3.svg" ;
 import Vector4 from "../assets/Vector4.svg" ;
+import ImgVideo from "../assets/img_video.png";
+import ImgImage from "../assets/img_image.png";
+import ImgAudio from "../assets/img_audio.png";
+import ImgDoc from "../assets/img_doc.png";
 
 export const Info = () => {
   return (
@@ -28,7 +32,46 @@ export const Info = () => {
             <Vector1/>
           </div>
         </div>
-
+        {/* catagories */}
+        <div className="row my-5 mx-4">
+          <h2 className="heading_2 text-color my-4">Content types</h2>
+          <div className="container">
+            <div className="row">
+              <div className="col-3 p-3">
+                <div className="card-cat-info">
+                  <h3 className="card-cat-info-heading heading_3 text-center p-2 ">Videos</h3>
+                  <div className="d-flex justify-content-center align-items-center">
+                  <img className="card-cat-img" src={ImgVideo} alt="dd"/>
+                  </div>
+                </div>
+              </div>
+              <div className="col-3 p-3">
+                <div className="card-cat-info">
+                  <h3 className="card-cat-info-heading heading_3 text-center p-2 ">Audios</h3>
+                  <div className="d-flex justify-content-center align-items-center">
+                  <img className="card-cat-img" src={ImgAudio} alt="dd"/>
+                  </div>
+                </div>
+              </div>
+              <div className="col-3 p-3">
+                <div className="card-cat-info">
+                  <h3 className="card-cat-info-heading heading_3 text-center p-2 ">Photographs</h3>
+                  <div className="d-flex justify-content-center align-items-center">
+                  <img className="card-cat-img" src={ImgImage} alt="dd"/>
+                  </div>
+                </div>
+              </div>
+              <div className="col-3 p-3">
+                <div className="card-cat-info">
+                  <h3 className="card-cat-info-heading heading_3 text-center p-2 ">Documents</h3>
+                  <div className="d-flex justify-content-center align-items-center">
+                  <img className="card-cat-img" src={ImgDoc} alt="dd"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* second */}
         <div className="row my-5">
           <div className="col-6 d-flex justify-content-center">

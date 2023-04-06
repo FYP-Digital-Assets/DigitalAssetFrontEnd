@@ -9,6 +9,22 @@
   --accent-color: #ECF1F4;
   --light-color: #FAFCFE;
 }
+.card-cat-img{
+  width: 11rem;
+  margin: 2rem auto;
+}
+.card-cat-info{
+  border: 1px solid var(--muted-color);
+  border-radius: 15px;
+  background-color: var(--accent-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.card-cat-info-heading{
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom: 1px solid var(--muted-color);
+  background-color: var(--light-color);
+}
 .loading{
   height: 100vh;
 }

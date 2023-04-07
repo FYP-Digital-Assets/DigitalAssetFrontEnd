@@ -1,10 +1,10 @@
 import {Card, Col} from 'react-bootstrap';
 export function ContentCard(prop){
   //styles objects
-  const cardStyle ={ width: '30rem', border:"0.3rem solid gray", borderRadius:"0.5rem"}; 
+  const cardStyle ={ width: '30rem', border:"0.3rem solid gray", borderRadius:"0.5rem", height:"45rem", margin:"1rem"}; 
   const typeDiv = {padding:"1rem", backgroundColor:"gray", fontSize:"2rem", textAlign:"center", fontWeight:"bold"};
   const coreDiv = {padding:"2rem"};
-  const imgStyle = {width:"100%"};
+  const imgStyle = {width:"26rem", height:"26rem", objectFit: "cover"};
   const authorImgStyle = {borderRadius:"50%", width:"3rem", height:"3rem", marginRight:"0.5rem"};
   const priceTagStyle = {color:"red", float:"right"};
     return (

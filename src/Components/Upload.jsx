@@ -10,6 +10,9 @@ export function Upload(prop){
     const [file, setFile] = useState(null);
     const [show, setShow] = useState(null);
     const handleClose = () => setShow(false);
+    const [filename, setFilename] = useState(uploadIcon);
+    const [fileType, setFileType] = useState("image/png");
+
     const handleClick = () => {
       fileInputRef.current.click();
     };
@@ -26,17 +29,20 @@ export function Upload(prop){
     const handleFileChange = (event) => {
 
       reader.onload = (event) => {
-      let image = document.getElementById("uploadImg");
-      image.src = event.target.result;
+      
+      setFilename(event.target.result);
       //image.style.width = "80%";
       };
       reader.readAsDataURL(event.target.files[0]);
+      setFileType(event.target.files[0].type);
       // Perform any other actions with the selected file
       setFile(event.target.files[0]);
     };
     
     return (<div>
-      <img src={uploadIcon} id="uploadImg"/><br />
+      <object data={filename} type={fileType} style={{width:"50rem", height:"50rem", objectFit:"cover"}}>
+        <p>Preview not available</p>
+      </object><br />
       {file?<>
       <input type="number" style={{width:"60%"}} placeholder="Price in Wei" id="priceTxt"/><br/><br/>
       <input type="text" style={{width:"60%"}} placeholder="Title" id="titleTxt"/><br/><br/>

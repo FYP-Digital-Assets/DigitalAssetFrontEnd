@@ -12,8 +12,13 @@ const AppLayout = (props)=> {
     const [bal, setBal] = useState(0);
     const ConnectToWallet = async() => {
         try{
+          console.log("web3 start")
           const web3 = new Web3(window.ethereum);
+          console.log("web3 done")
           const isMetaMask = web3.currentProvider.isMetaMask;
+          console.log(web3.currentProvider)
+          console.log("check for metamask")
+          console.log(isMetaMask)
           if(isMetaMask){
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             const accounts = await web3.eth.getAccounts();

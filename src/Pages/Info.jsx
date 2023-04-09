@@ -9,7 +9,7 @@ import ImgImage from "../assets/img_image.png";
 import ImgAudio from "../assets/img_audio.png";
 import ImgDoc from "../assets/img_doc.png";
 
-export const Info = () => {
+export const Info = (props) => {
   return (
     <>
       <BackLeft />
@@ -26,7 +26,11 @@ export const Info = () => {
               Nisi magni provident explicabo fuga aspernatur porro enim 
               libero mollitia eum sit vero tenetur, consequatur ipsum 
               soluta sunt accusantium quo, voluptatibus quidem. 
+              
             </p>
+            <div>
+            <button className="btn btn-primary" >Get Start</button>
+            </div>
           </div>
           <div className="col-6 d-flex justify-content-center">
             <Vector1/>

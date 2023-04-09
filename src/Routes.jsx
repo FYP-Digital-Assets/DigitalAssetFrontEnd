@@ -7,6 +7,7 @@ import AppLayout from "./AppLayout.jsx";
 import { Editing, Profile } from "./Pages/Profile.jsx";
 const Info = React.lazy(() => import("./Pages/Info.jsx"));
 const PageNotFound = React.lazy(() =>import("./Pages/PageNotFound.jsx")) ;
+import ContentDetail from "./Pages/ContentDetail";
 
 const ProjectRoutes = () => {
 
@@ -35,7 +36,7 @@ const ProjectRoutes = () => {
 
 
   const [isAuth, setAuth] = useState(false);
-  const [addr , setAddr] = useState("") ;
+  const [addr , setAddr] = useState("43443") ;
   
   return (
     <>
@@ -47,6 +48,7 @@ const ProjectRoutes = () => {
             <Route path="*" element={<PageNotFound />} />
             <Route path="/Profile" element={<Profile addr={addr} auth = {isAuth} imageUrl={imageUrl} userName={userName} des={userBio} />} />
             <Route path="/Profile/Editing" element={<Editing auth = {isAuth} handleFileChange={handleFileChange} imageUrl={imageUrl} userName={userName} handleNameChange={handleNameChange} des={userBio} handleBioChange={handleBioChange}/>} />
+            <Route path="/auth" element={<ContentDetail img={profileIcon} name={userName} address={addr} />} />
           </Route>
           
         </Routes>

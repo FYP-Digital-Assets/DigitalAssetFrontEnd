@@ -5,15 +5,17 @@ import logo from "../assets/logo2.svg"
 import searchIcon from "../assets/Searchicon.svg"
 import walletIcon from "../assets/wallet.svg"
 
+import { Link } from "react-router-dom"
+
 
 export const Navbar = (props) => {
     
     return (
       <nav className="navbar1">
         <div className="navEle1">
-            <a className="mx-4" href="/">
+            <Link to="/info" className="mx-4">
                 <img src={logo} alt="Digital asset" width="220" />
-            </a>
+            </Link>
             <div className="wrap">
                 <div className="searchbar">
                     <input type="text" className="searchInput" placeholder="Search" name="search"/>

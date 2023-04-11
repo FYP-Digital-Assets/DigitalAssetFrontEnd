@@ -201,3 +201,35 @@
 .img-owner-drow > span{
     color: #F76A81;
 }
+
+.button-purchase{
+    background-color: #ECF1F4;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    
+}
+.button-purchase .button-title{
+    border-radius: 10px 0px 0px 10px ;
+    cursor: pointer;
+    font-weight: bold;
+    color: #FAFCFE;
+    padding : 10px;
+}
+.button-purchase .button-one{
+    background-color: #6AC8F7 ;
+}
+.button-purchase .button-two{
+    background-color: #6AF79A ;
+}
+.button-purchase .button-three {
+    background-color: #F76A81 ;
+    pointer-events: none;
+    opacity: 0.3;
+}
+.button-purchase .button-one:hover , .button-purchase .button-two:hover{
+    background-color: #4A4A68;
+}
+.button-purchase .button-one:active , .button-purchase .button-two:active{
+    background-color: #8484a1;
+}

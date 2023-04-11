@@ -1,4 +1,4 @@
-import React,{ useState } from "react";
+import React,{ useState, useEffect } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import profileIcon from "./assets/profile.svg"
@@ -8,18 +8,40 @@ import { Editing, Profile } from "./Pages/Profile.jsx";
 const Info = React.lazy(() => import("./Pages/Info.jsx"));
 const PageNotFound = React.lazy(() =>import("./Pages/PageNotFound.jsx")) ;
 import ContentDetail from "./Pages/ContentDetail";
+import Web3 from 'web3';
 
-const ProjectRoutes = () => {
+const ProjectRoutes = (props) => {
+  const [bal, setBal] = useState(0);
+  //on load
+  useEffect(() => {
+    const checkConnection = async () => {
 
+        // Check if browser is running Metamask
+        let web3;
+        if (window.ethereum) {
+            web3 = new Web3(window.ethereum);
+        } else if (window.web3) {
+            web3 = new Web3(window.web3.currentProvider);
+        };
+
+        // Check if User is already connected by retrieving the accounts
+          const accounts = await web3.eth.getAccounts();
+          const address = accounts[0];
+          const balance = await web3.eth.getBalance(address);
+          setBal(web3.utils.fromWei(balance, 'ether'));
+          setAddr(address) ;
+          setAuth(true) ;
+    };
+    checkConnection();
+  }, []);
   
   // profile ediditng
-  var [userName, setUserName] = useState("Name") ;
   const [userBio, setUserBio] = useState("description");
   const handleBioChange = (event) =>{
     setUserBio(() => event.target.value);
   }
   const handleNameChange = (event)=>{
-    setUserName(()=> event.target.value) ;
+    props.setUserName(()=> event.target.value) ;
   }
   var [imageUrl, setImageUrl] = useState(profileIcon);
   const handleFileChange = (event)=> {
@@ -42,13 +64,13 @@ const ProjectRoutes = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppLayout auth = {isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} />} >
-            <Route index element={!isAuth?(<Info />):(<Profile addr={addr} auth = {isAuth} imageUrl={imageUrl} userName={userName} des={userBio}/>) } />  
+          <Route path="/" element={<AppLayout auth = {isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} bal={bal} setBal={setBal} />} >
+            <Route index element={!isAuth?(<Info />):(<Profile addr={addr} auth = {isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio}/>) } />  
             <Route path="/info" element={<Info />} />
             <Route path="*" element={<PageNotFound />} />
-            <Route path="/Profile" element={<Profile addr={addr} auth = {isAuth} imageUrl={imageUrl} userName={userName} des={userBio} />} />
-            <Route path="/Profile/Editing" element={<Editing auth = {isAuth} handleFileChange={handleFileChange} imageUrl={imageUrl} userName={userName} handleNameChange={handleNameChange} des={userBio} handleBioChange={handleBioChange}/>} />
-            <Route path="/auth" element={<ContentDetail img={profileIcon} name={userName} address={addr} />} />
+            <Route path="/Profile" element={<Profile addr={addr} auth = {isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
+            <Route path="/Profile/Editing" element={<Editing auth = {isAuth} handleFileChange={handleFileChange} imageUrl={imageUrl} userName={props.userName} handleNameChange={handleNameChange} des={userBio} handleBioChange={handleBioChange}/>} />
+            <Route path="/auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
           </Route>
           
         </Routes>

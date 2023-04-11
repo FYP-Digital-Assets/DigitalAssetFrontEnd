@@ -8,7 +8,7 @@ export function Content({data, type, title, description}){
           </object>
           <br/>
           <p className="title">{title}</p>
-          <Accordion defaultActiveKey="0">
+          <Accordion >
             <Accordion.Item eventKey="0">
               <Accordion.Header >Description</Accordion.Header>
               <Accordion.Body>

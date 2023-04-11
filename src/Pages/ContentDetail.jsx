@@ -33,7 +33,7 @@ function OwnerIconAndName(props){
                 <img src={props.img} alt="" />
                 <div className="d-flex flex-column align-items-start gap-0">
                     <span className="name-owe">{props.name}</span>
-                    <span className="name-addr">{props.address}</span>
+                    <span className="name-addr">{props.address.substr(0,6)}...{props.address.substr(-4, 4)}</span>
                     
                 </div>
             </div>

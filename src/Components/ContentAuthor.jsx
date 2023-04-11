@@ -4,7 +4,7 @@ export function ContentAuthor({img, name, address}){
             <img src={img}/>
             <div>
                 <p>{name}</p>
-                <p>{address}</p>
+                <p>{address.substr(0,6)}...{address.substr(-4, 4)}</p>
             </div>
         </div>
     );

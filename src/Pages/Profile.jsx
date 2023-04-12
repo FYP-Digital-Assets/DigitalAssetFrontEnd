@@ -6,6 +6,8 @@ import { Link, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useEffect, useState, useRef } from "react";
+
+import Table from 'react-bootstrap/Table';
 // profile in editing mode
 function EditingProtected(props){
   return (
@@ -112,8 +114,56 @@ function Profile(props){
     if(props.auth == false) navi("/")
   })
   return props.auth == true ? (
-      <ProfileProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
+      <div>
+        <ProfileProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
+        <OwnedContent/>
+      </div>
+      
   ):(null) ;
+}
+function OwnedContent(props){
+  return(
+    <div className="container-fluid mt-4">
+      <div>
+        <h3 className="heading_3 border-bottom pb-2">Content Owned</h3>
+      </div>
+      
+      <div className="p-3 mb-5 border rounded">
+
+        <Table striped  hover>
+          <thead className="table-background">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Views</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td colSpan={2}>Larry the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </Table>
+
+      </div>
+      
+    </div>
+  );
 }
 
 

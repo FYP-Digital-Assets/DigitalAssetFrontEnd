@@ -233,3 +233,6 @@
 .button-purchase .button-one:active , .button-purchase .button-two:active{
     background-color: #8484a1;
 }
+.table-background{
+    background-color: #6ac8f760;
+}

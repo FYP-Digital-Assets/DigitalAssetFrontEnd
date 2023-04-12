@@ -13,27 +13,63 @@ import Web3 from 'web3';
 const ProjectRoutes = (props) => {
   const [bal, setBal] = useState(0);
   //on load
-  useEffect(() => {
-    const checkConnection = async () => {
+  // useEffect(() => {
+  //   const checkConnection = async () => {
 
-        // Check if browser is running Metamask
-        let web3;
-        if (window.ethereum) {
-            web3 = new Web3(window.ethereum);
-        } else if (window.web3) {
-            web3 = new Web3(window.web3.currentProvider);
-        };
+  //       // Check if browser is running Metamask
+  //       let web3;
+  //       if (window.ethereum) {
+  //           web3 = new Web3(window.ethereum);
+  //       } else if (window.web3) {
+  //           web3 = new Web3(window.web3.currentProvider);
+  //       };
 
-        // Check if User is already connected by retrieving the accounts
-          const accounts = await web3.eth.getAccounts();
-          const address = accounts[0];
-          const balance = await web3.eth.getBalance(address);
-          setBal(web3.utils.fromWei(balance, 'ether'));
-          setAddr(address) ;
-          setAuth(true) ;
-    };
-    checkConnection();
-  }, []);
+  //       // Check if User is already connected by retrieving the accounts
+  //         const accounts = await web3.eth.getAccounts();
+  //         console.log("hello 99");
+  //         if(accounts.length !== 0){
+  //           const address = accounts[0];
+  //           console.log("addr: "+address) ;
+  //           await fetch('http://localhost:4000/login', {
+  //             method: 'POST',
+  //             mode:"no-cors",
+  //             body:JSON.stringify({user:address.toString()}),
+  //             headers: {
+  //               'Content-Type' : "applications/json",
+                
+  //             },
+  //             credentials:'include'
+  //           })
+  //           .then(async account =>{
+  //             console.log(account)
+  //             account = await account.json()
+  //             console.log("next")
+              
+  //             //console.log(account._id);
+  //             console.log(account)
+  //             // setAccount(account.ethAddress);
+  //             // if(account.profile){
+  //             //   setImageUrl("http://localhost:4000/uploads/"+account.profile);
+  //             // }
+  //             // if(account.name){
+  //             //   setName(account.name);
+  //             // }
+              
+  //           })
+  //           .catch(error => {
+  //             console.error('Error connecting account ', error);
+  //           });
+
+  //           const balance = await web3.eth.getBalance(address);
+          
+  //           setBal(web3.utils.fromWei(balance, 'ether'));
+  //           setAddr(address) ;
+  //           setAuth(true) ;
+
+  //         } 
+  //     };
+  //     checkConnection();
+  //   }, []);
   
   // profile ediditng
   const [userBio, setUserBio] = useState("description");

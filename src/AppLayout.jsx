@@ -19,39 +19,45 @@ const AppLayout = (props)=> {
             const accounts = await web3.eth.getAccounts();
             const address = accounts[0];
             const balance = await web3.eth.getBalance(address);
-            
-            await fetch('http://localhost:4000/login', {
+            const user = {user:address}
+            fetch('http://localhost:4000/login', {
               method: 'POST',
-              // mode:"no-cors",
-              body:JSON.stringify({user:address}),
               headers: {
-                'Content-Type' : "applications/json",
-                
+                'Content-Type': 'application/json',
               },
-              credentials:'include'
+              body: JSON.stringify(user),
+              credentials:"include"
             })
-            .then(async account =>{
-              console.log(account)
-              account = await account.json()
-              console.log("next")
+              .then(async account => {
+                
+                console.log(account)
+                console.log("header : ", account.headers.has('Set-Cookie'));
+                account = await account.json()
+                console.log("next")
+                if(account.code === 500){
+                  console.log(alert(account.msg));
+                  return;
+                }
+                //console.log(account._id);
+                console.log(account)
+                props.setAddr(account.data.ethAddress);
+                console.log(account.data.ethAddress)
+                if (account.data.profile) {
+                  props.setImageUrl("http://localhost:4000/uploads/" + account.data.profile);
+                }
+                props.setUserName(account.data.name);
+                
               
-              //console.log(account._id);
-              console.log(account)
-              // setAccount(account.ethAddress);
-              // if(account.profile){
-              //   setImageUrl("http://localhost:4000/uploads/"+account.profile);
-              // }
-              // if(account.name){
-              //   setName(account.name);
-              // }
-              
-            })
-            .catch(error => {
-              console.error('Error connecting account ', error);
-            });
+                props.setUserBio(account.data.bio);
+                props.setAuth(true)
+                
+                
+
+              })
+              .catch(error => {
+                console.error('Error connecting account ', error);
+              });
             props.setBal(web3.utils.fromWei(balance, 'ether'));
-            props.setAddr(address) ;
-            props.setAuth(true) ;
             close_modal();
           }
           else{

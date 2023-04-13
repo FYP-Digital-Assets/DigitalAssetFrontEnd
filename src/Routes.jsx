@@ -71,6 +71,9 @@ const ProjectRoutes = (props) => {
           const balance = await web3.eth.getBalance(address);
           setBal(web3.utils.fromWei(balance, 'ether'));
       }
+      else{
+        console.log("Not connected...")
+      }
     };
     checkConnection();
   }, [] );
@@ -104,7 +107,7 @@ const ProjectRoutes = (props) => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} bal={bal} setBal={setBal} />} >
+          <Route path="/" element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} bal={bal} setBal={setBal} setUserName={props.setUserName} />} >
             <Route index element={!isAuth ? (<Info />) : (<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />)} />
             <Route path="/info" element={<Info />} />
             <Route path="*" element={<PageNotFound />} />

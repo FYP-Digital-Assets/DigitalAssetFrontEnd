@@ -80,39 +80,30 @@ const ProjectRoutes = (props) => {
 
   // profile ediditng
   const [userBio, setUserBio] = useState("description");
-  const handleBioChange = (event) => {
-    setUserBio(() => event.target.value);
-  }
-  const handleNameChange = (event) => {
-    props.setUserName(() => event.target.value);
-  }
+ 
+ 
   var [imageUrl, setImageUrl] = useState(profileIcon);
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      const imageUrl = event.target.result;
-      setImageUrl(() => imageUrl);
-    };
-
-    reader.readAsDataURL(file);
-  }
+  
 
 
   
   const [addr, setAddr] = useState("43443");
+  const handleChangeEdit = (n, b, i) => {
+    setUserBio(() => b);
+    setImageUrl(() => i) ;
+    props.setUserName(() => n) ;
+  }
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} bal={bal} setBal={setBal} setUserName={props.setUserName} />} >
+          <Route path="/" element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} setUserName={props.setUserName} bal={bal} setBal={setBal} />} >
             <Route index element={!isAuth ? (<Info />) : (<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />)} />
             <Route path="/info" element={<Info />} />
             <Route path="*" element={<PageNotFound />} />
             <Route path="/Profile" element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
-            <Route path="/Profile/Editing" element={<Editing auth={isAuth} handleFileChange={handleFileChange} imageUrl={imageUrl} userName={props.userName} handleNameChange={handleNameChange} des={userBio} handleBioChange={handleBioChange} />} />
+            <Route path="/Profile/Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             <Route path="/auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
           </Route>
 

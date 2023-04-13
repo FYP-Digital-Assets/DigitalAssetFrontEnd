@@ -69,7 +69,8 @@ function ProfileProtected(props){
                     <div className='d-flex justify-content-left'>
                       <img src={EthIcon} alt='eth icon' className='ethIcon1'/>
                       <p className='text-muted address-text' onClick={copy} ref={target}>
-                        {props.addr.substr(0,6)}...{props.addr.substr(-4, 4)}
+                        {/* {props.addr.substr(0,6)}...{props.addr.substr(-4, 4)} */}
+                        {props.addr}
                       </p>
                       <Overlay target={target.current} show={show} placement="top">
                         {(props) => (

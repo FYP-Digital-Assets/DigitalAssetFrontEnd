@@ -12,10 +12,11 @@ import Web3 from 'web3';
 
 const ProjectRoutes = (props) => {
   const [bal, setBal] = useState(0);
+  const [isAuth, setAuth] = useState(false);
   //on load
   useEffect(() => {
     const checkConnection = async () => {
-
+      if(isAuth) return;
       // Check if browser is running Metamask
       let web3;
       if (window.ethereum) {
@@ -26,11 +27,10 @@ const ProjectRoutes = (props) => {
 
       // Check if User is already connected by retrieving the accounts
       const accounts = await web3.eth.getAccounts();
-      console.log("hello 99");
       if (accounts.length !== 0) {
         const address = accounts[0];
         console.log("addr: " + address);
-        const user = {user:"87498789749794797"}
+        const user = {user:"fd4234242309099392090"}
         fetch('http://localhost:4000/login', {
           method: 'POST',
           headers: {
@@ -39,35 +39,39 @@ const ProjectRoutes = (props) => {
           body: JSON.stringify(user)
         })
           .then(async account => {
+            
             console.log(account)
             account = await account.json()
             console.log("next")
-
+            if(account.code === 500){
+              console.log(alert(account.msg));
+              return;
+            }
             //console.log(account._id);
             console.log(account)
-            setAccount(account.ethAddress);
-            if (account.profile) {
-              setImageUrl("http://localhost:4000/uploads/" + account.profile);
+            setAddr(account.data.ethAddress);
+            console.log(account.data.ethAddress)
+            if (account.data.profile) {
+              setImageUrl("http://localhost:4000/uploads/" + account.data.profile);
             }
-            if (account.name) {
-              setName(account.name);
-            }
+            props.setUserName(account.data.name);
+            
+           
+            setUserBio(account.data.bio);
+            setAuth(true)
+            
+            
 
           })
           .catch(error => {
             console.error('Error connecting account ', error);
           });
-
-        const balance = await web3.eth.getBalance(address);
-
-        setBal(web3.utils.fromWei(balance, 'ether'));
-        setAddr(address);
-        setAuth(true);
-
+          const balance = await web3.eth.getBalance(address);
+          setBal(web3.utils.fromWei(balance, 'ether'));
       }
     };
     checkConnection();
-  }, []);
+  }, [] );
 
   // profile ediditng
   const [userBio, setUserBio] = useState("description");
@@ -91,7 +95,7 @@ const ProjectRoutes = (props) => {
   }
 
 
-  const [isAuth, setAuth] = useState(false);
+  
   const [addr, setAddr] = useState("43443");
 
   return (

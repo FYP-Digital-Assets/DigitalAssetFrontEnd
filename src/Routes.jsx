@@ -30,17 +30,19 @@ const ProjectRoutes = (props) => {
       if (accounts.length !== 0) {
         const address = accounts[0];
         console.log("addr: " + address);
-        const user = {user:"fd4234242309099392090"}
+        const user = {user:address}
         fetch('http://localhost:4000/login', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(user)
+          body: JSON.stringify(user),
+          credentials:"include"
         })
           .then(async account => {
             
             console.log(account)
+            console.log("header : ", account.headers.has('Set-Cookie'));
             account = await account.json()
             console.log("next")
             if(account.code === 500){

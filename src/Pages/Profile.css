@@ -57,27 +57,31 @@
     margin-right: 10px;
     
   }
-  .editButton{
+  .editButton, .editButton1{
     cursor: pointer;
-    position:fixed;
-    right: 30px;
+    right: 1.4rem;
+    position:absolute;
     text-decoration: none;
     background-color: rgba(255, 255, 255, 0.692);
     padding: 5px;
     border-radius: 5px;
   }
-  .editButton img{
-    width: 30px;
+  .editButton1{
+    margin-top: 3rem;
   }
-  .editButton .editSpan{
+  .editButton img, .editButton1 img{
+    width: 2rem;
+  }
+  .editButton .editSpan, .editButton1 .editSpan{
     margin-left: 10px;
     display: none;
     
   }
-  .editButton:hover .editSpan{
+  .editButton:hover .editSpan, .editButton1:hover .editSpan{
     color: rgba(67, 5, 238, 0.815);
     display: inline;
   }
+  
 
   /* edditing profile  */
   .bio-text-edit{

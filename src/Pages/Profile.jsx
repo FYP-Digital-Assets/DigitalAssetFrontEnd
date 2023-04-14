@@ -2,6 +2,7 @@ import "./Profile.css";
 import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
 import doneIcon from "../assets/verify.png"
+import cancelIcon from "../assets/cancel.png"
 import { Link, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -111,8 +112,12 @@ function EditingProtected(props){
       </div>
       
       <Link to="/profile" className="editButton" onClick={handleEdit}>
-          <img src={doneIcon}  alt="nodd" />
+          <img src={doneIcon}  alt="edit button" />
           <span className="editSpan">Done</span>
+      </Link>
+      <Link to="/profile" className="editButton1" >
+          <img src={cancelIcon}  alt="edit button" />
+          <span className="editSpan">Cancel</span>
       </Link>
     </div>
   )

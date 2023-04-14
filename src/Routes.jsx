@@ -53,13 +53,13 @@ const ProjectRoutes = (props) => {
             console.log(account)
             setAddr(account.data.ethAddress);
             console.log(account.data.ethAddress)
-            if (account.data.profile) {
-              setImageUrl("http://localhost:4000/uploads/" + account.data.profile);
-            }
-            props.setUserName(account.data.name);
+            console.log(account.data.img)
+            setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
+           
+            props.setUserName(account.data.name)
             
            
-            setUserBio(account.data.bio);
+            setUserBio(account.data.bio)
             setAuth(true)
             
             

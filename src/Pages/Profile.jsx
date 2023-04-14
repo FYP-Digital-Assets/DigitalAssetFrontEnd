@@ -7,7 +7,8 @@ import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useEffect, useState, useRef } from "react";
 
-import Table from 'react-bootstrap/Table';
+import {ContentCard} from "../Components/ContentCard"
+
 // profile in editing mode
 function EditingProtected(props){
   const [name_temp, setName_temp] = useState(props.name) ;
@@ -15,29 +16,54 @@ function EditingProtected(props){
   const [imgUrl_temp, setImgUrl_temp] = useState(props.imageUrl) ;
   const [imgFile, setImgFile] = useState() ;
   const handleEdit = async () =>{
-    console.log("edited... successfully") ;
-    const formData = new FormData();
-    formData.append('image', imgFile);
-    formData.append('ethAddress', props.addr);
-    formData.append('name', props.name_temp);
-    formData.append('bio', props.des_temp);
+    
+    if(name_temp !== props.name || des_temp !== props.des ){
+      console.log("updating user details....");
+      const userobj = {
+        "ethAddress": props.addr,
+        "details":{
+          "bio": des_temp,
+          "name": name_temp
+        }
+      };
 
-    fetch('http://localhost:4000/updateAccount', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Network response was not ok.');
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('There was a problem with the fetch operation:', error);
-    });
+      fetch('http://localhost:4000/updateDetails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userobj)
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
+    
+    if(imgFile){
+      const formData = new FormData();
+      formData.append('image', imgFile);
+      formData.append('ethAddress', props.addr);
+      fetch('http://localhost:4000/updateProfile', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Network response was not ok.');
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+    }
+    
     props.handleChangeEdit(name_temp, des_temp, imgUrl_temp) ;
 
   }
@@ -49,7 +75,6 @@ function EditingProtected(props){
   }
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file)
     setImgFile(() => file) ;
     const reader = new FileReader();
 
@@ -178,38 +203,28 @@ function OwnedContent(props){
         <h3 className="heading_3 border-bottom pb-2">Content Owned</h3>
       </div>
       
-      <div className="p-3 mb-5 border rounded">
-
-        <Table striped  hover>
-          <thead className="table-background">
-            <tr>
-              <th>#</th>
-              <th>Title</th>
-              <th>Views</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan={2}>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </Table>
-
+      <div className="row">
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
+          <div className=" col-md-4 col-lg-3 mt-4 ">
+            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          </div>
       </div>
       
     </div>

@@ -42,9 +42,7 @@ const AppLayout = (props)=> {
                 console.log(account)
                 props.setAddr(account.data.ethAddress);
                 console.log(account.data.ethAddress)
-                if (account.data.profile) {
-                  props.setImageUrl("http://localhost:4000/uploads/" + account.data.profile);
-                }
+                props.setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
                 props.setUserName(account.data.name);
                 
               

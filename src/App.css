@@ -252,3 +252,8 @@ svg #personright{
   }
 }
 
+.footer-app{
+  background-color: var(--text-color);
+  color: var(--light-color);
+}
+

@@ -11,6 +11,7 @@ import ContentDetail from "./Pages/ContentDetail";
 import Web3 from 'web3';
 import { Upload } from "./Components/Upload";
 
+
 const ProjectRoutes = (props) => {
   const [bal, setBal] = useState(0);
   const [isAuth, setAuth] = useState(false);
@@ -107,6 +108,8 @@ const ProjectRoutes = (props) => {
             <Route path="/Profile/Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             <Route path="/auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
             <Route path="/upload" element={<Upload/>} />
+            
+            
           </Route>
 
         </Routes>

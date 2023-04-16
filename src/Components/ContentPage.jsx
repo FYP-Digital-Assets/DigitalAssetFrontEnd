@@ -3,18 +3,13 @@ import { ContentCard } from "./ContentCard";
 import { Container, Row } from 'react-bootstrap';
 export function ContentPage(){
     return (
-        <>
-            <BrowserRouter>
-                <ContentTabButtons />
-                <Routes>
+        <Route path="/content">
                 <Route path='/' element={<ContentPanel/>} />
                 <Route path='/video' element={<ContentPanel contentType="video" />} />
                 <Route path='/audio' element={<ContentPanel contentType="audio" />} />
                 <Route path='/image' element={<ContentPanel contentType="image" />} />
                 <Route path='/document' element={<ContentPanel contentType="document" />} />
-                </Routes>
-            </BrowserRouter>
-        </>
+        </Route>
     );
 }
 /**

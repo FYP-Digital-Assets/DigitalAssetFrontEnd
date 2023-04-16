@@ -5,6 +5,7 @@ import Modal from "./Components/Modal";
 import WalletOffcanvase from "./Components/WalletOffcanvase"
 import { useRef} from "react";
 import Web3 from 'web3';
+import Footer from "./Components/Footer";
 const AppLayout = (props)=> {
     
     
@@ -98,6 +99,7 @@ const AppLayout = (props)=> {
             <WalletOffcanvase setShowOffcanvase={setShowOffcanvase} showOffcanvase={showOffcanvase} auth={props.auth} ConnectToWallet={ConnectToWallet} balance={props.bal} addr={props.addr}/>
             <Modal close_modal={close_modal} close_reference_modal={close_reference_modal} ConnectToWallet={ConnectToWallet}/>
             <Outlet/>
+            <Footer/>
         </React.Suspense>
     </>
 )}

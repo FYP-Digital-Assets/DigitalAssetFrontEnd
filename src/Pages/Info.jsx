@@ -13,15 +13,15 @@ export const Info = (props) => {
   return (
     <>
       <BackLeft />
-      <div className="container-fluid mt-5 ">
+      <div className="container mt-5">
 
         {/* first */}
         <div className="row mb-5">
           <div className="col-5 offset-1 d-flex flex-column justify-content-center">
-            <h2 className="heading_1">Digital Asset</h2>
+            <h2 className="heading_2">Digital Asset</h2>
            
             
-            <p>
+            <p className="body-text">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
               Nisi magni provident explicabo fuga aspernatur porro enim 
               libero mollitia eum sit vero tenetur, consequatur ipsum 
@@ -37,10 +37,10 @@ export const Info = (props) => {
           </div>
         </div>
         {/* catagories */}
-        <div className="row my-5 mx-4">
+        <div className="row my-5 ">
           <h2 className="heading_2 text-color my-4">Content types</h2>
           <div className="container">
-            <div className="row">
+            <div className="row mb-5">
               <div className="col-3 p-3">
                 <div className="card-cat-info">
                   <h3 className="card-cat-info-heading heading_3 text-center p-2 ">Videos</h3>
@@ -83,7 +83,7 @@ export const Info = (props) => {
           </div>
           <div className="col-5 d-flex flex-column justify-content-center">
             
-            <h2 className="heading_1">Videos</h2>
+            <h2 className="heading_2">Videos</h2>
            
             
             <p>
@@ -100,7 +100,7 @@ export const Info = (props) => {
          {/* third */}
          <div className="row my-5">
           <div className="col-5 offset-1 d-flex flex-column justify-content-center">
-            <h2 className="heading_1">Audios</h2>
+            <h2 className="heading_2">Audios</h2>
            
             
             <p>
@@ -125,7 +125,7 @@ export const Info = (props) => {
           </div>
           <div className="col-5  d-flex flex-column justify-content-center">
             
-            <h2 className="heading_1">Photographs</h2>
+            <h2 className="heading_2">Photographs</h2>
            
             
             <p>
@@ -141,7 +141,7 @@ export const Info = (props) => {
         {/* fifth */}
         <div className="row my-5">
           <div className="col-5 offset-1 d-flex flex-column justify-content-center">
-            <h2 className="heading_1">Documents</h2>
+            <h2 className="heading_2">Documents</h2>
            
             
             <p>

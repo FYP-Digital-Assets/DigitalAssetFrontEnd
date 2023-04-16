@@ -9,10 +9,12 @@
   --accent-color: #ECF1F4;
   --light-color: #FAFCFE;
 }
-
+.backgound-light{
+  background-color: #FAFCFE;
+}
 .card-cat-img{
-  width: 11rem;
-  margin: 2rem auto;
+  width: 6rem;
+  margin: 3rem auto;
 }
 .card-cat-info{
   border: 1px solid var(--muted-color);

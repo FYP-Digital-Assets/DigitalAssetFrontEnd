@@ -1,7 +1,7 @@
 
 export const Vector1 = () => {
     return (
-        <svg width={552} height={552} viewBox="0 0 552 552" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={500} height={500} viewBox="0 0 552 552" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="User flow-bro 1">
           <g id="freepik--background-simple--inject-9">
             <path id="vector_bg_luquid3" opacity="0.7" d="M74.9947 184.467C74.9947 184.467 44.2152 263.955 87.4699 343.995C130.725 424.035 219.817 466.319 291.125 502.474C362.432 538.63 436.478 521.022 471.662 461.803C506.846 402.585 458.591 360.312 458.524 275.867C458.458 191.423 471.165 169.067 425.404 97.7261C379.644 26.3856 267.466 10.5874 182.635 63.5021C97.8034 116.417 74.9947 184.467 74.9947 184.467Z" fill="#ECF1F4" />

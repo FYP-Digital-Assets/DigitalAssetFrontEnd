@@ -9,6 +9,7 @@ const Info = React.lazy(() => import("./Pages/Info.jsx"));
 const PageNotFound = React.lazy(() => import("./Pages/PageNotFound.jsx"));
 import ContentDetail from "./Pages/ContentDetail";
 import Web3 from 'web3';
+import { Upload } from "./Components/Upload";
 
 const ProjectRoutes = (props) => {
   const [bal, setBal] = useState(0);
@@ -105,6 +106,7 @@ const ProjectRoutes = (props) => {
             <Route path="/Profile" element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
             <Route path="/Profile/Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             <Route path="/auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
+            <Route path="/upload" element={<Upload/>} />
           </Route>
 
         </Routes>

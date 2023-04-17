@@ -7,6 +7,10 @@ import { Link } from 'react-router-dom';
 export function Upload(prop){
     const reader = new FileReader();
     const [file, setFile] = useState(null);
+    const [preFile, setPreFile] = useState(null);
+    const [thumbFile, setThumbFile] = useState(null);
+    const [preFilename, setPreFilename] = useState(uploadIcon);
+    const [thumbFilename, setThumbFilename] = useState(uploadIcon);
     const [show, setShow] = useState(null);
     const handleClose = () => setShow(false);
     const [filename, setFilename] = useState(uploadIcon);
@@ -31,31 +35,54 @@ export function Upload(prop){
     const handleSubmit = async(event)=> {
         event.preventDefault();
         
-        const formData = new FormData();
-        // const title = document.getElementById("titleTxt").value;
-        // const description = document.getElementById("descriptionTxt").value;
+        const mainContent = new FormData();
+        const title = document.getElementById("titleTxt").value;
+        const description = document.getElementById("descriptionTxt").value;
+        
         // const price = Number(document.getElementById("priceTxt").value);
-        formData.append('file', file);
+        mainContent.append('file', file);
         const response = await fetch("http://localhost:4000/uploadMainContent",{
           method: 'POST',
-          body: formData,
+          body: mainContent,
           credentials:"include"
         });
         if(response.ok){
-          const jsonData = await response.json();
-          jsonData.cid ;
-          const formData1 = new FormData();
-          formData1.append('file', file);
+          const mainContentCid = await response.json();
+          mainContentCid.cid ;
+          const clipContent = new FormData();
+          clipContent.append('file', preFile);
 
           const response1 = await fetch("http://localhost:4000/uploadClipContent",{
             method: 'POST',
-            body: formData1,
+            body: clipContent,
             credentials:"include"
           });
           if(response1.ok){
-            const jsonData1 = await response1.json() ;
-            console.log(jsonData1) ;
-            setShow(true)
+            const clipContentCid = await response1.json() ;
+            console.log(clipContentCid) ;
+            const contentDetails = new FormData();
+            contentDetails.append('file', thumbFile);
+            contentDetails.append('address', "23233jk3j2k32323") ;
+            contentDetails.append('clip', clipContentCid.cid) ;
+            contentDetails.append('description', description) ;
+            contentDetails.append('title', title) ;
+            
+            const response3 = await fetch("http://localhost:4000/uploadContent",{
+              method: 'POST',
+              body: clipContent,
+              credentials:"include"
+            });
+            if(response3.ok){
+              const mainContentCid1 = await response3.json();
+              console.log(mainContentCid1);
+              setShow(true)
+            }
+            else{
+              alert("failed to upload content")
+            }
+            
+          }else{
+            alert("Faild to upload clip content")
           }
         }
         else{
@@ -76,6 +103,24 @@ export function Upload(prop){
       // Perform any other actions with the selected file
       setFile(event.target.files[0]);
     };
+
+    const handlePreFileChange = (event) => {
+
+      reader.onload = (event) => {
+        setPreFilename(event.target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+      setPreFile(event.target.files[0]);
+    };
+    const handleThumbFileChange = (event) => {
+
+      reader.onload = (event) => {
+        setThumbFilename(event.target.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+      setThumbFile(event.target.files[0]);
+    };
+    
     
     return (
       <div className='container '>
@@ -88,29 +133,27 @@ export function Upload(prop){
                     <input  required className="form-control" type="file" onChange={handleFileChange}/>
                   </div>
                 </div>
-                <object data={filename} type={fileType} className='w-100 border rounded p-1' style={{"minHeight": "30rem"}}  >
+                <object data={filename} type={fileType} className='w-100 border rounded p-1 backgound-light' style={{"minHeight": "30rem"}}  >
                   <p>Preview not available</p>
                 </object>
                 <div className='d-flex justify-content-between p-2 align-items-center'>
                   <h2 className='heading_3 mt-4'>Preview content</h2>
                   <div>
-                    <input  required className="form-control" type="file" onChange={handleFileChange}/>
+                    <input  required className="form-control" type="file" onChange={handlePreFileChange}/>
                   </div>
                 </div>
-                <div className='border p-1  rounded'>
-                  
-                  <img className='w-100' src="https://placehold.co/600x400" alt="" />
-                </div>
+                <object data={preFilename} type={fileType} className='w-100 border rounded p-1 backgound-light' style={{"minHeight": "30rem"}}  >
+                  <p>Preview not available</p>
+                </object>
 
                 <div className='d-flex justify-content-between p-1 align-items-center'>
                   <h2 className='heading_3 mt-4'>Thumbnail Image</h2>
                   <div>
-                    <input  required className="form-control" type="file" onChange={handleFileChange}/>
+                    <input accept="image/*" required className="form-control" type="file" onChange={handleThumbFileChange}/>
                   </div>
                 </div>
                 <div className='border p-1  rounded'>
-                  
-                  <img className='w-100' src="https://placehold.co/600x400" alt="" />
+                  <img className='w-100' src={thumbFilename} alt="" />
                 </div>
               </div>
              

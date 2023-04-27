@@ -4,6 +4,7 @@ import uploadIcon from "./uploadIcon.png"
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
+import Web3 from "web3";
 export function Upload(prop){
     const reader = new FileReader();
     const [file, setFile] = useState(null);
@@ -257,3 +258,21 @@ export function Upload(prop){
       </div>
     );
   }
+
+  async function executeContract(account, content_ref, sellingPrice, licencePrice, viewFee){
+    const web3 = new Web3(window.ethereum);
+    const dAsset = JSON.parse(localStorage.get("Digital_Asset"))
+    const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
+    //call function to 
+    const address = await contract.methods.addContent(content_ref, sellingPrice, licencePrice, viewFee).send({from:account, gas:2000000})
+    .on('receipt', (receipt) => {
+                    // Check if the event was emitted
+                  if (receipt.events.MyEvent) {
+                    // Get the return value from the event
+                    const returnValue = receipt.events.MyEvent.returnValues.value;
+                  // return address
+                    return returnValue;
+                  }
+            })
+            return address;
+    }

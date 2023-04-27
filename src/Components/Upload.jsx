@@ -69,7 +69,7 @@ export function Upload(prop){
             
             const response3 = await fetch("http://localhost:4000/uploadContent",{
               method: 'POST',
-              body: clipContent,
+              body: contentDetails,
               credentials:"include"
             });
             if(response3.ok){

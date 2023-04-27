@@ -32,7 +32,7 @@ function ContentTabButtons(){
 /**
  * it will display cards
  */
-function ContentPanel(props){
+export function ContentPanel(props){
     const cards = [{
         img:"https://play-lh.googleusercontent.com/GmTrRvFLOg9415aIWoxXQMpsgucGvmu7RT_GaXn4bX_OdMjO5W41de1I33ZGOB2HGw",
         title:"Talking tom goes viral in the sky",
@@ -83,7 +83,7 @@ function ContentPanel(props){
         a.type = null;
         
     }
-    return <ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/>
+    return <ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> 
    })}
    </>:<></>}
    </Row>

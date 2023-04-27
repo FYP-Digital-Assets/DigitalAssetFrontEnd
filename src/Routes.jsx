@@ -10,6 +10,8 @@ const PageNotFound = React.lazy(() => import("./Pages/PageNotFound.jsx"));
 import ContentDetail from "./Pages/ContentDetail";
 import Web3 from 'web3';
 import { Upload } from "./Components/Upload";
+import { ContentPage, ContentPanel } from "./Components/ContentPage";
+import Explore from "./Pages/Explore";
 
 
 const ProjectRoutes = (props) => {
@@ -108,7 +110,12 @@ const ProjectRoutes = (props) => {
             <Route path="/Profile/Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             <Route path="/auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
             <Route path="/upload" element={<Upload/>} />
-            
+            <Route path="/content" element={<Explore/>} >
+                <Route path='video' element={<ContentPanel contentType="video" />} />
+                <Route path='audio' element={<ContentPanel contentType="audio" />} />
+                <Route path='image' element={<ContentPanel contentType="image" />} />
+                <Route path='document' element={<ContentPanel contentType="document" />} />
+            </Route>
             
           </Route>
 

@@ -256,4 +256,10 @@ svg #personright{
   background-color: var(--text-color);
   color: var(--light-color);
 }
+.nav-background{
+  background-color: var(--accent-color);
+}
+.cursor-pointer{
+  cursor: pointer;
+}
 

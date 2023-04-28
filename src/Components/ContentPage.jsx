@@ -75,19 +75,15 @@ export function ContentPanel(props){
 ]
     return (
         
-        <Container className='p-4'>
+        <div className='container-fluid'>
         <Row>
         {cards?<>
    {cards.map((a, i)=>{
-    if(props.contentType){
-        a.type = null;
-        
-    }
-    return <ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> 
+    return <div className="col-3 mt-5"><ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> </div>
    })}
    </>:<></>}
    </Row>
-   </Container>
+   </div>
         
     );
 }

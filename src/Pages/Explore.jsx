@@ -10,7 +10,7 @@ export default function Explore(){
 }
 function ExploreBottom(){
     return(
-        <div className="nav-background cursor-pointer p-3">
+        <div className="nav-background cursor-pointer p-3 mt-5">
             <nav aria-label="Page navigation example">
             <ul className="pagination justify-content-center">
                 <li className="page-item"><a className="page-link" >Previous</a></li>

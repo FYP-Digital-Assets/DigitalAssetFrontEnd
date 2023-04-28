@@ -63,18 +63,11 @@ export function Upload(prop){
             console.log(clipContentCid) ;
             const contentDetails = new FormData();
             contentDetails.append('file', thumbFile);
-            contentDetails.append('address', "23233jk3j2k32323") ;
+            
             contentDetails.append('clip', clipContentCid.cid) ;
             contentDetails.append('description', description) ;
             contentDetails.append('title', title) ;
-            
-            const response3 = await fetch("http://localhost:4000/uploadContent",{
-              method: 'POST',
-              body: contentDetails,
-              credentials:"include"
-            });
-            if(response3.ok){
-              const mainContentCid1 = await response3.json();
+
               var pricePurchase = 0 ;
               var priceView = 0 ;
               var priceLicense = 0 ;
@@ -87,8 +80,17 @@ export function Upload(prop){
               if(isView)
                 priceLicense = document.getElementById("priceLicenseTxt").value;
               
-             executeContract(prop.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
-             
+            const addrofContract = executeContract(prop.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
+            contentDetails.append('address', addrofContract) ;
+            
+            const response3 = await fetch("http://localhost:4000/uploadContent",{
+              method: 'POST',
+              body: contentDetails,
+              credentials:"include"
+            });
+            if(response3.ok){
+              const mainContentCid1 = await response3.json();
+              
              setShow(true)
 
             }

@@ -79,7 +79,7 @@ export function ContentPanel(props){
         <Row>
         {cards?<>
    {cards.map((a, i)=>{
-    return <div className="col-3 mt-5"><ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> </div>
+    return <div className="col-3 mt-5" key={i}><ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> </div>
    })}
    </>:<></>}
    </Row>

@@ -87,7 +87,7 @@ export function Upload(prop){
               if(isView)
                 priceLicense = document.getElementById("priceLicenseTxt").value;
               
-             executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
+             executeContract(prop.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
              
              setShow(true)
 
@@ -275,7 +275,7 @@ export function Upload(prop){
 
   async function executeContract(account, content_ref, sellingPrice, licencePrice, viewFee){
     const web3 = new Web3(window.ethereum);
-    const dAsset = JSON.parse(localStorage.get("Digital_Asset"))
+    const dAsset = JSON.parse(localStorage.getItem("Digital_Asset"))
     const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
     //call function to 
     const address = await contract.methods.addContent(content_ref, sellingPrice, licencePrice, viewFee).send({from:account, gas:2000000})

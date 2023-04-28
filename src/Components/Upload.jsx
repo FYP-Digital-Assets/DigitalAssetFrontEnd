@@ -75,8 +75,22 @@ export function Upload(prop){
             });
             if(response3.ok){
               const mainContentCid1 = await response3.json();
-              console.log(mainContentCid1);
-              setShow(true)
+              var pricePurchase = 0 ;
+              var priceView = 0 ;
+              var priceLicense = 0 ;
+              if(isPurchase)
+                pricePurchase = document.getElementById("pricePurchaseTxt").value;
+
+              if(isView)
+                pricePurchase = document.getElementById("priceViewTxt").value;
+              
+              if(isView)
+                priceLicense = document.getElementById("priceLicenseTxt").value;
+              
+             executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
+             
+             setShow(true)
+
             }
             else{
               alert("failed to upload content")

@@ -4,12 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import logo from "../assets/logo2.svg"
 import searchIcon from "../assets/Searchicon.svg"
 import walletIcon from "../assets/wallet.svg"
+import AddIcon from "../assets/addPlus.svg"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 export const Navbar = (props) => {
-    
+   
     return (
       <nav className="navbar1">
         <div className="navEle1">
@@ -28,8 +29,13 @@ export const Navbar = (props) => {
         
         
         <div className="navlinks">
-            <img src={walletIcon} className="mx-2 imageNav" alt="hle"  onClick={props.handleShowOffcanvase} />   
-            <img src={props.imageUrl} className="profileIcon imageNav mx-3" alt="hle" onClick={props.show_modal}/> 
+            <Link to="/upload">
+                <img src={AddIcon} title="create" className="mx-2 imageNav" alt="hle"  />   
+            </Link>
+            
+            <img src={walletIcon} title="wallet" className="mx-2 imageNav" alt="hle"  onClick={props.handleShowOffcanvase} />   
+            <img src={props.imageUrl} title="profile" className="profileIcon imageNav mx-2" alt="hle" onClick={props.show_modal}/> 
+            
             
             
 

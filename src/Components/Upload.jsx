@@ -1,11 +1,11 @@
 import {Button} from 'react-bootstrap';
-import { useRef } from 'react';
+
 import uploadIcon from "./uploadIcon.png"
 import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Web3 from "web3";
-export function Upload(prop){
+export function Upload(props){
     const reader = new FileReader();
     const [file, setFile] = useState(null);
     const [preFile, setPreFile] = useState(null);
@@ -18,6 +18,11 @@ export function Upload(prop){
     const [fileType, setFileType] = useState("image/png");
 
     const [isPurchase, setIsPurchase] = useState(false);
+
+    const navi = useNavigate();
+    useEffect(()=>{
+      if(props.auth == false) navi("/")
+    }, []) ;
 
     const handlePurchaseChange = () => {
       setIsPurchase(!isPurchase);
@@ -138,6 +143,9 @@ export function Upload(prop){
       setThumbFile(event.target.files[0]);
     };
     
+    if(props.auth == false)
+      return alert("not loggedIn...")
+    else{
     
     return (
       <div className='container '>
@@ -272,7 +280,7 @@ export function Upload(prop){
             </Modal.Footer>
           </Modal>
       </div>
-    );
+    );}
   }
 
   async function executeContract(account, content_ref, sellingPrice, licencePrice, viewFee){

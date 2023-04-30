@@ -9,6 +9,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { useRef } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Web3 from 'web3';
 
 export default function WalletOffcanvase(props) {   
     const handleClose = () => props.setShowOffcanvase(false);
@@ -39,7 +40,7 @@ function Connected(props) {
         <div className=''>
             <div>
                 <div className='text-muted address-text d-flex justify-content-between align-items-center'  >
-                    <span className='btn btn-info btn-sm'>logout</span>
+                    <span className='btn btn-info btn-sm' >logout</span>
                     <div onClick={copy} ref={target}>{props.addr.substr(0,6)}...{props.addr.substr(-4, 4)}</div>
                     
                 </div>

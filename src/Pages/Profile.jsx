@@ -3,7 +3,7 @@ import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
 import doneIcon from "../assets/verify.png"
 import cancelIcon from "../assets/cancel.png"
-import { Link, useNavigate} from "react-router-dom";
+import { Link, Outlet, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useEffect, useState, useRef } from "react";
@@ -236,5 +236,12 @@ function OwnedContent(props){
   );
 }
 
+function ProfileLayout(){
+  return(
+    <div>
+      <Outlet/>
+    </div>
+  )
+}
 
-export {Profile, Editing}
+export {Profile, Editing, ProfileLayout}

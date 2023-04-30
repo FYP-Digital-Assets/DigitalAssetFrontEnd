@@ -82,11 +82,16 @@ export function Upload(props){
               if(isView)
                 pricePurchase = document.getElementById("priceViewTxt").value;
               
-              if(isView)
+              if(isLicense)
                 priceLicense = document.getElementById("priceLicenseTxt").value;
-              
-            const addrofContract = executeContract(prop.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
+            
+                if(mainContentCid.code != "200"){
+              alert("Content already exist")
+            }
+            const addrofContract = await executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
             contentDetails.append('address', addrofContract) ;
+            console.log("adderss:   ------ below")
+            console.log(addrofContract)
             
             const response3 = await fetch("http://localhost:4000/uploadContent",{
               method: 'POST',
@@ -288,15 +293,23 @@ export function Upload(props){
     const dAsset = JSON.parse(localStorage.getItem("Digital_Asset"))
     const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
     //call function to 
-    const address = await contract.methods.addContent(content_ref, sellingPrice, licencePrice, viewFee).send({from:account, gas:2000000})
+    // console.log("account ", account)
+    // console.log("ref ", content_ref)
+    // console.log("sp ", sellingPrice)
+    // console.log("lp ", licencePrice)
+    // console.log("vp ", viewFee)
+    let address = 0
+    await contract.methods.addContent(content_ref, sellingPrice, licencePrice, viewFee).send({from:account, gas:2000000})
     .on('receipt', (receipt) => {
                     // Check if the event was emitted
                   if (receipt.events.MyEvent) {
                     // Get the return value from the event
-                    const returnValue = receipt.events.MyEvent.returnValues.value;
+                    address = receipt.events.MyEvent.returnValues.value;
                   // return address
-                    return returnValue;
+                  // console.log("contract in ", address)
+                    // return returnValue;
                   }
             })
+            // console.log("contract ", address)
             return address;
     }

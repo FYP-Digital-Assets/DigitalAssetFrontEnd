@@ -8,6 +8,7 @@ import ImgVideo from "../assets/img_video.png";
 import ImgImage from "../assets/img_image.png";
 import ImgAudio from "../assets/img_audio.png";
 import ImgDoc from "../assets/img_doc.png";
+import { Link } from "react-router-dom";
 
 export const Info = (props) => {
   return (
@@ -29,7 +30,10 @@ export const Info = (props) => {
               
             </p>
             <div>
-            <button className="btn btn-primary" >Get Start</button>
+              <Link to="/content">
+                <button className="btn btn-primary" >Get Start</button>
+              </Link>
+            
             </div>
           </div>
           <div className="col-6 d-flex justify-content-center">

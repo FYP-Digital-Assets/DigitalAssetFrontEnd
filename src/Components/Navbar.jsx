@@ -23,15 +23,23 @@ export const Navbar = (props) => {
                     <button className="searchButton"><img src={searchIcon} alt="" width={20}/></button>
                 </div>
             </div>
+            <div className="d-flex align-items-center ">
+                <Link to="/content" className="exploreLink" >
+                    <div className="exploreLink1" >Explore</div>
+                </Link>
+            </div>
+            
         </div>
         
         
         
         
         <div className="navlinks">
+            
             <Link to="/upload">
                 <img src={AddIcon} title="create" className="mx-2 imageNav" alt="hle"  />   
             </Link>
+            
             
             <img src={walletIcon} title="wallet" className="mx-2 imageNav" alt="hle"  onClick={props.handleShowOffcanvase} />   
             <img src={props.imageUrl} title="profile" className="profileIcon imageNav mx-2" alt="hle" onClick={props.show_modal}/> 

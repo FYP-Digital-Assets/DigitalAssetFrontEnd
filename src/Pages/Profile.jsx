@@ -211,17 +211,17 @@ function OwnedContent(props){
     const owners = await contract.methods.getOwnerHistory().call()
     return {cid, prices, licensors, owners}
 }
-var ownedContentDetails = [] ;
+const [ownedContentDetails, setOwnedContentDetails] = useState(null);
+console.log("call details")
   useEffect(async()=>{
     const resContract = await getContentFromContracts(props.addr) ;
     console.log("contract result "+resContract);
-    ownedContentDetails = resContract.map(async (address) =>{
+    setOwnedContentDetails(await Promise.all(resContract.map(async (address) =>{
       const detailsContracts = await getContentDetailsFromContracts(address, props.addr) ;
-      const detailsFromApi = await fetch('http://localhost:4000//content/'+address)
+      const detailsFromApi = await fetch('http://localhost:4000/content/'+address)
       .then(response => response.json()) ;
       return {...detailsContracts, ...detailsFromApi} ;
-    })
-    
+    })))
   },[]);
   return(
     <div className="container-fluid mt-4">
@@ -252,7 +252,9 @@ var ownedContentDetails = [] ;
             <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
           </div>
       </div>
-      
+      {ownedContentDetails?console.log("owned "+ownedContentDetails)
+        :console.log("need time")
+      }
     </div>
   );
 }
@@ -265,7 +267,7 @@ function ProfileLayout(props){
   return(
     <div>
       <Outlet/>
-      <OwnedContent/>
+      <OwnedContent addr={props.addr}/>
     </div>
   )
 }

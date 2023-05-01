@@ -174,7 +174,7 @@ const ProjectRoutes = (props) => {
                 <Route path='image' element={<ContentPanel contentType="image" />} />
                 <Route path='document' element={<ContentPanel contentType="document" />} />
             </Route>
-            <Route path="/Profile" element={<ProfileLayout/>} >
+            <Route path="/Profile" element={<ProfileLayout auth={isAuth} addr={addr}/>} >
               <Route index element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
               <Route path="Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             </Route>

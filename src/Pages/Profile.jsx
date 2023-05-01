@@ -7,7 +7,7 @@ import { Link, Outlet, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useEffect, useState, useRef } from "react";
-
+import Web3 from "web3";
 import {ContentCard} from "../Components/ContentCard"
 
 // profile in editing mode
@@ -181,27 +181,48 @@ function ProfileProtected(props){
   );
 }
 function Editing(props){
-  const navi = useNavigate();
-  useEffect(() => {
-    if(props.auth == false) navi("/")
-  })
   return props.auth ? (<EditingProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} handleChangeEdit={props.handleChangeEdit}/>):(null) ;
 }
 
 function Profile(props){
-  const navi = useNavigate();
-  useEffect(() => {
-    if(props.auth == false) navi("/")
-  })
+  
   return props.auth == true ? (
       <div>
         <ProfileProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
-        <OwnedContent/>
       </div>
       
   ):(null) ;
 }
 function OwnedContent(props){
+    async function getContentFromContracts(address){
+      const web3 = new Web3(window.ethereum);
+      const dAsset = JSON.parse(localStorage.getItem("Digital_Asset"))
+      const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
+      const result = await contract.methods.getContents(address).call()
+      return result;
+  }
+  async function getContentDetailsFromContracts(contentAddress, senderAddress){
+    const web3 = new Web3(window.ethereum);
+    const asset = JSON.parse(localStorage.getItem("Asset"))
+    const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    const cid = await contract.methods.getContent().call({from:senderAddress})
+    const prices = await contract.methods.getPrices().call()
+    const licensors = await contract.methods.getLicensorHistory().call()
+    const owners = await contract.methods.getOwnerHistory().call()
+    return {cid, prices, licensors, owners}
+}
+var ownedContentDetails = [] ;
+  useEffect(async()=>{
+    const resContract = await getContentFromContracts(props.addr) ;
+    console.log("contract result "+resContract);
+    ownedContentDetails = resContract.map(async (address) =>{
+      const detailsContracts = await getContentDetailsFromContracts(address, props.addr) ;
+      const detailsFromApi = await fetch('http://localhost:4000//content/'+address)
+      .then(response => response.json()) ;
+      return {...detailsContracts, ...detailsFromApi} ;
+    })
+    
+  },[]);
   return(
     <div className="container-fluid mt-4">
       <div>
@@ -236,10 +257,15 @@ function OwnedContent(props){
   );
 }
 
-function ProfileLayout(){
+function ProfileLayout(props){
+  const navi = useNavigate();
+  useEffect(() => {
+    if(props.auth == false) navi("/")
+  })
   return(
     <div>
       <Outlet/>
+      <OwnedContent/>
     </div>
   )
 }

@@ -262,6 +262,7 @@ console.log("call details")
 function ProfileLayout(props){
   const navi = useNavigate();
   useEffect(() => {
+    console.log(props.auth)
     if(props.auth == false) navi("/")
   })
   return(

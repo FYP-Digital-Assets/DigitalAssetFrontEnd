@@ -211,7 +211,7 @@ function OwnedContent(props){
     const owners = await contract.methods.getOwnerHistory().call()
     return {cid, prices, licensors, owners}
 }
-const [ownedContentDetails, setOwnedContentDetails] = useState(null);
+const [ownedContentDetails, setOwnedContentDetails] = useState();
 console.log("call details")
   useEffect(async()=>{
     const resContract = await getContentFromContracts(props.addr) ;
@@ -230,27 +230,32 @@ console.log("call details")
       </div>
       
       <div className="row">
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
+        { ownedContentDetails ? (ownedContentDetails.map((a,b)=>{
+          return (<
+            div className=" col-md-4 col-lg-3 my-4 ">
+              <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} />
+            </div>
+          );
+        })) : null }
+          
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
+          // <div className=" col-md-4 col-lg-3 mt-4 ">
+          //   <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
+          // </div>
       </div>
       {ownedContentDetails?console.log("owned "+ownedContentDetails)
         :console.log("need time")

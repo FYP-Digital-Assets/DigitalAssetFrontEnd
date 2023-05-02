@@ -9,8 +9,13 @@ import ImgImage from "../assets/img_image.png";
 import ImgAudio from "../assets/img_audio.png";
 import ImgDoc from "../assets/img_doc.png";
 import { Link } from "react-router-dom";
-
+import AOS from "aos";
+import 'aos/dist/aos.css';
+import { useEffect } from "react";
 export const Info = (props) => {
+  useEffect(() => {
+    AOS.init();
+  }, [])
   return (
     <>
       <BackLeft />
@@ -18,7 +23,7 @@ export const Info = (props) => {
 
         {/* first */}
         <div className="row mb-5">
-          <div className="col-5 offset-1 d-flex flex-column justify-content-center">
+          <div className="col-5 offset-1 d-flex flex-column justify-content-center" data-aos="fade-right">
             <h2 className="heading_2">Digital Asset</h2>
            
             
@@ -36,12 +41,12 @@ export const Info = (props) => {
             
             </div>
           </div>
-          <div className="col-6 d-flex justify-content-center">
+          <div className="col-6 d-flex justify-content-center" data-aos="fade-left">
             <Vector1/>
           </div>
         </div>
         {/* catagories */}
-        <div className="row my-5 ">
+        <div className="row my-5 " data-aos="zoom-in" >
           <h2 className="heading_2 text-color my-4">Content types</h2>
           <div className="container">
             <div className="row mb-5">
@@ -81,11 +86,11 @@ export const Info = (props) => {
           </div>
         </div>
         {/* second */}
-        <div className="row my-5">
-          <div className="col-6 d-flex justify-content-center">
+        <div className="row my-5" >
+          <div className="col-6 d-flex justify-content-center" data-aos="zoom-in-right">
             <img src={Vector2} alt="vector 2"  />
           </div>
-          <div className="col-5 d-flex flex-column justify-content-center">
+          <div className="col-5 d-flex flex-column justify-content-center" data-aos="zoom-in-left">
             
             <h2 className="heading_2">Videos</h2>
            
@@ -103,7 +108,7 @@ export const Info = (props) => {
 
          {/* third */}
          <div className="row my-5">
-          <div className="col-5 offset-1 d-flex flex-column justify-content-center">
+          <div className="col-5 offset-1 d-flex flex-column justify-content-center" data-aos="zoom-out-right">
             <h2 className="heading_2">Audios</h2>
            
             
@@ -114,7 +119,7 @@ export const Info = (props) => {
               soluta sunt accusantium quo, voluptatibus quidem. 
             </p>
           </div>
-          <div className="col-6 d-flex justify-content-center">
+          <div className="col-6 d-flex justify-content-center" data-aos="zoom-out-left">
           <img src={Vector3} alt="vector 2"  />
           </div>
         </div>
@@ -123,11 +128,11 @@ export const Info = (props) => {
 
 
         {/* fourth */}
-        <div className="row my-5">
-          <div className="col-6 d-flex justify-content-center ">
+        <div className="row my-5" data-aos="fade-right" >
+          <div className="col-6 d-flex justify-content-center "data-aos="fade-right">
             <Vector1/>
           </div>
-          <div className="col-5  d-flex flex-column justify-content-center">
+          <div className="col-5  d-flex flex-column justify-content-center" data-aos="fade-left">
             
             <h2 className="heading_2">Photographs</h2>
            
@@ -144,7 +149,7 @@ export const Info = (props) => {
 
         {/* fifth */}
         <div className="row my-5">
-          <div className="col-5 offset-1 d-flex flex-column justify-content-center">
+          <div className="col-5 offset-1 d-flex flex-column justify-content-center" data-aos="fade-right">
             <h2 className="heading_2">Documents</h2>
            
             
@@ -155,7 +160,7 @@ export const Info = (props) => {
               soluta sunt accusantium quo, voluptatibus quidem. 
             </p>
           </div>
-          <div className="col-6 d-flex justify-content-center ">
+          <div className="col-6 d-flex justify-content-center " data-aos="fade-left">
           <img src={Vector4} alt="vector 2"  />
           </div>
         </div>

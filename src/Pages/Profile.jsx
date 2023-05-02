@@ -6,7 +6,7 @@ import cancelIcon from "../assets/cancel.png"
 import { Link, Outlet, useNavigate} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Web3 from "web3";
 import {ContentCard} from "../Components/ContentCard"
 
@@ -206,23 +206,53 @@ function OwnedContent(props){
     const asset = JSON.parse(localStorage.getItem("Asset"))
     const contract = new web3.eth.Contract(asset.abi, contentAddress);
     const cid = await contract.methods.getContent().call({from:senderAddress})
+    console.log("cid ", cid)
     const prices = await contract.methods.getPrices().call()
     const licensors = await contract.methods.getLicensorHistory().call()
     const owners = await contract.methods.getOwnerHistory().call()
-    return {cid, prices, licensors, owners}
+    console.log("owners: ",owners) ;
+    console.log("price: ",prices)
+    console.log("license: ", licensors)
+    return ({cid, prices, licensors, owners})
 }
 const [ownedContentDetails, setOwnedContentDetails] = useState();
 console.log("call details")
-  useEffect(async()=>{
+  useMemo(async()=>{
     const resContract = await getContentFromContracts(props.addr) ;
-    console.log("contract result "+resContract);
+    console.log("contract result ",resContract);
     setOwnedContentDetails(await Promise.all(resContract.map(async (address) =>{
+      
       const detailsContracts = await getContentDetailsFromContracts(address, props.addr) ;
       const detailsFromApi = await fetch('http://localhost:4000/content/'+address)
       .then(response => response.json()) ;
-      return {...detailsContracts, ...detailsFromApi} ;
+      // console.log("one: ",detailsContracts,"\ntwo: ",detailsFromApi)
+      const owner = detailsContracts.owners[detailsContracts.owners.length-1]
+      //request owner details
+      const ownerDetail = await fetch("http://localhost:4000/userInfo", {
+      method:"post"  ,
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ethAddress:owner})
+      
+      }).then(res=>res.json())
+      console.log("owner current ", detailsContracts.owners[detailsContracts.owners.length-1])
+      return {...detailsContracts, ...detailsFromApi, ownerDetail} ;
     })))
-  },[]);
+    console.log("details: --> ",ownedContentDetails)
+  },[])
+  // useEffect(async()=>{
+  //   const resContract = await getContentFromContracts(props.addr) ;
+  //   console.log("contract result "+resContract);
+  //   setOwnedContentDetails(await Promise.all(resContract.map(async (address) =>{
+  //     const detailsContracts = await getContentDetailsFromContracts(address, props.addr) ;
+  //     const detailsFromApi = await fetch('http://localhost:4000/content/'+address)
+  //     .then(response => response.json()) ;
+  //     console.log("one: "+detailsContracts[0]+"\ntwo: "+detailsFromApi[0])
+  //     return {...detailsContracts, ...detailsFromApi} ;
+  //   })))
+  //   console.log("details: --> "+ ownedContentDetails)
+  // },[]);
   return(
     <div className="container-fluid mt-4">
       <div>
@@ -230,15 +260,15 @@ console.log("call details")
       </div>
       
       <div className="row">
-        { ownedContentDetails ? (ownedContentDetails.map((a,b)=>{
+        { ownedContentDetails ? (ownedContentDetails.slice(5).map((a,b)=>{
           return (
-            <div className=" col-md-4 col-lg-3 my-4 ">
-              <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} />
+            <div className=" col-md-4 col-lg-3 my-4 " key={b}>
+              <ContentCard type="video" img={`http://localhost:4000/thumbnail/${a.data.thumbnail}`} title={a.data.title} authorImg={`http://localhost:4000/profileImgs/${a.ownerDetail.data.img}`} author={a.ownerDetail.data.name} price={122} prices={a.prices} />
             </div>
           );
-        })) : null }
+        })) : <></> }
           
-          <div className=" col-md-4 col-lg-3 mt-4 ">
+          {/* <div className=" col-md-4 col-lg-3 mt-4 ">
            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
           </div>
           <div className=" col-md-4 col-lg-3 mt-4 ">
@@ -255,9 +285,9 @@ console.log("call details")
         </div>
         <div className=" col-md-4 col-lg-3 mt-4 ">
           <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-        </div>
+        </div> */}
       </div>
-      {ownedContentDetails?console.log("owned "+ownedContentDetails)
+      {ownedContentDetails?console.log("owned ",ownedContentDetails)
         :console.log("need time")
       }
     </div>

@@ -28,10 +28,12 @@ export const Info = (props) => {
            
             
             <p className="body-text">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Digital Assets Provenance empowers you to recognize your true value by 
+              acknowledging the unwavering effort and dedication that fuel your success. With our 
+              cutting-edge blockchain technology, we pave the way for an unparalleled user experience
+              that enables you to soar above limitations and bask in the vibrant hues of this 
+              magnificent world. Join us on a mission to unlock limitless possibilities!
+ 
               
             </p>
             <div>
@@ -96,10 +98,15 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Imagine being able to relive your most treasured moments as 
+              if they were unfolding before you once more. Videos have the 
+              unique power to immortalize our memories, ensuring that we always 
+              remember them in their best light and inspiring us to capture new experiences. 
+              But what if there was a way to take this even further? Thanks to blockchain-based solutions, 
+              videos can now be accompanied by strong provenance and authenticity - truly decentralized
+              assets with unparalleled value. Don't miss out on the chance to elevate your video content 
+              like never before!
+ 
             </p>
           </div>
           
@@ -113,10 +120,11 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Envisage being able to relive cherished memories through sound
+              from listening to your favorite tunes, to hearing the voice of someone 
+              dear again. As much as audio technology has been primarily geared 
+              towards enhancing entertainment experiences in the past. This is how we 
+              can offer our audiences a truly multi-sensory experience like no other! 
             </p>
           </div>
           <div className="col-6 d-flex justify-content-center" data-aos="zoom-out-left">
@@ -138,10 +146,13 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              The emergence of photography fueled by community engagement
+              can serve as a motivating force for photographers to unlock their 
+              creative potential and delve into novel approaches, trends and avenues. 
+              This movement heralds an era where imagination and originality are
+              esteemed in the industry, paving way for enriched self-improvement 
+              opportunities through skill enhancement and personal growth.
+ 
             </p>
           </div>
           
@@ -154,10 +165,14 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              It is imperative to possess records that trace the ancestry 
+              and background of valuables such as artwork or collectibles. 
+              Such documents are instrumental in safeguarding their worth 
+              and certifying their genuineness. These records serve to 
+              chronicle the concepts, imaginings, innovation, and heritage 
+              associated with these treasures, permitting us to transfer 
+              them on as legal items of considerable value.
+ 
             </p>
           </div>
           <div className="col-6 d-flex justify-content-center " data-aos="fade-left">

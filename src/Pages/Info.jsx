@@ -165,10 +165,14 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              It is imperative to possess records that trace the ancestry 
+              and background of valuables such as artwork or collectibles. 
+              Such documents are instrumental in safeguarding their worth 
+              and certifying their genuineness. These records serve to 
+              chronicle the concepts, imaginings, innovation, and heritage 
+              associated with these treasures, permitting us to transfer 
+              them on as legal items of considerable value.
+ 
             </p>
           </div>
           <div className="col-6 d-flex justify-content-center " data-aos="fade-left">

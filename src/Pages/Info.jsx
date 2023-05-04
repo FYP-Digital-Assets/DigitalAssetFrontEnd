@@ -146,10 +146,13 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              The emergence of photography fueled by community engagement
+              can serve as a motivating force for photographers to unlock their 
+              creative potential and delve into novel approaches, trends and avenues. 
+              This movement heralds an era where imagination and originality are
+              esteemed in the industry, paving way for enriched self-improvement 
+              opportunities through skill enhancement and personal growth.
+ 
             </p>
           </div>
           

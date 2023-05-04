@@ -9,14 +9,14 @@ import dropIcon from "../assets/down.png"
 import { useState } from "react";
 
 export default function ContentDetail(props){
-    
+    const {author, content} = props;
     return (
         <div className="container-fluid px-4 py-4 ">
             <div className="row">
                 <div className="col-9 detailsRightSection">
-                    <ContentAuthor img={props.img} name={props.name} address={props.address}/>
-                    <Content data="https://placehold.co/600x400/png" type="image/png" title="hellosdf sjdlfkjs lkjsdf" description="hello dbdskdfk jaskljdf jlkajsd"/>
-                    <CommentBox/>
+                    <ContentAuthor img={author.img} name={author.name} address={author.address}/>
+                    <Content data={content.clip} type={content.type} title={content.title} description={content.description} prices={content.prices}/>
+                    <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >
                     <SideBar/>

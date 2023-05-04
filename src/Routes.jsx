@@ -156,6 +156,13 @@ const ProjectRoutes = (props) => {
       console.log("Not connected...")
     }
   });
+  const details = {
+    author:{name:"my name", img:profileIcon, address:addr},
+    content:{clip:"", title:"Content Title", 
+    description:"Hello this is description", prices:[120, 10, 0], address:"cid",
+    clip:"QmYog8dP2hJpgQXvfFes6CfhT64fgzoksG4K3CPAt3PMFC", type:"video/mp4"
+  }
+  }
   return (
     <>
       <BrowserRouter>
@@ -166,7 +173,7 @@ const ProjectRoutes = (props) => {
             <Route path="*" element={<PageNotFound />} />
             
             
-            <Route path="auth" element={<ContentDetail img={profileIcon} name={props.userName} address={addr} />} />
+            <Route path="auth" element={<ContentDetail {...details} />} />
             <Route path="upload" element={<Upload addr={addr} auth={isAuth}/>} />
             <Route path="content" element={<Explore/>} >
                 <Route path='video' element={<ContentPanel contentType="video" />} />

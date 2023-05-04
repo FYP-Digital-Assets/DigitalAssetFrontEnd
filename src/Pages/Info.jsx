@@ -28,10 +28,12 @@ export const Info = (props) => {
            
             
             <p className="body-text">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Digital Assets Provenance empowers you to recognize your true value by 
+              acknowledging the unwavering effort and dedication that fuel your success. With our 
+              cutting-edge blockchain technology, we pave the way for an unparalleled user experience
+              that enables you to soar above limitations and bask in the vibrant hues of this 
+              magnificent world. Join us on a mission to unlock limitless possibilities!
+ 
               
             </p>
             <div>

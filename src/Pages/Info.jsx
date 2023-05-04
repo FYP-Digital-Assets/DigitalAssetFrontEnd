@@ -98,10 +98,15 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Imagine being able to relive your most treasured moments as 
+              if they were unfolding before you once more. Videos have the 
+              unique power to immortalize our memories, ensuring that we always 
+              remember them in their best light and inspiring us to capture new experiences. 
+              But what if there was a way to take this even further? Thanks to blockchain-based solutions, 
+              videos can now be accompanied by strong provenance and authenticity - truly decentralized
+              assets with unparalleled value. Don't miss out on the chance to elevate your video content 
+              like never before!
+ 
             </p>
           </div>
           

@@ -120,10 +120,11 @@ export const Info = (props) => {
            
             
             <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-              Nisi magni provident explicabo fuga aspernatur porro enim 
-              libero mollitia eum sit vero tenetur, consequatur ipsum 
-              soluta sunt accusantium quo, voluptatibus quidem. 
+              Envisage being able to relive cherished memories through sound
+              from listening to your favorite tunes, to hearing the voice of someone 
+              dear again. As much as audio technology has been primarily geared 
+              towards enhancing entertainment experiences in the past. This is how we 
+              can offer our audiences a truly multi-sensory experience like no other! 
             </p>
           </div>
           <div className="col-6 d-flex justify-content-center" data-aos="zoom-out-left">

@@ -1,6 +1,7 @@
 import { Route, Routes, BrowserRouter, Link} from "react-router-dom";
 import { ContentCard } from "./ContentCard";
 import { Container, Row } from 'react-bootstrap';
+import { useEffect, useMemo, useState } from "react";
 export function ContentPage(){
     return (
         <Route path="/content">
@@ -33,6 +34,34 @@ function ContentTabButtons(){
  * it will display cards
  */
 export function ContentPanel(props){
+    const [dataResult, setDataResult] = useState(null);
+
+    const postData = async () => {
+    try {
+        const response = await fetch('http://localhost:4000/explore', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ page: 0 }) // replace 0 with the desired page number
+        });
+        const data = await response.json();
+        console.log(data.data);
+        setDataResult(() => data.data); // wrap data.data in a function
+    } catch (error) {
+        console.error(error);
+    }
+    }
+
+    useMemo(() => {
+    postData();
+    }, []);
+
+    useEffect(() => {
+    console.log("result: " + dataResult);
+    }, [dataResult]);
+
+
     const cards = [{
         img:"https://play-lh.googleusercontent.com/GmTrRvFLOg9415aIWoxXQMpsgucGvmu7RT_GaXn4bX_OdMjO5W41de1I33ZGOB2HGw",
         title:"Talking tom goes viral in the sky",
@@ -79,7 +108,7 @@ export function ContentPanel(props){
         <Row>
         {cards?<>
    {cards.map((a, i)=>{
-    return <div className="col-3 mt-5" key={i}><ContentCard img={a.img} title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> </div>
+    return <div className="col-3 mt-5" key={i}><ContentCard img={a.img } title={a.title} type={a.type} author={a.author} price={a.price} authorImg={a.authorImg} key={i} style={{display:"inline-block"}}/> </div>
    })}
    </>:<></>}
    </Row>

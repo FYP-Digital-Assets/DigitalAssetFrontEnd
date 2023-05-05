@@ -90,6 +90,8 @@ export function Upload(props){
             }
             const addrofContract = await executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
             contentDetails.append('address', addrofContract) ;
+            contentDetails.append('type', fileType)
+            contentDetails.append('ext', [preFilename.substr(preFilename.lastIndexOf('.')+1),filename.substr(filename.lastIndexOf('.')+1)])
             console.log("adderss:   ------ below")
             console.log(addrofContract)
             

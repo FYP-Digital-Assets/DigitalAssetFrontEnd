@@ -176,10 +176,10 @@ const ProjectRoutes = (props) => {
             <Route path="auth" element={<ContentDetail {...details} />} />
             <Route path="upload" element={<Upload addr={addr} auth={isAuth}/>} />
             <Route path="content" element={<Explore/>} >
-                <Route path='video' element={<ContentPanel contentType="video" />} />
-                <Route path='audio' element={<ContentPanel contentType="audio" />} />
-                <Route path='image' element={<ContentPanel contentType="image" />} />
-                <Route path='document' element={<ContentPanel contentType="document" />} />
+                <Route path='video' element={<ContentPanel addr={addr} contentType="video" />} />
+                <Route path='audio' element={<ContentPanel addr={addr} contentType="audio" />} />
+                <Route path='image' element={<ContentPanel addr={addr} contentType="image" />} />
+                <Route path='document' element={<ContentPanel addr={addr} contentType="document" />} />
             </Route>
             <Route path="profile" element={<ProfileLayout auth={isAuth} addr={addr}/>} >
               <Route index element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />

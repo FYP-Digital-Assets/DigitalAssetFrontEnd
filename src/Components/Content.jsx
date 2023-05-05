@@ -1,9 +1,9 @@
 import Accordion from 'react-bootstrap/Accordion';
-export function Content({data, type, title, description, prices}){
+export function Content({data, type, title, description, prices, ext}){
     
     return (
         <div className="content_of_content_details">
-          <object data={`http://localhost:4000/ipfs/${data}`} type={type} >
+          <object data={`http://localhost:4000/ipfs/${data}/${ext}`} type={type} >
             <p>Preview not available</p>  
           </object>
           <br/>

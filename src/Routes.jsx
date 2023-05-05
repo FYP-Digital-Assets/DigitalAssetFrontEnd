@@ -160,7 +160,7 @@ const ProjectRoutes = (props) => {
     author:{name:"my name", img:profileIcon, address:addr},
     content:{clip:"", title:"Content Title", 
     description:"Hello this is description", prices:[120, 10, 0], address:"cid",
-    clip:"QmYog8dP2hJpgQXvfFes6CfhT64fgzoksG4K3CPAt3PMFC", type:"video/mp4"
+    clip:"QmYog8dP2hJpgQXvfFes6CfhT64fgzoksG4K3CPAt3PMFC", type:"video/mp4", ext:"mp4"
   }
   }
   return (

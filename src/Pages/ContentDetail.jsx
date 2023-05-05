@@ -15,7 +15,7 @@ export default function ContentDetail(props){
             <div className="row">
                 <div className="col-9 detailsRightSection">
                     <ContentAuthor img={author.img} name={author.name} address={author.address}/>
-                    <Content data={content.clip} type={content.type} title={content.title} description={content.description} prices={content.prices}/>
+                    <Content data={content.clip} type={content.type} title={content.title} description={content.description} prices={content.prices} ext={content.ext}/>
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >

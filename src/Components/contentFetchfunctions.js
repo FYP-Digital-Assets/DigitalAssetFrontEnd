@@ -28,6 +28,36 @@ async function getContentDetailsFromContracts(contentAddress, senderAddress) {
     return { cid, prices, licensors, owners }
 }
 /**
+ * 
+ * @param {*} contentAddress address of assetcontract
+ * @param {*} senderAddress  address of sender
+ * @param {*} methodName  name of solidity method. all possible values [buyView, buyLicense, buyContent]
+ * @param {*} price price of content in wei
+ * @returns txhash will be returned
+ */
+async function doTradeTransaction(contentAddress, senderAddress, methodName, price){
+    const web3 = new Web3(window.ethereum);
+    const asset = JSON.parse(localStorage.getItem("Asset"))
+    const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    const result = await contract.methods[methodName]().send({from:senderAddress, gas:2000000, value:price}).on('transactionHash', hash=>hash)
+    console.log("tx hash ", result)
+    return result;
+}
+/**
+ * 
+ * @param {*} contentAddress address of assetcontract
+ * @param {*} senderAddress  address of sender
+ * @param {*} prices prices of content in wei
+ * @returns true or false
+ */
+async function updatePrices(contentAddress, senderAddress, prices){
+    const web3 = new Web3(window.ethereum);
+    const asset = JSON.parse(localStorage.getItem("Asset"))
+    const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    const result = await contract.methods.setPrices(...prices).send({from:senderAddress, gas:2000000}).then(res=>true).catch(err=>false)
+    return result;
+}
+/**
  * search content from db
  * @param searchTerm is any string
  */

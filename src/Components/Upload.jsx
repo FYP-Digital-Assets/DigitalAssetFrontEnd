@@ -16,7 +16,8 @@ export function Upload(props){
     const handleClose = () => setShow(false);
     const [filename, setFilename] = useState(uploadIcon);
     const [fileType, setFileType] = useState("image/png");
-
+    const [preExt, setPreExt] = useState('')
+    const [mainExt, setMainExt] = useState('')
     const [isPurchase, setIsPurchase] = useState(false);
 
     const navi = useNavigate();
@@ -69,9 +70,9 @@ export function Upload(props){
             const contentDetails = new FormData();
             contentDetails.append('file', thumbFile);
             
-            contentDetails.append('clip', clipContentCid.cid) ;
-            contentDetails.append('description', description) ;
-            contentDetails.append('title', title) ;
+            //contentDetails.append('clip', clipContentCid.cid) ;
+            //contentDetails.append('description', description) ;
+            //contentDetails.append('title', title) ;
 
               var pricePurchase = 0 ;
               var priceView = 0 ;
@@ -89,11 +90,14 @@ export function Upload(props){
               alert("Content already exist")
             }
             const addrofContract = await executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense )
-            contentDetails.append('address', addrofContract) ;
-            contentDetails.append('type', fileType)
-            contentDetails.append('ext', [preFilename.substr(preFilename.lastIndexOf('.')+1),filename.substr(filename.lastIndexOf('.')+1)])
-            console.log("adderss:   ------ below")
-            console.log(addrofContract)
+            //contentDetails.append('address', addrofContract) ;
+            //contentDetails.append('type', fileType)
+            //contentDetails.append('ext', [preFilename.substr(preFilename.lastIndexOf('.')+1),filename.substr(filename.lastIndexOf('.')+1)])
+            const obj = {clip:clipContentCid.cid, description, title, address:addrofContract, type:fileType, ext:[preExt,mainExt]}
+            console.log("req obj ", obj)
+            //console.log("adderss:   ------ below")
+            //console.log(addrofContract)
+            contentDetails.append('obj', JSON.stringify(obj))
             
             const response3 = await fetch("http://localhost:4000/uploadContent",{
               method: 'POST',
@@ -129,6 +133,8 @@ export function Upload(props){
       };
       reader.readAsDataURL(event.target.files[0]);
       setFileType(event.target.files[0].type);
+      let {name} = event.target.files[0]
+      setMainExt(name.substr(name.lastIndexOf('.')+1))
       // Perform any other actions with the selected file
       setFile(event.target.files[0]);
     };
@@ -137,8 +143,11 @@ export function Upload(props){
 
       reader.onload = (event) => {
         setPreFilename(event.target.result);
+        
       };
       reader.readAsDataURL(event.target.files[0]);
+      let {name} = event.target.files[0]
+      setPreExt(name.substr(name.lastIndexOf('.')+1))
       setPreFile(event.target.files[0]);
     };
     const handleThumbFileChange = (event) => {

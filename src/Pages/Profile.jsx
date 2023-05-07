@@ -16,6 +16,7 @@ function EditingProtected(props){
   const [des_temp, setDes_temp] = useState(props.des) ;
   const [imgUrl_temp, setImgUrl_temp] = useState(props.imageUrl) ;
   const [imgFile, setImgFile] = useState() ;
+
   const handleEdit = async () =>{
     
     if(name_temp !== props.name || des_temp !== props.des ){
@@ -86,6 +87,7 @@ function EditingProtected(props){
 
     reader.readAsDataURL(file);
   }
+  
   return (
     <div className='EditingSection'>
       <div className='imageChose'>
@@ -127,10 +129,13 @@ function ProfileProtected(props){
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const copy = async () => {
-    await navigator.clipboard.writeText(props.addr);
+    await navigator.clipboard.writeText(props.userData.ethAddress);
     setShow(true)
     setTimeout(()=> setShow(false), 1000);
   }
+  useEffect(() =>{
+    console.log("data :", props.userData)
+  })
   
   return(
     <div className="container-fluid">
@@ -139,20 +144,20 @@ function ProfileProtected(props){
             
             <div className='d-flex juctify-content-left '>
                 {props.isOwner ? 
-                  <Link to="/profile/Editing" relative="path" className="editButton">
+                  <Link to={`/profile/${props.userData.ethAddress}/Editing`} relative="path" className="editButton">
                     <img src={editIcon}  alt="nodd" />
                     <span className="editSpan">Edit</span>
               </Link>
                 : <></>}
                 
-                <img src={props.imageUrl} alt='Profile pic' className='imgProfile' />
+                <img src={`http://localhost:4000/ProfileImgs/${props.userData.img}`} alt='Profile pic' className='imgProfile' />
                 {/* Name and crytpo address info */}
                 <div className='profileText'>
-                    <h1 className="heading_2 "> {props.name} </h1>
+                    <h1 className="heading_2 "> {props.userData.name} </h1>
                     <div className='d-flex justify-content-left'>
                       <img src={EthIcon} alt='eth icon' className='ethIcon1'/>
                       <p className='text-muted address-text' onClick={copy} ref={target}>
-                        {props.addr.substr(0,6)}...{props.addr.substr(-4, 4)}
+                        {props.userData.ethAddress.substr(0,6)}...{props.userData.ethAddress.substr(-4, 4)}
                       </p>
                       <Overlay target={target.current} show={show} placement="top">
                         {(props) => (
@@ -173,7 +178,7 @@ function ProfileProtected(props){
                 <div className="bioRapter mt-4">
                     <h1 className="subtitle-text">Bio</h1>
                     <p className="body-text">
-                        {props.des}
+                        {props.userData.bio}
                     </p>
                 </div>
                 
@@ -184,18 +189,23 @@ function ProfileProtected(props){
   );
 }
 function Editing(props){
-  return props.auth ? (<EditingProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} handleChangeEdit={props.handleChangeEdit}/>):(null) ;
+  const [isOwner] = useOutletContext();
+  const navi = useNavigate();
+  useEffect(()=>{
+    if(!isOwner) navi("..")
+  }, [])
+  return isOwner ? (<EditingProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} handleChangeEdit={props.handleChangeEdit}/>):(null) ;
 }
 
-function Profile(props){
-  const isOwner = useOutletContext();
+function Profile(){
+  const [isOwner, userData] = useOutletContext();
   
-  return props.auth == true ? (
+  return userData ? (
       <div>
-        <ProfileProtected isOwner={isOwner} addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
+        <ProfileProtected userData={userData} isOwner={isOwner}/>
       </div>
       
-  ):(null) ;
+  ):(<></>) ;
 }
 function OwnedContent(props){
     async function getContentFromContracts(address){
@@ -300,32 +310,32 @@ console.log("call details")
 
 function ProfileLayout(props){
   const [isOwner, setIsOwner] = useState(false) ;
-  const [userData, setUserData] = useState({}) ;
+  const [userData, setUserData] = useState(null) ;
   const {id} = useParams() ;
   const navi = useNavigate();
-  useMemo(async() => {
-    if(id === props.addr){
-      setIsOwner(true) ;
-    }
-    const ownerDetail = await fetch("http://localhost:4000/userInfo", {
-        method:"post"  ,
+  useEffect(() => {
+    async function fetchUserData() {
+      if(id == null) return
+      if (id === props.addr) {
+        setIsOwner(true);
+      }
+      const ownerDetail = await fetch("http://localhost:4000/userInfo", {
+        method: "post",
         headers: {
-            'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ethAddress:id}) 
-    });
-    
-    const data = await ownerDetail.json();
-    
-    if(data.data !== null){
+        body: JSON.stringify({ ethAddress: id }),
+      });
+      const data = await ownerDetail.json();
+      if (data.data !== null) {
         setUserData(data.data);
-        
+      } else {
+        navi("/");
+      }
     }
-    else{
-      navi("/");
-    }
-    console.log("data: "+userData);
-  }, []) ;
+  
+    fetchUserData();
+  }, [id, props.addr]);
   
   return(
     <div>

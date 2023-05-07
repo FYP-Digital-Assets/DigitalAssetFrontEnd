@@ -160,12 +160,12 @@ const ProjectRoutes = (props) => {
     content:{clip:"", title:"Content Title", 
     description:"Hello this is description", prices:[120, 10, 0], address:"cid",
     clip:"QmYog8dP2hJpgQXvfFes6CfhT64fgzoksG4K3CPAt3PMFC", type:"video/mp4", ext:["mp4","mp4"],
-    view:100, licensor:20,
-  },
-  owners:[{name:"iqbal", img:"https://placehold.co/400x400/red/white", price:"121 eth", address:"12121212" },
-      {name:"shankar", img:"https://placehold.co/400x400/blue/white", price:"121 eth", address:"12121212" },
-      {name:"javeria", img:"https://placehold.co/400x400/yellow/white", price:"minted", address:"12121212" }]
+    view:100, licensors:[],owners:[{name:"iqbal", img:"https://placehold.co/400x400/red/white", price:"121 eth", address:"12121212" },
+    {name:"shankar", img:"https://placehold.co/400x400/blue/white", price:"121 eth", address:"12121212" },
+    {name:"javeria", img:"https://placehold.co/400x400/yellow/white", price:"minted", address:"12121212" }],
+}, addr:"0x8D26B7E1ce09582939337c7e16AA988776e83203"
   }
+  
   return (
     <>
       <BrowserRouter>
@@ -176,7 +176,7 @@ const ProjectRoutes = (props) => {
             <Route path="*" element={<PageNotFound />} />
             
             
-            <Route path="auth" element={<ContentDetail {...details} />} />
+            <Route path="auth/:contractAddress" element={<ContentDetail {...details} />} />
             <Route path="upload" element={<Upload addr={addr} auth={isAuth}/>} />
             <Route path="content" element={<Explore/>} >
                 <Route path='video' element={<ContentPanel addr={addr} contentType="video" />} />

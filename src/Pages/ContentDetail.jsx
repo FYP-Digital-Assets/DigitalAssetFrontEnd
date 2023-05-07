@@ -6,41 +6,76 @@ import viewIcon from "../assets/view.png"
 import licenseIcon from "../assets/license.png"
 import ownerIcon from "../assets/owner.png"
 import dropIcon from "../assets/down.png"
-import { useState } from "react";
-
+import { useEffect, useState, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import Web3 from "web3";
 export default function ContentDetail(props){
-    const {owners, content} = props;
-    console.log(owners)
+    const {contractAddress} = useParams()
+    const [content, setContent] = useState(null)
+    useMemo(async ()=>{
+        const contractDetail =await getContentDetailsFromContracts(contractAddress, props.addr)
+        console.log("addre ", props.addr)
+        //console.log("contract detail ",contractDetail)
+        const dbDetail = await fetch(`http://localhost:4000/content/${contractAddress}`).then(res=>res.json()).then(res=>res.data)
+        //console.log("db details ",dbDetail)
+        contractDetail.owners = await Promise.all(contractDetail.owners.map(async (address)=>{
+            const owner =  await fetch("http://localhost:4000/userInfo", {
+                method:"post"  ,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ethAddress:address}) 
+                }).then(res=>res.json()).then(res=>res.data)
+            return owner
+        }))
+        const detail = {...contractDetail, ...dbDetail}
+        console.log("detail ", detail)
+        setContent(detail)
+    }, [])
+
+    
+    console.log("address ",contractAddress)
     return (
         <div className="container-fluid px-4 py-4 ">
+            {content?
             <div className="row">
+            
                 <div className="col-9 detailsRightSection">
-                    <ContentAuthor img={owners[0].img} name={owners[0].name} address={owners[0].address}/>
+                    
+                    <ContentAuthor img={content?.owners[0].img} name={content?.owners[0].name} address={content?.owners[0].ethAddress}/>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
                       ext={content.ext}/>
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >
-                    <SideBar view={content.view} licensor={content.licensor} owners={owners}/>
+                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners}/>
                 </div>
-            </div>
+            </div>:<></>}
         </div>
     );
 }
-
+async function getContentDetailsFromContracts(contentAddress, senderAddress) {
+    const web3 = new Web3(window.ethereum);
+    const asset = JSON.parse(localStorage.getItem("Asset"))
+    const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    const cid = await contract.methods.getContent().call({ from: senderAddress })
+    const prices = await contract.methods.getPrices().call()
+    const licensors = await contract.methods.getLicensorHistory().call()
+    const owners = await contract.methods.getOwnerHistory().call()
+    return { cid, prices, licensors, owners }
+}
 function OwnerIconAndName(props){
     return(
         <div className="img-owner-drow">
             <div>
-                <img src={props.img} alt="" />
+                <img src={`http://localhost:4000/profileImgs/${props.img}`} alt="" />
                 <div className="d-flex flex-column align-items-start gap-0">
                     <span className="name-owe">{props.name}</span>
                     <span className="name-addr">{props.address.substr(0,6)}...{props.address.substr(-4, 4)}</span>
                     
                 </div>
             </div>
-            <span>{props.price}</span>
         </div>
     );
 }
@@ -71,7 +106,7 @@ function SideBar(props){
                     <div className='p-2 d-flex flex-column justify-content-end'  >
                         {
                             owners.map((owner, key)=>{
-                                return(<OwnerIconAndName img={owner.img} name={owner.name} price={owner.price} address={owner.address} key={key} />)
+                                return(<OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} />)
                             })
                         }
                     </div>

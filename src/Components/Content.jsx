@@ -8,7 +8,8 @@ export function Content({data, type, title, description, prices, ext}){
           </object>
           <br/>
           <p className="title">{title}</p>
-          <PurchaseButtons price_1={prices[0]} price_2={prices[1]} price_3={prices[2]} />
+
+          <PurchaseButtons price_1={Number(prices[0])} price_2={Number(prices[1])} price_3={Number(prices[2])} />
           <Accordion >
             <Accordion.Item eventKey="0">
               <Accordion.Header >Description</Accordion.Header>

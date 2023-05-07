@@ -181,9 +181,13 @@ const ProjectRoutes = (props) => {
                 <Route path='image' element={<ContentPanel addr={addr} contentType="image" />} />
                 <Route path='document' element={<ContentPanel addr={addr} contentType="document" />} />
             </Route>
-            <Route path="profile" element={<ProfileLayout auth={isAuth} addr={addr}/>} >
-              <Route index element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
+            {/* <Route path="profile" element={<ProfileLayout auth={isAuth} addr={addr}/>} >
+              <Route index element={<Profile isOwner={true} addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
               <Route path="Editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
+            </Route> */}
+            <Route path="profile" element={<ProfileLayout isOwner={false} auth={true} addr={addr}/>} >
+              <Route path=":id" element={<Profile addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
+              <Route path="editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             </Route>
             
           </Route>

@@ -3,7 +3,7 @@ import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
 import doneIcon from "../assets/verify.png"
 import cancelIcon from "../assets/cancel.png"
-import { Link, Outlet, useNavigate} from "react-router-dom";
+import { Link, Outlet, useNavigate, useOutletContext, useParams} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { useEffect, useState, useRef, useMemo } from "react";
@@ -111,11 +111,11 @@ function EditingProtected(props){
         </div>
       </div>
       
-      <Link to="/profile" className="editButton" onClick={handleEdit}>
+      <Link to={`/profile/${props.addr}`} className="editButton" onClick={handleEdit}>
           <img src={doneIcon}  alt="edit button" />
           <span className="editSpan">Done</span>
       </Link>
-      <Link to="/profile" className="editButton1" >
+      <Link to={`/profile/${props.addr}`} className="editButton1" >
           <img src={cancelIcon}  alt="edit button" />
           <span className="editSpan">Cancel</span>
       </Link>
@@ -138,10 +138,13 @@ function ProfileProtected(props){
         <div className="row profile_details">
             
             <div className='d-flex juctify-content-left '>
-                <Link to="/profile/Editing" relative="path" className="editButton">
+                {props.isOwner ? 
+                  <Link to="/profile/Editing" relative="path" className="editButton">
                     <img src={editIcon}  alt="nodd" />
                     <span className="editSpan">Edit</span>
-                </Link>
+              </Link>
+                : <></>}
+                
                 <img src={props.imageUrl} alt='Profile pic' className='imgProfile' />
                 {/* Name and crytpo address info */}
                 <div className='profileText'>
@@ -185,10 +188,11 @@ function Editing(props){
 }
 
 function Profile(props){
+  const isOwner = useOutletContext();
   
   return props.auth == true ? (
       <div>
-        <ProfileProtected addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
+        <ProfileProtected isOwner={isOwner} addr={props.addr} imageUrl={props.imageUrl} name={props.userName} des={props.des} />
       </div>
       
   ):(null) ;
@@ -295,15 +299,38 @@ console.log("call details")
 }
 
 function ProfileLayout(props){
+  const [isOwner, setIsOwner] = useState(false) ;
+  const [userData, setUserData] = useState({}) ;
+  const {id} = useParams() ;
   const navi = useNavigate();
-  useEffect(() => {
-    console.log(props.auth)
-    if(props.auth == false) navi("/")
-  })
+  useMemo(async() => {
+    if(id === props.addr){
+      setIsOwner(true) ;
+    }
+    const ownerDetail = await fetch("http://localhost:4000/userInfo", {
+        method:"post"  ,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ethAddress:id}) 
+    });
+    
+    const data = await ownerDetail.json();
+    
+    if(data.data !== null){
+        setUserData(data.data);
+        
+    }
+    else{
+      navi("/");
+    }
+    console.log("data: "+userData);
+  }, []) ;
+  
   return(
     <div>
-      <Outlet/>
-      <OwnedContent addr={props.addr}/>
+      <Outlet context={[isOwner, userData]}  />
+      <OwnedContent addr={id}/>
     </div>
   )
 }

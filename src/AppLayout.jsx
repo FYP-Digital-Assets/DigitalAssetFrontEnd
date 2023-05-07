@@ -83,7 +83,7 @@ const AppLayout = (props)=> {
     }
     const show_modal = () =>{
         if(props.auth){
-            navigation("/Profile") ;
+            navigation(`profile/${props.addr}`) ;
         }else{close_reference_modal.current.style.display = "block" }
         
     }

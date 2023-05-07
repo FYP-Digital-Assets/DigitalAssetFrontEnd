@@ -305,7 +305,7 @@ export function Upload(props){
     const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
     //call function to 
     // console.log("account ", account)
-    // console.log("ref ", content_ref)
+    console.log("ref ", content_ref)
     // console.log("sp ", sellingPrice)
     // console.log("lp ", licencePrice)
     // console.log("vp ", viewFee)

@@ -59,6 +59,7 @@ async function getContentDetailsFromContracts(contentAddress, senderAddress) {
     const web3 = new Web3(window.ethereum);
     const asset = JSON.parse(localStorage.getItem("Asset"))
     const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    console.log("sender addre ", senderAddress)
     const cid = await contract.methods.getContent().call({ from: senderAddress })
     const prices = await contract.methods.getPrices().call()
     const licensors = await contract.methods.getLicensorHistory().call()

@@ -9,6 +9,7 @@ import dropIcon from "../assets/down.png"
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Web3 from "web3";
+import { Button } from "react-bootstrap";
 export default function ContentDetail(props){
     const {contractAddress} = useParams()
     const [content, setContent] = useState(null)
@@ -45,11 +46,11 @@ export default function ContentDetail(props){
                     <ContentAuthor img={content?.owners[0].img} name={content?.owners[0].name} address={content?.owners[0].ethAddress}/>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
-                      ext={content.ext}/>
+                      ext={content.ext} address={content.address} ethAddress={props.addr}/>
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >
-                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners}/>
+                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners} prices={content.prices} address={content.address} addr={props.addr}/>
                 </div>
             </div>:<></>}
         </div>
@@ -114,7 +115,63 @@ function SideBar(props){
                 </div>
                 
             </div>
+            {owners[owners.length-1].ethAddress == props.addr?
+            <EditPrice prices={props.prices} ethAddress={owners[owners.length-1].ethAddress} address={props.address}/>
+            :<></>
+        }
             
         </div>
     );
+}
+async function updatePrices(contentAddress, senderAddress, prices){
+    const web3 = new Web3(window.ethereum);
+    const asset = JSON.parse(localStorage.getItem("Asset"))
+    const contract = new web3.eth.Contract(asset.abi, contentAddress);
+    console.log("n price ", prices)
+    console.log("content address ", contentAddress)
+    console.log("sender address ", senderAddress)
+    const result = await contract.methods.setPrices(...prices).send({from:senderAddress, gas:2000000}).then(res=>true).catch(err=>false)
+    return result;
+}
+function EditPrice({prices, address, ethAddress}){
+    const[nPrice0, setNPrices0] = useState(prices[0])
+    const[nPrice1, setNPrices1] = useState(prices[1])
+    const[nPrice2, setNPrices2] = useState(prices[2])
+    const handleUpdate = async ()=>{
+        const result = await updatePrices(address, ethAddress, [nPrice0, nPrice1, nPrice2])
+        console.log("update prices ", result)
+
+    }
+    const handleChange = (event)=>{
+        event.preventDefault()
+        const {id, value} = event.target
+        if(id=='0'){
+            setNPrices0(value)
+        }
+        else if(id=='1'){
+            setNPrices1(value)
+        }
+        else{
+            setNPrices2(value)
+        }
+    }
+    return (<div>
+        <table>
+            <tbody>
+            <tr>
+                <td><label>Purchase Price</label></td>
+                <td><input type="number" defaultValue={prices[0]} id={0} onChange={handleChange}/></td>
+            </tr>
+            <tr>
+                <td><label>License Price</label></td>
+                <td><input type="number" defaultValue={prices[1]} id={1} onChange={handleChange}/></td>
+            </tr>
+            <tr>
+                <td><label>View Price</label></td>
+                <td><input type="number" defaultValue={prices[2]} id={2} onChange={handleChange}/></td>
+            </tr>
+            </tbody>
+        </table>
+        <Button onClick={handleUpdate}>Update</Button>
+    </div>)
 }

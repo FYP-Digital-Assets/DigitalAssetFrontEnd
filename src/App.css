@@ -271,4 +271,11 @@ svg #personright{
 .exploreLink1:hover{
   color: var(--muted-color);
 }
+.footer-logo{
+  width: 20rem;
+}
 
+.first-content{
+  width: 100%;
+  height: 100%;
+}

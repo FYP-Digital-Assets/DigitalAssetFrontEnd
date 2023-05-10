@@ -280,7 +280,14 @@ console.log("call details")
               <ContentCard type={a.data.type} img={`http://localhost:4000/thumbnail/${a.data.thumbnail}`} title={a.data.title} authorImg={`http://localhost:4000/profileImgs/${a.ownerDetail.data.img}`} author={a.ownerDetail.data.name} prices={a.prices} />
             </div>
           );
-        })) : <></> }
+        })) : (
+          <div className="container">
+            <div className="d-flex flex-column justify-content-center align-items-center p-5 border my-3 ">
+              <img src={noContent} alt="no content" width="200rem" className="m-1" />
+              <h3>No Content Avalible</h3>
+            </div>
+          </div>
+        )  }
           
           {/* <div className=" col-md-4 col-lg-3 mt-4 ">
            <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 

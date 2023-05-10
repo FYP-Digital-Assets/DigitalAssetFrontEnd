@@ -3,6 +3,7 @@ import EthIcon from "../assets/ethereum.png"
 import editIcon from "../assets/edit.png"
 import doneIcon from "../assets/verify.png"
 import cancelIcon from "../assets/cancel.png"
+import noContent from "../assets/delete.png"
 import { Link, Outlet, useNavigate, useOutletContext, useParams} from "react-router-dom";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
@@ -255,18 +256,7 @@ console.log("call details")
     })))
     console.log("details: --> ",ownedContentDetails)
   },[])
-  // useEffect(async()=>{
-  //   const resContract = await getContentFromContracts(props.addr) ;
-  //   console.log("contract result "+resContract);
-  //   setOwnedContentDetails(await Promise.all(resContract.map(async (address) =>{
-  //     const detailsContracts = await getContentDetailsFromContracts(address, props.addr) ;
-  //     const detailsFromApi = await fetch('http://localhost:4000/content/'+address)
-  //     .then(response => response.json()) ;
-  //     console.log("one: "+detailsContracts[0]+"\ntwo: "+detailsFromApi[0])
-  //     return {...detailsContracts, ...detailsFromApi} ;
-  //   })))
-  //   console.log("details: --> "+ ownedContentDetails)
-  // },[]);
+  
   return(
     <div className="container-fluid mt-4">
       <div>
@@ -289,24 +279,6 @@ console.log("call details")
           </div>
         )  }
           
-          {/* <div className=" col-md-4 col-lg-3 mt-4 ">
-           <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-          </div>
-          <div className=" col-md-4 col-lg-3 mt-4 ">
-           <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-         </div>
-        <div className=" col-md-4 col-lg-3 mt-4 ">
-          <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-        </div>
-        <div className=" col-md-4 col-lg-3 mt-4 ">
-          <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-        </div>
-        <div className=" col-md-4 col-lg-3 mt-4 ">
-          <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-        </div>
-        <div className=" col-md-4 col-lg-3 mt-4 ">
-          <ContentCard type="video" img="https://placehold.co/600x400" title="title of image is given" authorImg="https://placehold.co/400x400" author="Iqbal" price={122} /> 
-        </div> */}
       </div>
       {ownedContentDetails?console.log("owned ",ownedContentDetails)
         :console.log("need time")
@@ -322,6 +294,7 @@ function ProfileLayout(props){
   const navi = useNavigate();
   useEffect(() => {
     async function fetchUserData() {
+      console.log("id: ", id)
       if(id == null) return
       if (id === props.addr) {
         setIsOwner(true);
@@ -342,7 +315,7 @@ function ProfileLayout(props){
     }
   
     fetchUserData();
-  }, [id, props.addr]);
+  }, [props]);
   
   return(
     <div>

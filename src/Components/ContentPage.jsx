@@ -67,12 +67,8 @@ export function ContentPanel(props){
             setDataResult(await Promise.all(
                 data.data.map( async(a, b) =>{
                     console.log(a.address+"\nd: "+props.addr)
-                    if(a.address.length !==42 ){
-                       return undefined;
-                    }
-                    else{
                         const contentDetailsContract =  await getContentDetailsFromContracts(a.address, props.addr) ;
-                        const owner = await contentDetailsContract.owners[detailsContracts.owners.length-1] ;
+                        const owner = await contentDetailsContract.owners[contentDetailsContract.owners.length-1] ;
                         console.log(owner)
                         const ownerDetail = await fetch("http://localhost:4000/userInfo", {
                             method:"post"  ,
@@ -88,10 +84,8 @@ export function ContentPanel(props){
                                 }
                                     
                             })
-                            console.log("values: "+ownerDetail);
-                            console.log("values:", JSON.stringify(ownerDetail));
-                            return {...a, ...ownerDetail, ...owner};
-                    }
+                            console.log("values:", JSON.stringify(a));
+                            return {...a, ...ownerDetail, ...owner, ...contentDetailsContract};
                     
                    })
             ));
@@ -108,7 +102,7 @@ export function ContentPanel(props){
     };
 
     useMemo(async () => {
-        setDataResult(await postData());
+        await postData();
         console.log("here result ", dataResult)
     
     }, []);
@@ -126,7 +120,7 @@ export function ContentPanel(props){
         
         {dataResult?<>
             {dataResult.map((a, i)=>{
-                return <div className="col-3 mt-5" key={a._id}><ContentCard img={`http://localhost:4000/thumbnail/${a.thumbnail}`} title={a.title} type="video" author="Iqbal" price={122} authorImg={`http://localhost:4000/thumbnail/${a.thumbnail}`} style={{display:"inline-block"}}/> </div>
+                return <div className="col-3 mt-5" key={a._id}><ContentCard img={`http://localhost:4000/thumbnail/${a.thumbnail}`} title={a.title} type="video" author="Iqbal" prices={a.prices} authorImg={`http://localhost:4000/thumbnail/${a.thumbnail}`} style={{display:"inline-block"}}/> </div>
             })}
             </>:<></>
         }

@@ -46,7 +46,7 @@ export default function ContentDetail(props){
                     <ContentAuthor img={content?.owners[0].img} name={content?.owners[0].name} address={content?.owners[0].ethAddress}/>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
-                      ext={content.ext} address={content.address} ethAddress={props.addr}/>
+                      ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[0].ethAddress} licensors={content.licensors}/>
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >

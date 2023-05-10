@@ -1,6 +1,7 @@
 import {Content} from "../Components/Content"
 import {CommentBox} from "../Components/CommentBox"
 import { ContentAuthor } from "../Components/ContentAuthor";
+import AddReview from "../Components/AddReview";
 import "./ContentDetail.css"
 import viewIcon from "../assets/view.png"
 import licenseIcon from "../assets/license.png"
@@ -51,6 +52,7 @@ export default function ContentDetail(props){
                 </div>
                 <div className="col-3"  >
                     <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners} prices={content.prices} address={content.address} addr={props.addr}/>
+                    <AddReview address={content.address} addr={props.addr}/>
                 </div>
             </div>:<></>}
         </div>

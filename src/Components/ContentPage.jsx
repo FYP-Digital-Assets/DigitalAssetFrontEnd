@@ -107,8 +107,10 @@ export function ContentPanel(props){
     }
     };
 
-    useMemo(() => {
-    postData();
+    useMemo(async () => {
+        setDataResult(await postData());
+        console.log("here result ", dataResult)
+    
     }, []);
 
     // useEffect(async() => {

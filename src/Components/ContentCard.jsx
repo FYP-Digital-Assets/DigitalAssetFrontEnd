@@ -7,10 +7,11 @@ export function ContentCard(prop){
 
   const authorImgStyle = {borderRadius:"50%", width:"3rem", height:"3rem", marginRight:"0.5rem"};
   const priceTagStyle = {color:"red", float:"right"};
+  const type = prop.type.substr(0, prop.type.indexOf('/'))
     return (
       
       <Card  className='content_card_style border'>
-        {prop.type?<div className='card_typeDiv'>{prop.type}</div>:<></>}
+        {type?<div className='card_typeDiv'>{type}</div>:<></>}
         <div >
           <div className='p-1'>
             <Card.Img variant="top" className='card_ImgStyle' src={prop.img} />
@@ -23,9 +24,9 @@ export function ContentCard(prop){
             
           </Card.Body>
           <Card.Footer className='d-flex justify-content-between flex-column'>
-            <small className='d-flex justify-content-between'><span>Purchase:</span>{prop.price}</small>
-            <small className='d-flex justify-content-between'><span>View:</span> {prop.price}</small>
-            <small className='d-flex justify-content-between'><span>License</span> {prop.price}</small>
+            <small className='d-flex justify-content-between'><span>Purchase:</span>{prop.prices[0]}</small>
+            <small className='d-flex justify-content-between'><span>License</span> {prop.prices[1]}</small>
+            <small className='d-flex justify-content-between'><span>View:</span> {prop.prices[2]}</small>
           </Card.Footer>
         </div>
       </Card>

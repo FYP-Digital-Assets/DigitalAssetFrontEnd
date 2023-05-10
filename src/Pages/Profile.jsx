@@ -267,7 +267,7 @@ console.log("call details")
         { ownedContentDetails ? (ownedContentDetails.map((a,b)=>{
           return (
             <div className=" col-md-4 col-lg-3 my-4 " key={b}>
-              <ContentCard type={a.data.type} img={`http://localhost:4000/thumbnail/${a.data.thumbnail}`} title={a.data.title} authorImg={`http://localhost:4000/profileImgs/${a.ownerDetail.data.img}`} author={a.ownerDetail.data.name} prices={a.prices} />
+              <Link to={`/auth/${a.data.address}`}><ContentCard type={a.data.type} img={`http://localhost:4000/thumbnail/${a.data.thumbnail}`} title={a.data.title} authorImg={`http://localhost:4000/profileImgs/${a.ownerDetail.data.img}`} author={a.ownerDetail.data.name} prices={a.prices} /></Link>
             </div>
           );
         })) : (

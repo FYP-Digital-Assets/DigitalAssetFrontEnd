@@ -12,11 +12,15 @@ import Web3 from 'web3';
 import { Upload } from "./Components/Upload";
 import { ContentPage, ContentPanel } from "./Components/ContentPage";
 import Explore from "./Pages/Explore";
+import Stat from "./Pages/Stat";
 
 
 const ProjectRoutes = (props) => {
   const [bal, setBal] = useState(0);
   const [isAuth, setAuth] = useState(false);
+  const [userBio, setUserBio] = useState("description");
+  var [imageUrl, setImageUrl] = useState(profileIcon);
+  
   //on load
   useEffect(() => {
     const checkConnection = async () => {
@@ -28,7 +32,7 @@ const ProjectRoutes = (props) => {
         web3 = new Web3(window.ethereum);
       } else if (window.web3) {
         web3 = new Web3(window.web3.currentProvider);
-      };
+      }
 
       // Check if User is already connected by retrieving the accounts
       const accounts = await web3.eth.getAccounts();
@@ -56,7 +60,7 @@ const ProjectRoutes = (props) => {
             }
             //console.log(account._id);
             console.log(account)
-            setAddr(account.data.ethAddress);
+            props.setAddr(account.data.ethAddress);
             console.log(account.data.ethAddress)
             console.log(account.data.img)
             setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
@@ -84,31 +88,24 @@ const ProjectRoutes = (props) => {
   }, [] );
 
   // profile ediditng
-  const [userBio, setUserBio] = useState("description");
- 
- 
-  var [imageUrl, setImageUrl] = useState(profileIcon);
-  
-
-
-  
-  const [addr, setAddr] = useState("43443");
   const handleChangeEdit = (n, b, i) => {
     setUserBio(() => b);
     setImageUrl(() => i) ;
     props.setUserName(() => n) ;
   }
+  // on account change
   window.ethereum.on('accountsChanged', async () => {
     let web3;
     if (window.ethereum) {
       web3 = new Web3(window.ethereum);
     } else if (window.web3) {
       web3 = new Web3(window.web3.currentProvider);
-    };
+    }
 
     // Check if User is already connected by retrieving the accounts
     const accounts = await web3.eth.getAccounts();
     if (accounts.length !== 0) {
+      console.log("check: ", accounts[0],",  ",props.addr) ;
       const address = accounts[0];
       console.log("addr: " + address);
       const user = {user:address}
@@ -132,7 +129,7 @@ const ProjectRoutes = (props) => {
           }
           //console.log(account._id);
           console.log(account)
-          setAddr(account.data.ethAddress);
+          props.setAddr(account.data.ethAddress);
           console.log(account.data.ethAddress)
           console.log(account.data.img)
           setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
@@ -170,23 +167,24 @@ const ProjectRoutes = (props) => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={setAddr} addr={addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} setUserName={props.setUserName} bal={bal} setBal={setBal} />} >
+          <Route element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={props.setAddr} addr={props.addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} setUserName={props.setUserName} bal={bal} setBal={setBal} />} >
             <Route index element={<Info />} />
             <Route path="info" element={<Info />} />
             <Route path="*" element={<PageNotFound />} />
             
             
             <Route path="auth/:contractAddress" element={<ContentDetail {...details} />} />
-            <Route path="upload" element={<Upload addr={addr} auth={isAuth}/>} />
+            <Route path="upload" element={<Upload addr={props.addr} auth={isAuth}/>} />
+            <Route path="stat" element={<Stat/>} />
             <Route path="content" element={<Explore/>} >
-                <Route path='video' element={<ContentPanel addr={addr} contentType="video" />} />
-                <Route path='audio' element={<ContentPanel addr={addr} contentType="audio" />} />
-                <Route path='image' element={<ContentPanel addr={addr} contentType="image" />} />
-                <Route path='document' element={<ContentPanel addr={addr} contentType="document" />} />
+                <Route path='video' element={<ContentPanel addr={props.addr} contentType="video" />} />
+                <Route path='audio' element={<ContentPanel addr={props.addr} contentType="audio" />} />
+                <Route path='image' element={<ContentPanel addr={props.addr} contentType="image" />} />
+                <Route path='document' element={<ContentPanel addr={props.addr} contentType="document" />} />
             </Route>
-            <Route path="profile/:id" element={<ProfileLayout isOwner={false} addr={addr}/>} >
-              <Route index element={<Profile addr={addr} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
-              <Route path="editing" element={<Editing addr={addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
+            <Route path="profile/:id" element={<ProfileLayout isOwner={false} addr={props.addr}/>} >
+              <Route index element={<Profile addr={props.addr} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
+              <Route path="editing" element={<Editing addr={props.addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             </Route>
             
           </Route>

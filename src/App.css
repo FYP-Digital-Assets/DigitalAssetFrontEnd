@@ -263,7 +263,7 @@ svg #personright{
   cursor: pointer;
 }
 .exploreLink{
-  margin: auto 1rem;
+  margin: auto 0.5rem;
   text-decoration: none;
   font-weight: bold;
   color: var(--text-color);

@@ -15,16 +15,18 @@ export default function Stat(props){
             <tbody>
                 {trending?trending.map(
                     (obj, i)=>{
-                        <tr>
-                            <td>{i}</td>
-                            <td><img src={`http://localhost:4000/thumbnails${obj.thumbnail}`}/></td>
-                            <td>{obj.title}</td>
-                            <td>{obj.prices[0]}</td>
-                            <td>{obj.prices[1]}</td>
-                            <td>{obj.prices[2]}</td>
-                            <td>{obj.view}</td>
-                            <td>{obj.licesors.length}</td>
-                        </tr>
+                        return (
+                            <tr>
+                                <td>{i}</td>
+                                <td><img src={`http://localhost:4000/thumbnails${obj.thumbnail}`}/></td>
+                                <td>{obj.title}</td>
+                                <td>{obj.prices[0]}</td>
+                                <td>{obj.prices[1]}</td>
+                                <td>{obj.prices[2]}</td>
+                                <td>{obj.view}</td>
+                                <td>{obj.licesors.length}</td>
+                            </tr>
+                        );
                     }
                 ):<></>
 

@@ -23,9 +23,12 @@ export const Navbar = (props) => {
                     <button className="searchButton"><img src={searchIcon} alt="" width={20}/></button>
                 </div>
             </div>
-            <div className="d-flex align-items-center ">
+            <div className="d-flex align-items-center mx-2 ">
                 <Link to="/content" className="exploreLink" >
                     <div className="exploreLink1" >Explore</div>
+                </Link>
+                <Link to="/stat" className="exploreLink" >
+                    <div className="exploreLink1" >Stat</div>
                 </Link>
             </div>
             

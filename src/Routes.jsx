@@ -200,7 +200,7 @@ const ProjectRoutes = (props) => {
             <Route path="*" element={<PageNotFound />} />
             
             
-            <Route path="auth/:contractAddress" element={<ContentDetail {...details} />} />
+            <Route path="auth/:contractAddress" element={<ContentDetail addr={props.addr} />} />
             <Route path="upload" element={<Upload addr={props.addr} auth={isAuth}/>} />
             <Route path="stat" element={<Stat/>} />
             <Route path="content" element={<Explore/>} >

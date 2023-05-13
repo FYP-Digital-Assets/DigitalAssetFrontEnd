@@ -120,8 +120,9 @@ export function ContentPanel(props){
         
         {dataResult?<>
             {dataResult.map((a, i)=>{
+                console.log("obj ", a)
                 return <div className="col-3 mt-5" key={a._id}>
-                    <Link to={`/auth/${a.address}`}><ContentCard img={`http://localhost:4000/thumbnail/${a.thumbnail}`} title={a.title} type="video" author="Iqbal" prices={a.prices} authorImg={`http://localhost:4000/thumbnail/${a.thumbnail}`} style={{display:"inline-block"}}/></Link>
+                    <Link to={`/auth/${a.address}`}><ContentCard img={`http://localhost:4000/thumbnail/${a.thumbnail}`} title={a.title} type={a.type} author={a.data.name} prices={a.prices} authorImg={`http://localhost:4000/thumbnail/${a.thumbnail}`} style={{display:"inline-block"}}/></Link>
                     </div>
             })}
             </>:<></>

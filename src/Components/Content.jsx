@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Web3 from 'web3';
-export function Content({data, type, title, description, prices, ext, address, ethAddress, owner, licensors}){
+export function Content({data, type, title, description, prices, ext, address, ethAddress, owner, licensors, setReviewVisible}){
     const[dataUrl, setDataUrl] = useState(`ipfs/${data}/${ext[0]}`)
     useMemo(async ()=>{
       if(ethAddress==owner || licensors.includes(ethAddress)){
@@ -20,7 +20,8 @@ export function Content({data, type, title, description, prices, ext, address, e
           <br/>
           <p className="title">{title}</p>
 
-          <PurchaseButtons setUrl={setDataUrl} address={address} ext={ext} ethAddress={ethAddress} price_1={Number(prices[0])} price_2={Number(prices[1])} price_3={Number(prices[2])} owner={owner} licensors={licensors}/>
+          <PurchaseButtons setUrl={setDataUrl} address={address} ext={ext} ethAddress={ethAddress} price_1={Number(prices[0])} price_2={Number(prices[1])} price_3={Number(prices[2])} owner={owner} 
+          licensors={licensors} setReviewVisible={setReviewVisible}/>
           <Accordion >
             <Accordion.Item eventKey="0">
               <Accordion.Header >Description</Accordion.Header>
@@ -42,7 +43,7 @@ async function doTradeTransaction(contentAddress, senderAddress, methodName, pri
   return {txHash:result.transactionHash, cid};
 }
 function PurchaseButtons(props){
-  const {ethAddress, address, price_1, price_2, price_3, ext, setUrl, owner, licensors} = props
+  const {ethAddress, address, price_1, price_2, price_3, ext, setUrl, owner, licensors, setReviewVisible} = props
   const handleTradeButton = async (event)=>{
     event.preventDefault();
     let price = 0;
@@ -66,12 +67,14 @@ function PurchaseButtons(props){
       else{
         setUrl(`licenseOrOwner/${address}/${ethAddress}/${cid}/${ext[1]}`)
       }
+      setReviewVisible(true)
     }
 
   }
+  console.log("perchase btn ", ethAddress, " ", owner)
   return(
     <div className='mb-4 d-flex justify-content-between '>
-      {!ethAddress==owner?(<><div className='button-purchase ' >
+      {ethAddress!=owner?(<><div className='button-purchase ' >
         <div className={props.price_1 ? (props.price_1===0 ?"button-title button-two":"button-title button-one"): "button-title button-three"} id='buyContent' onClick={handleTradeButton}>Purchase</div>
         <div className='px-3'>{props.price_1 ? props.price_1 + " wei": "Not Avalible"}</div>
       </div>

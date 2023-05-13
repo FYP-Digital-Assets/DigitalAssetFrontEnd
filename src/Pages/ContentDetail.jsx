@@ -14,6 +14,7 @@ import { Button } from "react-bootstrap";
 export default function ContentDetail(props){
     const {contractAddress} = useParams()
     const [content, setContent] = useState(null)
+    const [reviewVisible, setReviewVisible] = useState(null)
     useMemo(async ()=>{
         const contractDetail =await getContentDetailsFromContracts(contractAddress, props.addr)
         console.log("addre ", props.addr)
@@ -44,15 +45,18 @@ export default function ContentDetail(props){
             
                 <div className="col-9 detailsRightSection">
                     
-                    <ContentAuthor img={content?.owners[0].img} name={content?.owners[0].name} address={content?.owners[0].ethAddress}/>
+                    <ContentAuthor img={content?.owners[content.owners.length-1].img} name={content?.owners[content.owners.length-1].name} address={content?.owners[content.owners.length-1].ethAddress}/>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
-                      ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[0].ethAddress} licensors={content.licensors}/>
+                      ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[content.owners.length-1].ethAddress} licensors={content.licensors}
+                      setReviewVisible={setReviewVisible}
+                      />
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >
-                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners} prices={content.prices} address={content.address} addr={props.addr}/>
-                    <AddReview address={content.address} addr={props.addr}/>
+                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr}/>
+                    {reviewVisible?
+                    <AddReview address={content.address} addr={props.addr}/>:<></>}
                 </div>
             </div>:<></>}
         </div>

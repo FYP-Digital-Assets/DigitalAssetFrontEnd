@@ -26,7 +26,7 @@ const AddReview = (props)=>{
             <form className="needs-validation">
                 <label for="reviewInput" class="form-label">Review</label>
                 <input type="text" className="form-control" id="reviewInput" value={review} onChange={handleReviewChange} required />
-                <button class="btn btn-primary" type="submit" onSubmit={onSubmitReview}>Submit Review</button>
+                <button class="btn btn-primary" type="submit" onClick={onSubmitReview}>Submit Review</button>
             </form>
         </div>
     );

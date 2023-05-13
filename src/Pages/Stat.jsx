@@ -11,14 +11,16 @@ export default function Stat(props){
         licesors:["a", "b"]}
     ])
     return <>
+        <h2 className="m-4 border-bottom">Trending</h2>
         <table style={{width:"100%"}}>
             <tbody>
                 {trending?trending.map(
                     (obj, i)=>{
                         return (
+                            // src={`http://localhost:4000/thumbnail/${obj.thumbnail}
                             <tr key={i}>
                                 <td>{i}</td>
-                                <td><img src={`http://localhost:4000/thumbnail/${obj.thumbnail}`}
+                                <td><img src={`https://placehold.co/600x400`}
                                 style={{width:"8rem", height:"8rem", objectFit:"cover"}}
                                 /></td>
                                 <td>{obj.title}</td>

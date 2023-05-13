@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import  ProjectRoutes  from "./Routes" ;
 function App() {
   var [userName, setUserName] = useState("Name") ;
-  const [addr, setAddr] = useState("43443");
+  const [addr, setAddr] = useState(null);
   useEffect(()=>{
     const response = async() =>{
       const res1 = await fetch('http://localhost:4000/digitalAssetContract') ;

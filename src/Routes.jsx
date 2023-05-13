@@ -101,13 +101,40 @@ const ProjectRoutes = (props) => {
     } else if (window.web3) {
       web3 = new Web3(window.web3.currentProvider);
     }
-
+    
     // Check if User is already connected by retrieving the accounts
     const accounts = await web3.eth.getAccounts();
     if (accounts.length !== 0) {
       console.log("check: ", accounts[0],",  ",props.addr) ;
       const address = accounts[0];
-      console.log("addr: " + address);
+      console.log("addrdd: " + address);
+      if(props.addr == address ){
+        console.log("already done");
+        return ;
+      }
+
+        fetch('http://localhost:4000/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ethAddress: props.addr
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Logout failed');
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("logout Data", data); // { code: "200", msg: "logout successful" }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      
       const user = {user:address}
       fetch('http://localhost:4000/login', {
         method: 'POST',

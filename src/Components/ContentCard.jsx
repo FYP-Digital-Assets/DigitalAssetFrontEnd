@@ -1,5 +1,6 @@
 import {Card} from 'react-bootstrap';
 import "./ContentCard.css"
+import { Link } from 'react-router-dom';
 export function ContentCard(prop){
   //styles objects
   
@@ -21,7 +22,6 @@ export function ContentCard(prop){
             <Card.Title className='content_card_title'>{prop.title}</Card.Title>
             <img src={prop.authorImg}  className='card_authorImgStyle'/>
             <b>{prop.author}</b><br/>
-            
           </Card.Body>
           <Card.Footer className='d-flex justify-content-between flex-column'>
             <small className='d-flex justify-content-between'><span>Purchase:</span>{prop.prices[0]}</small>

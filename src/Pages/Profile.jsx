@@ -329,7 +329,7 @@ function ProfileLayout(props){
             </span> 
           </h3>
         </div>
-        <OwnedContent addr={id} methodName={isOwnedContent ? "getContent" : "getLicensedContent"}/>
+        <OwnedContent addr={id} methodName={isOwnedContent ? "getContents" : "getLicensedContents"}/>
       </div>
     </div>
   )

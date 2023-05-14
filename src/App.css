@@ -290,3 +290,15 @@ svg #personright{
   font-size: 16px;
   font-weight: bold;
 }
+.filter-lable{
+  cursor: pointer;
+}
+
+.filter-lable:hover{
+  font-weight: 300;
+}
+input[type="radio"] {
+  display: none;
+}
+
+

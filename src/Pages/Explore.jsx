@@ -29,27 +29,27 @@ function ExploreTop(){
         <div className="nav-background p-3" >
             <ul className="nav ">
                 <li className="nav-item ">
-                    <Link to='./' className="nav-link ">
+                    <Link to='/' className="nav-link ">
                         ALL
                     </Link>
                 </li>
                 <li className="nav-item" >
-                    <Link to='./video' className="nav-link ">
+                    <Link to='video' className="nav-link ">
                         Videos
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='./audio' className="nav-link ">
+                    <Link to='audio' className="nav-link ">
                         Audios
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='./image' className="nav-link ">
+                    <Link to='image' className="nav-link ">
                         Images
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link to='./document' className="nav-link ">
+                    <Link to='document' className="nav-link ">
                         Documents
                     </Link>
                 </li>

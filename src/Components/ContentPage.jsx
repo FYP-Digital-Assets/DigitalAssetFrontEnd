@@ -36,6 +36,7 @@ function ContentTabButtons(){
  */
 export function ContentPanel(props){
     const [dataResult, setDataResult] = useState(null);
+    console.log("props ", props.contentType)
     async function getContentDetailsFromContracts(contentAddress, senderAddress){
         const web3 = new Web3(window.ethereum);
         const asset = JSON.parse(localStorage.getItem("Asset"))
@@ -52,15 +53,16 @@ export function ContentPanel(props){
     }
     const postData = async () => {
     try {
+        console.log("content type ",props.contentType)
         const response = await fetch('http://localhost:4000/explore', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ page: 0 }) // replace 0 with the desired page number
+        body: JSON.stringify({ page: 0, contentType:props.contentType}) // replace 0 with the desired page number
         });
-
         const data = await response.json();
+        console.log("data from db ", data )
 
         if (data && Array.isArray(data.data)) {
             console.log(data.data) ;

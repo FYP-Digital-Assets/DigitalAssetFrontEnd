@@ -11,6 +11,7 @@ import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import Web3 from "web3";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 export default function ContentDetail(props){
     const {contractAddress} = useParams()
     const [content, setContent] = useState(null)
@@ -45,7 +46,7 @@ export default function ContentDetail(props){
             
                 <div className="col-9 detailsRightSection">
                     
-                    <ContentAuthor img={content?.owners[content.owners.length-1].img} name={content?.owners[content.owners.length-1].name} address={content?.owners[content.owners.length-1].ethAddress}/>
+                    <Link to={`/profile/${content?.owners[content.owners.length-1].ethAddress}`}><ContentAuthor img={content?.owners[content.owners.length-1].img} name={content?.owners[content.owners.length-1].name} address={content?.owners[content.owners.length-1].ethAddress}/></Link>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
                       ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[content.owners.length-1].ethAddress} licensors={content.licensors}
@@ -114,7 +115,10 @@ function SideBar(props){
                     <div className='p-2 d-flex flex-column justify-content-end'  >
                         {
                             owners.map((owner, key)=>{
-                                return(<OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} />)
+                                return(<Link to={`/profile/${owner.ethAddress}`}>
+                                <OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} />
+                                </Link>
+                                )
                             })
                         }
                     </div>

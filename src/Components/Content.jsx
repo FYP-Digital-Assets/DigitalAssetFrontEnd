@@ -19,9 +19,10 @@ export function Content({data, type, title, description, prices, ext, address, e
           </object>
           <br/>
           <p className="title">{title}</p>
-
+          {ethAddress?
           <PurchaseButtons setUrl={setDataUrl} address={address} ext={ext} ethAddress={ethAddress} price_1={Number(prices[0])} price_2={Number(prices[1])} price_3={Number(prices[2])} owner={owner} 
-          licensors={licensors} setReviewVisible={setReviewVisible}/>
+          licensors={licensors} setReviewVisible={setReviewVisible}/>:<></>
+          }
           <Accordion >
             <Accordion.Item eventKey="0">
               <Accordion.Header >Description</Accordion.Header>

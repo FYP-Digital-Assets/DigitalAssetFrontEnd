@@ -262,6 +262,9 @@ svg #personright{
 .cursor-pointer{
   cursor: pointer;
 }
+.removeLinkEffect{
+  text-decoration: none;
+}
 .exploreLink{
   margin: auto 0.5rem;
   text-decoration: none;

@@ -46,7 +46,7 @@ export default function ContentDetail(props){
             
                 <div className="col-9 detailsRightSection">
                     
-                    <Link to={`/profile/${content?.owners[content.owners.length-1].ethAddress}`}><ContentAuthor img={content?.owners[content.owners.length-1].img} name={content?.owners[content.owners.length-1].name} address={content?.owners[content.owners.length-1].ethAddress}/></Link>
+                    <Link to={`/profile/${content?.owners[content.owners.length-1].ethAddress}`} className="removeLinkEffect"><ContentAuthor img={content?.owners[content.owners.length-1].img} name={content?.owners[content.owners.length-1].name} address={content?.owners[content.owners.length-1].ethAddress}/></Link>
                     <Content data={content.clip} type={content.type}
                      title={content.title} description={content.description} prices={content.prices}
                       ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[content.owners.length-1].ethAddress} licensors={content.licensors}
@@ -115,7 +115,7 @@ function SideBar(props){
                     <div className='p-2 d-flex flex-column justify-content-end'  >
                         {
                             owners.map((owner, key)=>{
-                                return(<Link to={`/profile/${owner.ethAddress}`}>
+                                return(<Link to={`/profile/${owner.ethAddress}`} className="removeLinkEffect">
                                 <OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} />
                                 </Link>
                                 )

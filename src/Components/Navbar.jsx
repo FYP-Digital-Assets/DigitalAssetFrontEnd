@@ -30,6 +30,9 @@ export const Navbar = (props) => {
                 <Link to="/stat" className="exploreLink" >
                     <div className="exploreLink1" >Stats</div>
                 </Link>
+                <Link to="/info" className="exploreLink" >
+                    <div className="exploreLink1" >Info</div>
+                </Link>
             </div>
             
         </div>

@@ -213,7 +213,8 @@ function OwnedContent(props){
       const web3 = new Web3(window.ethereum);
       const dAsset = JSON.parse(localStorage.getItem("Digital_Asset"))
       const contract = new web3.eth.Contract(dAsset.abi, dAsset.address);
-      const result = await contract.methods.getContents(address).call()
+      // getContent , getLicensedContent
+      const result = await contract.methods[props.methodName](address).call()
       return result;
   }
   async function getContentDetailsFromContracts(contentAddress, senderAddress){
@@ -255,16 +256,12 @@ console.log("call details")
       return {...detailsContracts, ...detailsFromApi, ownerDetail} ;
     })))
     console.log("details: --> ",ownedContentDetails)
-  },[])
+  },[props.methodName])
   
   return(
-    <div className="container-fluid mt-4">
-      <div>
-        <h3 className="heading_3 border-bottom pb-2">Content Owned</h3>
-      </div>
-      
+    <>
       <div className="row">
-        { ownedContentDetails?.length!=0 ? (ownedContentDetails.map((a,b)=>{
+        { ownedContentDetails && ownedContentDetails?.length!=0 ? (ownedContentDetails.map((a,b)=>{
           return (
             <div className=" col-md-4 col-lg-3 my-4 " key={b}>
               <Link to={`/auth/${a.data.address}`}><ContentCard type={a.data.type} img={`http://localhost:4000/thumbnail/${a.data.thumbnail}`} title={a.data.title} authorImg={`http://localhost:4000/profileImgs/${a.ownerDetail.data.img}`} author={a.ownerDetail.data.name} prices={a.prices} /></Link>
@@ -283,13 +280,14 @@ console.log("call details")
       {ownedContentDetails?console.log("owned ",ownedContentDetails)
         :console.log("need time")
       }
-    </div>
+    </>
   );
 }
 
 function ProfileLayout(props){
   const [isOwner, setIsOwner] = useState(false) ;
   const [userData, setUserData] = useState(null) ;
+  const [isOwnedContent, setIsOwnedContent] = useState(true) ;
   const {id} = useParams() ;
   const navi = useNavigate();
   useEffect(() => {
@@ -320,9 +318,20 @@ function ProfileLayout(props){
   return(
     <div>
       <Outlet context={[isOwner, userData]}  />
-      <OwnedContent addr={id}/>
+      <div className="container-fluid mt-4">
+        <div>
+          <h3 className="heading_3 border-bottom pb-2"> 
+            <span className={`select-content-section  ${isOwnedContent?"select-content-seleted": ""}`} onClick={() => setIsOwnedContent(true)}>
+              Content Owned
+            </span> 
+            <span className={`select-content-section  ${!isOwnedContent?"select-content-seleted": ""}`} onClick={() => setIsOwnedContent(false)} >
+              Licensed Content
+            </span> 
+          </h3>
+        </div>
+        <OwnedContent addr={id} methodName={isOwnedContent ? "getContent" : "getLicensedContent"}/>
+      </div>
     </div>
   )
 }
-
 export {Profile, Editing, ProfileLayout}

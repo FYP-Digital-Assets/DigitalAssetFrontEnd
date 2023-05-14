@@ -8,20 +8,35 @@ export default function Stat(props){
         {title:"cde", thumbnail:"1683743582292.jpeg", prices:[12, 20, 30], view:100, 
         licesors:["a", "b"]},
         {title:"fgh", thumbnail:"1683743582292.jpeg", prices:[18, 20, 30], view:200, 
+        licesors:["a", "b"]},
+        {title:"cde", thumbnail:"1683743582292.jpeg", prices:[12, 20, 30], view:100, 
         licesors:["a", "b"]}
+        
     ])
-    return <>
-        <h2 className="m-4 border-bottom">Trending</h2>
-        <table style={{width:"100%"}}>
-            <tbody>
+    return <div className="container my-5">
+        <h2 className=" border-bottom border-dark p-2 heading_2 mb-5">Trending</h2>
+        <table className="table-table-stat" >
+            <thead className="border-bottom border-secondary">
+                <tr className="table-head-row-stat bg-secondary ">
+                    <th className="text-light p-3">#</th>
+                    <th className="text-light" >Content</th>
+                    <th className="text-light" >Title</th>
+                    <th className="text-light" >Price1</th>
+                    <th className="text-light" >Price2</th>
+                    <th className="text-light" >Price3</th>
+                    <th className="text-light" >Views</th>
+                    <th className="text-light" >Licensors</th>
+                </tr>
+            </thead>
+            <tbody >
                 {trending?trending.map(
                     (obj, i)=>{
                         return (
                             // src={`http://localhost:4000/thumbnail/${obj.thumbnail}
-                            <tr key={i}>
-                                <td>{i}</td>
-                                <td><img src={`https://placehold.co/600x400`}
-                                style={{width:"8rem", height:"8rem", objectFit:"cover"}}
+                            <tr className=" border-bottom table-row-stat" key={i}>
+                                <td className="p-3">{i}</td>
+                                <td className="p-2"><img src={`https://placehold.co/600x400`}
+                                style={{width:"5rem", height:"4rem", objectFit:"cover"}}
                                 /></td>
                                 <td>{obj.title}</td>
                                 <td>{obj.prices[0]}</td>
@@ -37,5 +52,5 @@ export default function Stat(props){
                 }
             </tbody>
         </table>
-    </>
+    </div>
 }

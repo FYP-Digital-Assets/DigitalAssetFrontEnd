@@ -28,7 +28,7 @@ export const Navbar = (props) => {
                     <div className="exploreLink1" >Explore</div>
                 </Link>
                 <Link to="/stat" className="exploreLink" >
-                    <div className="exploreLink1" >Stat</div>
+                    <div className="exploreLink1" >Stats</div>
                 </Link>
             </div>
             

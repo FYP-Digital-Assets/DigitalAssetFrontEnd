@@ -297,7 +297,7 @@ svg #personright{
 .filter-lable:hover{
   font-weight: 300;
 }
-input[type="radio"] {
+input[name="filter_trending"] {
   display: none;
 }
 

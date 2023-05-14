@@ -1,7 +1,7 @@
-import { Route, Routes, BrowserRouter, Link} from "react-router-dom";
+import { Route,Link} from "react-router-dom";
 import { ContentCard } from "./ContentCard";
-import { Container, Row } from 'react-bootstrap';
-import { useEffect, useMemo, useState } from "react";
+import { Row } from 'react-bootstrap';
+import {useMemo, useState } from "react";
 import Web3 from "web3";
 export function ContentPage(){
     return (
@@ -14,26 +14,6 @@ export function ContentPage(){
         </Route>
     );
 }
-/**
- * tabs button
- * 
- */
-function ContentTabButtons(){
-    const tabStyle = {position:"sticky", top:"0px", zIndex:"1", backgroundColor:"white", display:"flex", justifyContent:"space-around"};
-    const btnStyle = {padding:"1rem", color:"black", width:"30rem"};
-    return(
-        <div style={tabStyle}>
-            <Link to='/'><button style={btnStyle}>ALL</button> </Link>
-            <Link to='/video'><button style={btnStyle}>Video</button> </Link>
-            <Link to='/audio'><button style={btnStyle}>Audio</button> </Link>
-            <Link to='/image'><button style={btnStyle}>Image</button> </Link>
-            <Link to='/document'><button style={btnStyle}>Document</button> </Link>
-        </div>
-    );
-}
-/**
- * it will display cards
- */
 export function ContentPanel(props){
     const [dataResult, setDataResult] = useState(null);
     console.log("props ", props.contentType)
@@ -107,7 +87,7 @@ export function ContentPanel(props){
         await postData();
         console.log("here result ", dataResult)
     
-    }, []);
+    }, [props.contentType]);
 
     // useEffect(async() => {
 

@@ -10,7 +10,7 @@ const PageNotFound = React.lazy(() => import("./Pages/PageNotFound.jsx"));
 import ContentDetail from "./Pages/ContentDetail";
 import Web3 from 'web3';
 import { Upload } from "./Components/Upload";
-import { ContentPage, ContentPanel } from "./Components/ContentPage";
+import { ContentPanel } from "./Components/ContentPage";
 import Explore from "./Pages/Explore";
 import Stat from "./Pages/Stat";
 

@@ -49,15 +49,19 @@ function PurchaseButtons(props){
     event.preventDefault();
     let price = 0;
     const id = event.target.id
+    let action = 0;
     // console.log("do .. ", id)
     if(id == 'buyView'){
       price = price_3
+      action = 0
     }
     else if(id == 'buyLicense'){
       price = price_2
+      action = 1
     }
     else if(id == 'buyContent'){
       price = price_1
+      action = 2
     }
     console.log("price ", price)
     if(price != 0){
@@ -69,6 +73,13 @@ function PurchaseButtons(props){
         setUrl(`licenseOrOwner/${address}/${ethAddress}/${cid}/${ext[1]}`)
       }
       setReviewVisible(true)
+      await fetch('http://localhost:4000/addHistory', {
+        method:"post",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ethAddress, address, action})
+      })
     }
 
   }

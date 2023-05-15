@@ -25,6 +25,7 @@ const ProjectRoutes = (props) => {
   //on load
   useEffect(() => {
     const checkConnection = async () => {
+      
       if(isAuth) return;
     
       // Check if browser is running Metamask

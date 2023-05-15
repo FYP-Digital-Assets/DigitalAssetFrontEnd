@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TopSection from "./Pages/AboutUs";
-
+import History from "./Pages/History";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import profileIcon from "./assets/profile.svg"
 
@@ -199,7 +199,7 @@ const ProjectRoutes = (props) => {
             <Route index element={<Info />} />
             <Route path="info" element={<Info />} />
             <Route path="about" element={<TopSection/>} />
-            <Route path="history" element={<History/>} />
+            <Route path="history" element={<History addr={props.addr}/>} />
             <Route path="*" element={<PageNotFound />} />
             
             

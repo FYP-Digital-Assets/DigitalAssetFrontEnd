@@ -50,7 +50,7 @@ const Footer = ()=>{
                     </div>
                         <div className="d-flex justify-content-center align-items-center  border-top p-4">
                         <a href="https://github.com/FYP-Digital-Assets" className="mx-2" target="blank"><img height={40} src={github} alt="" /></a>
-                        <a href="https://github.com/FYP-Digital-Assets" className="mx-2" target="blank"><img height={40} src={iba} alt="" /></a>
+                        <a href="https://www.iba-suk.edu.pk/" className="mx-2" target="blank"><img height={40} src={iba} alt="" /></a>
                         </div>                
                         
     

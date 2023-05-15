@@ -6,11 +6,24 @@ import searchIcon from "../assets/Searchicon.svg"
 import walletIcon from "../assets/wallet.svg"
 import AddIcon from "../assets/addPlus.svg"
 
-import { Link, useNavigate } from "react-router-dom"
+import { Link, createSearchParams, useNavigate } from "react-router-dom"
+import { useState } from "react"
 
 
 export const Navbar = (props) => {
-   
+   const [searchTerm, setSearchTerm] = useState("");
+   const navigate = useNavigate()
+   const params = { searchTerm: 'term'};
+    const handleSearch = ()=>{
+        navigate({
+            pathname: '/search',
+            search: `?${createSearchParams(params)}`
+          })
+    }
+    const handleChangeSearchTerm = (event)=>{
+        event.preventDefault()
+        searchTerm(event.target.value)
+    }
     return (
       <nav className="navbar1">
         <div className="navEle1">
@@ -19,8 +32,8 @@ export const Navbar = (props) => {
             </Link>
             <div className="wrap">
                 <div className="searchbar">
-                    <input type="text" className="searchInput" placeholder="Search" name="search"/>
-                    <button className="searchButton"><img src={searchIcon} alt="" width={20}/></button>
+                    <input type="text" className="searchInput" onChange={handleChangeSearchTerm} placeholder="Search" name="search"/>
+                    <button className="searchButton" onClick={handleSearch}><img src={searchIcon} alt="" width={20}/></button>
                 </div>
             </div>
             <div className="d-flex align-items-center mx-2 ">

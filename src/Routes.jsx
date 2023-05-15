@@ -42,7 +42,7 @@ const ProjectRoutes = (props) => {
         const address = accounts[0];
         console.log(`in refresh: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
         if(address !== localStorage.getItem('DAUserID')){
-          fetch('http://localhost:4000/logout', {
+          await fetch('http://localhost:4000/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -106,6 +106,7 @@ const ProjectRoutes = (props) => {
   }
   // on account change
   window.ethereum.on('accountsChanged', async () => {
+    
     let web3;
     if (window.ethereum) {
       web3 = new Web3(window.ethereum);
@@ -123,7 +124,7 @@ const ProjectRoutes = (props) => {
       const address = accounts[0];
       console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
 
-        fetch('http://localhost:4000/logout', {
+        await fetch('http://localhost:4000/logout', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -142,7 +143,7 @@ const ProjectRoutes = (props) => {
         });
       
       const user = {user:address}
-      fetch('http://localhost:4000/login', {
+      await fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

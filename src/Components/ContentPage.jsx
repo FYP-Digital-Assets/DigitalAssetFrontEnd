@@ -1,20 +1,11 @@
-import { Route,Link} from "react-router-dom";
+import { Route,Link, useOutletContext} from "react-router-dom";
 import { ContentCard } from "./ContentCard";
 import { Row } from 'react-bootstrap';
-import {useMemo, useState } from "react";
+import {useEffect, useMemo, useState } from "react";
 import Web3 from "web3";
-export function ContentPage(){
-    return (
-        <Route path="/content">
-                <Route path='/' element={<ContentPanel/>} />
-                <Route path='/video' element={<ContentPanel contentType="video" />} />
-                <Route path='/audio' element={<ContentPanel contentType="audio" />} />
-                <Route path='/image' element={<ContentPanel contentType="image" />} />
-                <Route path='/document' element={<ContentPanel contentType="document" />} />
-        </Route>
-    );
-}
 export function ContentPanel(props){
+    const [pageNumber, setIsNext] = useOutletContext() ;
+
     const [dataResult, setDataResult] = useState(null);
     console.log("props ", props.contentType)
     async function getContentDetailsFromContracts(contentAddress, senderAddress){
@@ -39,13 +30,16 @@ export function ContentPanel(props){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ page: 0, contentType:props.contentType}) // replace 0 with the desired page number
+        body: JSON.stringify({ page:pageNumber, contentType:props.contentType})
         });
         const data = await response.json();
         console.log("data from db ", data )
 
         if (data && Array.isArray(data.data)) {
-            console.log(data.data) ;
+            if(data.data.length < 10){
+                setIsNext(false);
+            }
+            else setIsNext(true);
             setDataResult(await Promise.all(
                 data.data.map( async(a, b) =>{
                     console.log(a.address+"\nd: "+props.addr)
@@ -87,13 +81,9 @@ export function ContentPanel(props){
         await postData();
         console.log("here result ", dataResult)
     
-    }, [props.contentType]);
+    }, [props.contentType, pageNumber]);
 
-    // useEffect(async() => {
 
-    //     console.log('result:', dataResult);
-
-    // }, [dataResult]);
 
     return (
         
@@ -107,7 +97,7 @@ export function ContentPanel(props){
                     <Link to={`/auth/${a.address}`} className="removeLinkEffect"><ContentCard img={`http://localhost:4000/thumbnail/${a.thumbnail}`} title={a.title} type={a.type} author={a.data.name} prices={a.prices} authorImg={`http://localhost:4000/thumbnail/${a.thumbnail}`} style={{display:"inline-block"}}/></Link>
                     </div>
             })}
-            </>:<></>
+            </>:<>loading....</>
         }
    </Row>
    </div>

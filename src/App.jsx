@@ -28,7 +28,7 @@ function App() {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            ethAddress: "0xCE08833f40a663C8Ef89e395e8d070F82Da58fD9"
+            ethAddress: localStorage.getItem('DAUserID')
           })
         })
         .then(response => {

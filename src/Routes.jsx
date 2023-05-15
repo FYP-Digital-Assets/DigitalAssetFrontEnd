@@ -14,6 +14,7 @@ import { Upload } from "./Components/Upload";
 import { ContentPanel } from "./Components/ContentPage";
 import Explore from "./Pages/Explore";
 import Stat from "./Pages/Stat";
+import Search from "./Pages/Search";
 
 
 const ProjectRoutes = (props) => {
@@ -222,6 +223,7 @@ const ProjectRoutes = (props) => {
               <Route index element={<Profile addr={props.addr} imageUrl={imageUrl} userName={props.userName} des={userBio} />} />
               <Route path="editing" element={<Editing addr={props.addr} auth={isAuth} imageUrl={imageUrl} userName={props.userName} des={userBio} handleChangeEdit={handleChangeEdit} />} />
             </Route>
+            <Route path="/search" element={<Search/>}/>
             
           </Route>
 

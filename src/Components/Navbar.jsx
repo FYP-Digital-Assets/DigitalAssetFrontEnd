@@ -13,16 +13,15 @@ import { useState } from "react"
 export const Navbar = (props) => {
    const [searchTerm, setSearchTerm] = useState("");
    const navigate = useNavigate()
-   const params = { searchTerm: 'term'};
     const handleSearch = ()=>{
         navigate({
             pathname: '/search',
-            search: `?${createSearchParams(params)}`
+            search: `?${createSearchParams({searchTerm})}`
           })
     }
     const handleChangeSearchTerm = (event)=>{
         event.preventDefault()
-        searchTerm(event.target.value)
+        setSearchTerm(event.target.value)
     }
     return (
       <nav className="navbar1">

@@ -22,20 +22,20 @@ const Footer = ()=>{
                 <div className="col-3 p-4">
                    <div className="d-flex flex-column gap-3 ">
                     <h3 className="text-light subtitle-text" >Quick links</h3>
-                       <div className="d-flex flex-column gap-3 p-2">
-                            <Link to="/content" className="" >
+                       <div className="d-flex flex-column gap-3 p-2 ">
+                            <Link to="/content" className="removeLinkEffect" >
                                 <div className=" text-light" >Explore</div>
                             </Link>
-                            <Link to="/stat" className="" >
+                            <Link to="/stat" className="removeLinkEffect" >
                                 <div className=" text-light" >Stats</div>
                             </Link>
-                            <Link to="/info" className="" >
+                            <Link to="/info" className="removeLinkEffect" >
                                 <div className=" text-light" >Info</div>
                             </Link>
-                            <Link to="/about" className="" >
+                            <Link to="/about" className="removeLinkEffect" >
                                 <div className=" text-light" >About-us</div>
                             </Link>
-                            <Link to="/history" className="" >
+                            <Link to="/history" className="removeLinkEffect" >
                                 <div className=" text-light" >History</div>
                             </Link>
                        </div>
@@ -43,8 +43,8 @@ const Footer = ()=>{
                 </div>
                     <div className="col-5 p-4">
                     <h3 className="text-light subtitle-text" >Developers</h3>
-                    <div className="d-flex flex-column gap-2 p-4">
-                    <p className="text-light">Iqbal</p>
+                    <div className="d-flex flex-column gap-2 p-4 ">
+                    <p className="text-light ">Iqbal</p>
                     <p className="text-light">Shanker</p>
                     <p className="text-light">Javeria</p>
                     </div>

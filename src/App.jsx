@@ -17,41 +17,6 @@ function App() {
       localStorage.setItem('Asset', JSON.stringify(asset));
     }
     response();
-    const handleTabClose = event => {
-      event.preventDefault();
-  
-      console.log('beforeunload event triggered');
-      if(localStorage.getItem('DAUserID')){
-        fetch('http://localhost:4000/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ethAddress: localStorage.getItem('DAUserID')
-          })
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Logout failed');
-          }
-          else{
-            localStorage.setItem('DAUserID', null) ;
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      }
-  
-      return (event.returnValue ='Are you sure you want to exit?');
-    };
-  
-    window.addEventListener('beforeunload', handleTabClose);
-  
-    return () => {
-      window.removeEventListener('beforeunload', handleTabClose);
-    };
 
   }) ;
   return (

@@ -45,9 +45,12 @@ export default function Search(){
     }, [query])
     return <div className='container-fluid'>
         <Row>
-        {searchResult && searchResult.length!=0?searchResult
-        .map((obj,i)=><div className="col-3 mt-5" key={i}><ContentCard img={`http://localhost:4000/thumbnail/${obj.thumbnail}`} title={obj.title} type={obj.type} author={obj.name} prices={obj.prices} authorImg={`http://localhost:4000/profileImgs/${obj.img}`} style={{display:"inline-block"}}/></div>)
-        :<h1>No Content</h1>
+        {searchResult ?(
+            searchResult.length!=0 ? searchResult
+                .map((obj,i)=><div className="col-3 mt-5" key={i}><ContentCard img={`http://localhost:4000/thumbnail/${obj.thumbnail}`} title={obj.title} type={obj.type} author={obj.name} prices={obj.prices} authorImg={`http://localhost:4000/profileImgs/${obj.img}`} style={{display:"inline-block"}}/></div>)
+                :<h1>No Content</h1> 
+        ):<>loading....</>
+        
         }
     
     </Row>

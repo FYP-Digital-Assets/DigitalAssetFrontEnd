@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import TopSection from "./Pages/AboutUs";
 import History from "./Pages/History";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate} from "react-router-dom";
 import profileIcon from "./assets/profile.svg"
 
 import AppLayout from "./AppLayout.jsx";
@@ -18,6 +18,7 @@ import Search from "./Pages/Search";
 
 
 const ProjectRoutes = (props) => {
+  
   const [bal, setBal] = useState(0);
   const [isAuth, setAuth] = useState(false);
   const [userBio, setUserBio] = useState("description");
@@ -42,7 +43,7 @@ const ProjectRoutes = (props) => {
         const address = accounts[0];
         console.log(`in refresh: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
         if(address !== localStorage.getItem('DAUserID')){
-          await fetch('http://localhost:4000/logout', {
+          fetch('http://localhost:4000/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -96,7 +97,7 @@ const ProjectRoutes = (props) => {
     };
     checkConnection();
     console.log(`after refresh: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
-  }, [] );
+  }, [props.addr] );
 
   // profile ediditng
   const handleChangeEdit = (n, b, i) => {
@@ -104,9 +105,9 @@ const ProjectRoutes = (props) => {
     setImageUrl(() => i) ;
     props.setUserName(() => n) ;
   }
+
   // on account change
   window.ethereum.on('accountsChanged', async () => {
-    
     let web3;
     if (window.ethereum) {
       web3 = new Web3(window.ethereum);
@@ -116,77 +117,84 @@ const ProjectRoutes = (props) => {
     
     // Check if User is already connected by retrieving the accounts
     const accounts = await web3.eth.getAccounts();
-    if (accounts.length !== 0) {
-      if(accounts[0] === localStorage.getItem('DAUserID')){
-        console.log("already done");
-        return ;
-      }
-      const address = accounts[0];
-      console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
+    props.setAddr(accounts[0]) ;
+    localStorage.setItem('DAUserID', accounts[0]) ;
+    console.log("kam")
+    
+   
+    // if (accounts.length !== 0) {
+    //   if(accounts[0] === localStorage.getItem('DAUserID')){
+    //     console.log("already done");
+    //     return ;
+    //   }
+    //   const address = accounts[0];
+    //   console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
 
-        await fetch('http://localhost:4000/logout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            ethAddress: localStorage.getItem('DAUserID')
-          })
-        })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Logout failed');
-          }
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    //     fetch('http://localhost:4000/logout', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //         ethAddress: localStorage.getItem('DAUserID')
+    //       })
+    //     })
+    //     .then(response => {
+    //       if (!response.ok) {
+    //         throw new Error('Logout failed');
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.error(error);
+    //     });
       
-      const user = {user:address}
-      await fetch('http://localhost:4000/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-        credentials:"include"
-      })
-        .then(async account => {
+    //   const user = {user:address}
+    //  await fetch('http://localhost:4000/login', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(user),
+    //     credentials:"include"
+    //   })
+    //     .then(async account => {
           
-          console.log(account)
-          console.log("header : ", account.headers.has('Set-Cookie'));
-          account = await account.json()
-          console.log("next")
-          if(account.code === 500){
-            console.log(alert(account.msg));
-            return;
-          }
-          //console.log(account._id);
-          localStorage.setItem('DAUserID', account.data.ethAddress) ;
-          props.setAddr(account.data.ethAddress);
-          console.log(account.data.ethAddress)
-          console.log(account.data.img)
-          setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
+    //       console.log(account)
+    //       console.log("header : ", account.headers.has('Set-Cookie'));
+    //       account = await account.json()
+    //       console.log("next")
+    //       if(account.code === 500){
+    //         console.log(alert(account.msg));
+    //         return;
+    //       }
+    //       //console.log(account._id);
+    //       localStorage.setItem('DAUserID', account.data.ethAddress) ;
+    //       console.log("change setting: "+account.data.ethAddress)
+    //       props.setAddr(account.data.ethAddress);
+    //       console.log(account.data.ethAddress)
+    //       console.log(account.data.img)
+    //       setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
          
-          props.setUserName(account.data.name)
+    //       props.setUserName(account.data.name)
           
          
-          setUserBio(account.data.bio)
-          setAuth(true)
+    //       setUserBio(account.data.bio)
+    //       setAuth(true)
           
           
-
-        })
-        .catch(error => {
-          console.error('Error connecting account ', error);
-        });
-        const balance = await web3.eth.getBalance(address);
-        setBal(web3.utils.fromWei(balance, 'ether'));
-    }
-    else{
-      console.log("Not connected...")
-    }
-    console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
+          
+    //     })
+    //     .catch(error => {
+    //       console.error('Error connecting account ', error);
+    //     });
+    //     const balance = await web3.eth.getBalance(address);
+    //     setBal(web3.utils.fromWei(balance, 'ether'));
+    //     navi("/profile/"+localStorage.getItem('DAUserID'))
+    // }
+    // else{
+    //   console.log("Not connected...")
+    // }
+    // console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
   });
   const details = {
     content:{clip:"", title:"Content Title", 

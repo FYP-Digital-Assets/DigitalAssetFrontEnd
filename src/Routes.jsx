@@ -25,6 +25,7 @@ const ProjectRoutes = (props) => {
   //on load
   useEffect(() => {
     const checkConnection = async () => {
+      
       if(isAuth) return;
     
       // Check if browser is running Metamask
@@ -207,6 +208,7 @@ const ProjectRoutes = (props) => {
             <Route path="upload" element={<Upload addr={props.addr} auth={isAuth}/>} />
             <Route path="stat" element={<Stat/>} />
             <Route path="content" element={<Explore/>} >
+                <Route index element={<ContentPanel addr={props.addr} contentType="all" />} />
                 <Route path='video' element={<ContentPanel addr={props.addr} contentType="video" />} />
                 <Route path='audio' element={<ContentPanel addr={props.addr} contentType="audio" />} />
                 <Route path='image' element={<ContentPanel addr={props.addr} contentType="image" />} />

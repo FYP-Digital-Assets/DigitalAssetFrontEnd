@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TopSection from "./Pages/AboutUs";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import profileIcon from "./assets/profile.svg"
@@ -197,6 +198,8 @@ const ProjectRoutes = (props) => {
           <Route element={<AppLayout auth={isAuth} setAuth={setAuth} setAddr={props.setAddr} addr={props.addr} imageUrl={imageUrl} setImageUrl={setImageUrl} setUserBio={setUserBio} setUserName={props.setUserName} bal={bal} setBal={setBal} />} >
             <Route index element={<Info />} />
             <Route path="info" element={<Info />} />
+            <Route path="about" element={<TopSection/>} />
+            <Route path="history" element={<History/>} />
             <Route path="*" element={<PageNotFound />} />
             
             

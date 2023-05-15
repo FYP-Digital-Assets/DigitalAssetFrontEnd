@@ -33,6 +33,12 @@ export const Navbar = (props) => {
                 <Link to="/info" className="exploreLink" >
                     <div className="exploreLink1" >Info</div>
                 </Link>
+                <Link to="/about" className="exploreLink" >
+                    <div className="exploreLink1" >About-us</div>
+                </Link>
+                <Link to="/history" className="exploreLink" >
+                    <div className="exploreLink1" >History</div>
+                </Link>
             </div>
             
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
-import './AboutUs.css';
-import CardDisplay from "./ContributorList";
-import image from "./images/au.png"
+import '../Components/AboutUs.css';
+import CardDisplay from "../Components/ContributorList";
+import image from "../assets/view.png"
 
 const TopSection = () => {
   return (

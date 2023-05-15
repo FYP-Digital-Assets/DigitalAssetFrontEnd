@@ -19,6 +19,7 @@ const AppLayout = (props)=> {
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             const accounts = await web3.eth.getAccounts();
             const address = accounts[0];
+            console.log(`in first log: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${props.auth}`) ;
             const balance = await web3.eth.getBalance(address);
             const user = {user:address}
             fetch('http://localhost:4000/login', {
@@ -41,17 +42,13 @@ const AppLayout = (props)=> {
                 }
                 //console.log(account._id);
                 console.log(account)
+                localStorage.setItem('DAUserID', account.data.ethAddress);
                 props.setAddr(account.data.ethAddress);
                 console.log(account.data.ethAddress)
                 props.setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
                 props.setUserName(account.data.name);
-                
-              
                 props.setUserBio(account.data.bio);
                 props.setAuth(true)
-                
-                
-
               })
               .catch(error => {
                 console.error('Error connecting account ', error);
@@ -67,6 +64,7 @@ const AppLayout = (props)=> {
           console.log(err);
           console.log("hello")
         }
+        console.log(`after first log: `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${props.auth}`) ;
     }
 
     // offcanvase variables

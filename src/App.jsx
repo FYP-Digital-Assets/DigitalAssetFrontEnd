@@ -7,6 +7,7 @@ function App() {
   var [userName, setUserName] = useState("Name") ;
   const [addr, setAddr] = useState(null);
   useEffect(()=>{
+    console.log(`first in app: `, `local ${localStorage.getItem('DAUserID')}`) ;
     const response = async() =>{
       const res1 = await fetch('http://localhost:4000/digitalAssetContract') ;
       const digital_asset = await res1.json() ;
@@ -16,7 +17,42 @@ function App() {
       localStorage.setItem('Asset', JSON.stringify(asset));
     }
     response();
-   
+    const handleTabClose = event => {
+      event.preventDefault();
+  
+      console.log('beforeunload event triggered');
+      if(localStorage.getItem('DAUserID')){
+        fetch('http://localhost:4000/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ethAddress: "0xCE08833f40a663C8Ef89e395e8d070F82Da58fD9"
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Logout failed');
+          }
+          else{
+            localStorage.setItem('DAUserID', null) ;
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
+  
+      return (event.returnValue ='Are you sure you want to exit?');
+    };
+  
+    window.addEventListener('beforeunload', handleTabClose);
+  
+    return () => {
+      window.removeEventListener('beforeunload', handleTabClose);
+    };
+
   }) ;
   return (
     <div className="App"> 

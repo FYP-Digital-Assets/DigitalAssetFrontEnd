@@ -25,8 +25,7 @@ const ProjectRoutes = (props) => {
   //on load
   useEffect(() => {
     const checkConnection = async () => {
-      
-      if(isAuth) return;
+      if(isAuth || localStorage.getItem('DAUserID') == null) return;
     
       // Check if browser is running Metamask
       let web3;
@@ -40,7 +39,26 @@ const ProjectRoutes = (props) => {
       const accounts = await web3.eth.getAccounts();
       if (accounts.length !== 0) {
         const address = accounts[0];
-        console.log("addr: " + address);
+        console.log(`in refresh: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
+        if(address !== localStorage.getItem('DAUserID')){
+          fetch('http://localhost:4000/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              ethAddress: localStorage.getItem('DAUserID')
+            })
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Logout failed');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+        }
         const user = {user:address}
         fetch('http://localhost:4000/login', {
           method: 'POST',
@@ -51,8 +69,6 @@ const ProjectRoutes = (props) => {
           credentials:"include"
         })
           .then(async account => {
-            
-            console.log(account)
             console.log("header : ", account.headers.has('Set-Cookie'));
             account = await account.json()
             console.log("next")
@@ -60,21 +76,12 @@ const ProjectRoutes = (props) => {
               console.log(alert(account.msg));
               return;
             }
-            //console.log(account._id);
-            console.log(account)
+            localStorage.setItem('DAUserID', account.data.ethAddress) ;
             props.setAddr(account.data.ethAddress);
-            console.log(account.data.ethAddress)
-            console.log(account.data.img)
             setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
-           
             props.setUserName(account.data.name)
-            
-           
             setUserBio(account.data.bio)
             setAuth(true)
-            
-            
-
           })
           .catch(error => {
             console.error('Error connecting account ', error);
@@ -87,6 +94,7 @@ const ProjectRoutes = (props) => {
       }
     };
     checkConnection();
+    console.log(`after refresh: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
   }, [] );
 
   // profile ediditng
@@ -107,13 +115,12 @@ const ProjectRoutes = (props) => {
     // Check if User is already connected by retrieving the accounts
     const accounts = await web3.eth.getAccounts();
     if (accounts.length !== 0) {
-      console.log("check: ", accounts[0],",  ",props.addr) ;
-      const address = accounts[0];
-      console.log("addrdd: " + address);
-      if(props.addr == address ){
+      if(accounts[0] === localStorage.getItem('DAUserID')){
         console.log("already done");
         return ;
       }
+      const address = accounts[0];
+      console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
 
         fetch('http://localhost:4000/logout', {
           method: 'POST',
@@ -121,17 +128,13 @@ const ProjectRoutes = (props) => {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            ethAddress: props.addr
+            ethAddress: localStorage.getItem('DAUserID')
           })
         })
         .then(response => {
           if (!response.ok) {
             throw new Error('Logout failed');
           }
-          return response.json();
-        })
-        .then(data => {
-          console.log("logout Data", data); // { code: "200", msg: "logout successful" }
         })
         .catch(error => {
           console.error(error);
@@ -157,7 +160,7 @@ const ProjectRoutes = (props) => {
             return;
           }
           //console.log(account._id);
-          console.log(account)
+          localStorage.setItem('DAUserID', account.data.ethAddress) ;
           props.setAddr(account.data.ethAddress);
           console.log(account.data.ethAddress)
           console.log(account.data.img)
@@ -181,6 +184,7 @@ const ProjectRoutes = (props) => {
     else{
       console.log("Not connected...")
     }
+    console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
   });
   const details = {
     content:{clip:"", title:"Content Title", 

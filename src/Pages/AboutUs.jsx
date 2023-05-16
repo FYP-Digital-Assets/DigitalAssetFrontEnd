@@ -5,7 +5,7 @@ import image from "../assets/view.png"
 
 const TopSection = () => {
   return (
-    <div className="top-section">
+    <div className="about-top-section">
       
       <div class="aboutHead"> 
            
@@ -14,7 +14,7 @@ const TopSection = () => {
       
       </div>
       
-      <div class="container">
+      <div class="about-container">
         <p>
         We have developed Digital Assets Provenence using blockchain in order to give a sense of 
         security to content creators and content consumers. Free will is the power of 

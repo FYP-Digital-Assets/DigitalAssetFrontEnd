@@ -14,9 +14,9 @@ const Card = ({ user }) => {
   };
 
   return (
-    <div className="card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="about-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <img src={user.picture} alt={user.name} />
-      <div className="card-content">
+      <div className="about-card-content">
       
         <h2>{user.name}</h2>
         

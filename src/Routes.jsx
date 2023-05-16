@@ -23,7 +23,6 @@ const ProjectRoutes = (props) => {
   const [isAuth, setAuth] = useState(false);
   const [userBio, setUserBio] = useState("description");
   var [imageUrl, setImageUrl] = useState(profileIcon);
-  
   //on load
   useEffect(() => {
     const checkConnection = async () => {
@@ -119,8 +118,10 @@ const ProjectRoutes = (props) => {
     const accounts = await web3.eth.getAccounts();
     props.setAddr(accounts[0]) ;
     localStorage.setItem('DAUserID', accounts[0]) ;
-    console.log("kam")
-    
+    console.log("kam ", window.location.pathname == `/profile/${props.addr}`)
+    if(window.location.pathname == `/profile/${props.addr}`){
+      window.location = `/profile/${accounts[0]}`
+    }
    
     // if (accounts.length !== 0) {
     //   if(accounts[0] === localStorage.getItem('DAUserID')){

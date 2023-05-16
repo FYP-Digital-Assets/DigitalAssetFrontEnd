@@ -55,7 +55,7 @@ export default function ContentDetail(props){
                     <CommentBox address={content.address}/>
                 </div>
                 <div className="col-3"  >
-                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr}/>
+                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr} priceHistory={content.priceHistory}/>
                     {reviewVisible?
                     <AddReview address={content.address} addr={props.addr}/>:<></>}
                 </div>
@@ -72,7 +72,8 @@ async function getContentDetailsFromContracts(contentAddress, senderAddress) {
     const prices = await contract.methods.getPrices().call()
     const licensors = await contract.methods.getLicensorHistory().call()
     const owners = await contract.methods.getOwnerHistory().call()
-    return { cid, prices, licensors, owners }
+    const priceHistory = await contract.methods.getBuyPriceHistory().call()
+    return { cid, prices, licensors, owners, priceHistory}
 }
 function OwnerIconAndName(props){
     return(
@@ -82,14 +83,14 @@ function OwnerIconAndName(props){
                 <div className="d-flex flex-column align-items-start gap-0">
                     <span className="name-owe">{props.name}</span>
                     <span className="name-addr">{props.address.substr(0,6)}...{props.address.substr(-4, 4)}</span>
-                    
+                    <span className="name-price">{props.price}</span>
                 </div>
             </div>
         </div>
     );
 }
 function SideBar(props){
-    const {owners} = props
+    const {owners, priceHistory} = props
     const [drop, setdrop] = useState(false) ;
     const tuggle_drop_down_owner_history =()=>{
        setdrop(e=>!e);
@@ -116,7 +117,7 @@ function SideBar(props){
                         {
                             owners.map((owner, key)=>{
                                 return(<Link to={`/profile/${owner.ethAddress}`} className="removeLinkEffect">
-                                <OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} />
+                                <OwnerIconAndName img={owner.img} name={owner.name} address={owner.ethAddress} key={key} price={priceHistory[key]}/>
                                 </Link>
                                 )
                             })

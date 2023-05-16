@@ -45,7 +45,7 @@ const Footer = ()=>{
                     <h3 className="text-light subtitle-text" >Developers</h3>
                     <div className="d-flex flex-column gap-2 p-4 ">
                     <p className="text-light ">Iqbal</p>
-                    <p className="text-light">Shanker</p>
+                    <p className="text-light">Shankar</p>
                     <p className="text-light">Javeria</p>
                     </div>
                         <div className="d-flex justify-content-center align-items-center  border-top p-4">

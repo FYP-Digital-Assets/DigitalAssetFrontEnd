@@ -8,7 +8,8 @@ export function ContentCard(prop){
 
   const authorImgStyle = {borderRadius:"50%", width:"3rem", height:"3rem", marginRight:"0.5rem"};
   const priceTagStyle = {color:"red", float:"right"};
-  const type = prop.type.substr(0, prop.type.indexOf('/'))
+  const typeExt = prop.type.substr(0, prop.type.indexOf('/'))
+  const type = !["audio", "video", "image"].includes(typeExt)?"document":typeExt;
     return (
       
       <Card  className='content_card_style border'>

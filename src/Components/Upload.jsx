@@ -74,22 +74,25 @@ export function Upload(props) {
         //contentDetails.append('description', description) ;
         //contentDetails.append('title', title) ;
 
-        var pricePurchase = 0;
-        var priceView = 0;
-        var priceLicense = 0;
-        if (isPurchase)
-          pricePurchase = document.getElementById("pricePurchaseTxt").value;
+        const pp = isPurchase?Number(document.getElementById("pricePurchaseTxt").value):0;
+        const pv = isView?Number(document.getElementById("priceViewTxt").value):0;
+        const pl = isLicense?Number(document.getElementById("priceLicenseTxt").value):0;
+        // if (isPurchase)
+        //   pricePurchase = document.getElementById("pricePurchaseTxt").value;
 
-        if (isView)
-          pricePurchase = document.getElementById("priceViewTxt").value;
+        // if (isView)
+        //   pricePurchase = document.getElementById("priceViewTxt").value;
 
-        if (isLicense)
-          priceLicense = document.getElementById("priceLicenseTxt").value;
+        // if (isLicense)
+        //   priceLicense = document.getElementById("priceLicenseTxt").value;
 
         if (mainContentCid.code != "200") {
           alert("Content already exist")
         }
-        const addrofContract = await executeContract(props.addr, mainContentCid.cid, pricePurchase, priceView, priceLicense)
+        console.log(pp, " ", pl, ", ", pv)
+        console.log("doc ",document.getElementById("pricePurchaseTxt").value)
+        console.log(isPurchase, " ", isLicense, ", ", isView)
+        const addrofContract = await executeContract(props.addr, mainContentCid.cid, pp, pl, pv)
         //contentDetails.append('address', addrofContract) ;
         //contentDetails.append('type', fileType)
         //contentDetails.append('ext', [preFilename.substr(preFilename.lastIndexOf('.')+1),filename.substr(filename.lastIndexOf('.')+1)])

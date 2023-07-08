@@ -79,6 +79,7 @@ const ProjectRoutes = (props) => {
             }
             localStorage.setItem('DAUserID', account.data.ethAddress) ;
             props.setAddr(account.data.ethAddress);
+            console.log("my image ", account)
             setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
             props.setUserName(account.data.name)
             setUserBio(account.data.bio)
@@ -117,85 +118,87 @@ const ProjectRoutes = (props) => {
     // Check if User is already connected by retrieving the accounts
     const accounts = await web3.eth.getAccounts();
     props.setAddr(accounts[0]) ;
-    localStorage.setItem('DAUserID', accounts[0]) ;
+    
+    //localStorage.setItem('DAUserID', accounts[0]) ;
     console.log("kam ", window.location.pathname == `/profile/${props.addr}`)
     if(window.location.pathname == `/profile/${props.addr}`){
       window.location = `/profile/${accounts[0]}`
     }
    
-    // if (accounts.length !== 0) {
-    //   if(accounts[0] === localStorage.getItem('DAUserID')){
-    //     console.log("already done");
-    //     return ;
-    //   }
-    //   const address = accounts[0];
-    //   console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
+    if (accounts.length !== 0) {
+      if(accounts[0] === localStorage.getItem('DAUserID')){
+        console.log("already done");
+        return ;
+      }
+      localStorage.setItem('DAUserID', accounts[0]) ;
+      const address = accounts[0];
+      console.log(`in acc change: addrwallet ${address} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
 
-    //     fetch('http://localhost:4000/logout', {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify({
-    //         ethAddress: localStorage.getItem('DAUserID')
-    //       })
-    //     })
-    //     .then(response => {
-    //       if (!response.ok) {
-    //         throw new Error('Logout failed');
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.error(error);
-    //     });
+        fetch('http://localhost:4000/logout', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            ethAddress: localStorage.getItem('DAUserID')
+          })
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Logout failed');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
       
-    //   const user = {user:address}
-    //  await fetch('http://localhost:4000/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(user),
-    //     credentials:"include"
-    //   })
-    //     .then(async account => {
+      const user = {user:address}
+     await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+        credentials:"include"
+      })
+        .then(async account => {
           
-    //       console.log(account)
-    //       console.log("header : ", account.headers.has('Set-Cookie'));
-    //       account = await account.json()
-    //       console.log("next")
-    //       if(account.code === 500){
-    //         console.log(alert(account.msg));
-    //         return;
-    //       }
-    //       //console.log(account._id);
-    //       localStorage.setItem('DAUserID', account.data.ethAddress) ;
-    //       console.log("change setting: "+account.data.ethAddress)
-    //       props.setAddr(account.data.ethAddress);
-    //       console.log(account.data.ethAddress)
-    //       console.log(account.data.img)
-    //       setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
+          console.log(account)
+          console.log("header : ", account.headers.has('Set-Cookie'));
+          account = await account.json()
+          console.log("next")
+          if(account.code === 500){
+            console.log(alert(account.msg));
+            return;
+          }
+          //console.log(account._id);
+          localStorage.setItem('DAUserID', account.data.ethAddress) ;
+          console.log("change setting: "+account.data.ethAddress)
+          props.setAddr(account.data.ethAddress);
+          console.log(account.data.ethAddress)
+          console.log(account.data.img)
+          setImageUrl("http://localhost:4000/ProfileImgs/"+(account.data.img))
          
-    //       props.setUserName(account.data.name)
+          props.setUserName(account.data.name)
           
          
-    //       setUserBio(account.data.bio)
-    //       setAuth(true)
+          setUserBio(account.data.bio)
+          setAuth(true)
           
           
           
-    //     })
-    //     .catch(error => {
-    //       console.error('Error connecting account ', error);
-    //     });
-    //     const balance = await web3.eth.getBalance(address);
-    //     setBal(web3.utils.fromWei(balance, 'ether'));
-    //     navi("/profile/"+localStorage.getItem('DAUserID'))
-    // }
-    // else{
-    //   console.log("Not connected...")
-    // }
-    // console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
+        })
+        .catch(error => {
+          console.error('Error connecting account ', error);
+        });
+        const balance = await web3.eth.getBalance(address);
+        setBal(web3.utils.fromWei(balance, 'ether'));
+        //navi("/profile/"+localStorage.getItem('DAUserID'))
+    }
+    else{
+      console.log("Not connected...")
+    }
+    console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
   });
   const details = {
     content:{clip:"", title:"Content Title", 

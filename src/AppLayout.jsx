@@ -98,7 +98,7 @@ const AppLayout = (props)=> {
             <WalletOffcanvase setShowOffcanvase={setShowOffcanvase} showOffcanvase={showOffcanvase} auth={props.auth} ConnectToWallet={ConnectToWallet} balance={props.bal} addr={props.addr}/>
             <Modal close_modal={close_modal} close_reference_modal={close_reference_modal} ConnectToWallet={ConnectToWallet}/>
             <Outlet/>
-            <Footer/>
+            <Footer />
         </React.Suspense>
     </>
 )}

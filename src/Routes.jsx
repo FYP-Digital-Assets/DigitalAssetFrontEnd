@@ -200,6 +200,7 @@ const ProjectRoutes = (props) => {
     }
     console.log(`after change acc: addracc ${props.addr} `, `local ${localStorage.getItem('DAUserID')}`, ` isAuth ${isAuth}`) ;
   });
+  
   const details = {
     content:{clip:"", title:"Content Title", 
     description:"Hello this is description", prices:[120, 10, 0], address:"cid",

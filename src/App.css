@@ -255,6 +255,9 @@ svg #personright{
 .footer-app{
   background-color: var(--text-color);
   color: var(--light-color);
+  
+
+
 }
 .nav-background{
   background-color: var(--light-color);
@@ -264,6 +267,8 @@ svg #personright{
 }
 .removeLinkEffect{
   text-decoration: none;
+  color:inherit;
+  width: inherit;
 }
 .exploreLink{
   margin: auto 0.5rem;

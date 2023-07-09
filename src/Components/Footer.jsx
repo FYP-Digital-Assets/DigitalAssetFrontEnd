@@ -4,7 +4,7 @@ import iba from "../assets/iba.png"
 import { Link } from "react-router-dom";
 const Footer = ()=>{
     return(
-        <div className="container-fluid footer-app p-4 mt-5 text-light">
+        <div className="container-fluid footer-app p-4 mt-5 text-light" >
            <div className="row my-5">
                 <div className="col-4">
                     <div className="">

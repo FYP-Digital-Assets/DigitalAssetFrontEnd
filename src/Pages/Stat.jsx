@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react"
 import Web3 from "web3";
-
+import { Link } from "react-router-dom";
 export default function Stat(props){
     //call data from backend using useEffect
     const[trending, setTrending] = useState([])
@@ -127,18 +127,21 @@ export default function Stat(props){
                 {trending?trending.map(
                     (obj, i)=>{
                         return (
-                            // src={`http://localhost:4000/thumbnail/${obj.thumbnail}
+                            
                             <tr className=" border-bottom table-row-stat" key={i}>
+                                
                                 <td className="p-3">{i+1}</td>
-                                <td className="p-2"><img src={`http://localhost:4000/thumbnail/${obj.thumbnail}`}
+                                <td className="p-2"><Link to={`/auth/${obj.address}`} className="removeLinkEffect"><img src={`http://localhost:4000/thumbnail/${obj.thumbnail}`}
                                 style={{width:"5rem", height:"4rem", objectFit:"cover"}}
-                                /></td>
-                                <td>{obj.title}</td>
+                                /></Link></td>
+                                <td><Link to={`/auth/${obj.address}`} className="removeLinkEffect">{obj.title}</Link></td>
                                 <td>{obj.prices[0]}</td>
                                 <td>{obj.prices[1]}</td>
                                 <td>{obj.prices[2]}</td>
                                 <td>{obj.view}</td>
                                 <td>{obj.licensors.length}</td>
+                            
+
                             </tr>
                         );
                     }

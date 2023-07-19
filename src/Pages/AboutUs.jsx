@@ -1,7 +1,6 @@
 import React from "react";
 import '../Components/AboutUs.css';
 import CardDisplay from "../Components/ContributorList";
-import image from "../assets/view.png"
 
 const TopSection = () => {
   return (
@@ -9,7 +8,7 @@ const TopSection = () => {
       
       <div class="aboutHead"> 
            
-          <img src={image} alt="Image" />
+          <img src={"https://www.pngmart.com/files/About-Us-Transparent-PNG.png"} alt="Image" />
           <h1>About Us</h1>
       
       </div>
@@ -31,7 +30,8 @@ const TopSection = () => {
         </p>
 
      </div>
-
+     <br/>
+     <br/>
       <h2>Let's get to know each other!</h2>
       <p>Meet our Team</p>
       

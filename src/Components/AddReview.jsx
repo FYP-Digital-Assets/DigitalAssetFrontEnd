@@ -19,6 +19,8 @@ const AddReview = (props)=>{
             body: JSON.stringify(data)
           }
         );
+        console.log("clicked")
+        props.setReviewVisible(false)
         const result = await response.json();
     }
     return(

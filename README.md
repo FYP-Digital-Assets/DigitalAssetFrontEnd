@@ -1,6 +1,5 @@
 # DigitalAssetFrontEnd
-##How to run this system? 
-<br>
+
 Follow these steps to run this application:
 
 1. git clone 

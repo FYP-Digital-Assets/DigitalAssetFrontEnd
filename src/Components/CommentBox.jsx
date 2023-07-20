@@ -17,7 +17,7 @@ export function CommentBox(props){
       }))
       setReviews(obj.reviews)
       console.log(obj.reviews)
-    }, [])
+    }, [props.flag])
     return (
       
       <>

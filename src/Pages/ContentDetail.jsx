@@ -52,12 +52,12 @@ export default function ContentDetail(props){
                       ext={content.ext} address={content.address} ethAddress={props.addr} owner={content?.owners[content.owners.length-1].ethAddress} licensors={content.licensors}
                       setReviewVisible={setReviewVisible}
                       />
-                    <CommentBox address={content.address}/>
+                    <CommentBox address={content.address} flag={reviewVisible}/>
                 </div>
                 <div className="col-3"  >
                     <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr} priceHistory={content.priceHistory}/>
                     {reviewVisible?
-                    <AddReview address={content.address} addr={props.addr}/>:<></>}
+                    <AddReview address={content.address} addr={props.addr} setReviewVisible={setReviewVisible}/>:<></>}
                 </div>
             </div>:<></>}
         </div>

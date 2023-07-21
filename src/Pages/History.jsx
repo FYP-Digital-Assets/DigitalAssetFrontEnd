@@ -13,8 +13,8 @@ export default function History(props){
             .then(res=>res.data)
             return {...contentDetail, ...obj}
         }))
-        setHistory(data)
-        console.log(data)
+        setHistory(data.reverse())
+        //console.log(data)
     }, [props.addr])
     return (<>
         {history?history.map((obj,i)=>{

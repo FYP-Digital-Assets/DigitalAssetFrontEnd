@@ -55,7 +55,7 @@ export default function ContentDetail(props){
                     <CommentBox address={content.address} flag={reviewVisible}/>
                 </div>
                 <div className="col-3"  >
-                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr} priceHistory={content.priceHistory}/>
+                    <SideBar view={content.view} licensor={content.licensors.length} owners={content?.owners.reverse()} prices={content.prices} address={content.address} addr={props.addr} priceHistory={[...content.priceHistory].reverse()}/>
                     {reviewVisible?
                     <AddReview address={content.address} addr={props.addr} setReviewVisible={setReviewVisible}/>:<></>}
                 </div>
@@ -72,7 +72,7 @@ async function getContentDetailsFromContracts(contentAddress, senderAddress) {
     const prices = await contract.methods.getPrices().call()
     const licensors = await contract.methods.getLicensorHistory().call()
     const owners = await contract.methods.getOwnerHistory().call()
-    const priceHistory = await contract.methods.getBuyPriceHistory().call()
+    let priceHistory = await contract.methods.getBuyPriceHistory().call()
     return { cid, prices, licensors, owners, priceHistory}
 }
 function OwnerIconAndName(props){
@@ -91,6 +91,8 @@ function OwnerIconAndName(props){
 }
 function SideBar(props){
     const {owners, priceHistory} = props
+    console.log("p h ",priceHistory)
+    console.log("o h ",owners)
     const [drop, setdrop] = useState(false) ;
     const tuggle_drop_down_owner_history =()=>{
        setdrop(e=>!e);
@@ -126,7 +128,7 @@ function SideBar(props){
                 </div>
                 
             </div>
-            {owners[owners.length-1].ethAddress == props.addr?
+            {owners[0].ethAddress == props.addr?
             <EditPrice prices={props.prices} ethAddress={owners[owners.length-1].ethAddress} address={props.address}/>
             :<></>
         }

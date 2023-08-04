@@ -14,7 +14,7 @@ export function Content({data, type, title, description, prices, ext, address, e
     }, [])
     return (
         <div className="content_of_content_details">
-          <object data={`http://localhost:4000/${dataUrl}`} type={type} >
+          <object data={`http://localhost:4000/${dataUrl}`} type={type}>
             <p>Preview not available</p>  
           </object>
           <br/>
